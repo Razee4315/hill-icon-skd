@@ -1,0 +1,34 @@
+.placeholder-image {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #dee2e6;
+  border-radius: var(--border-radius-sm);
+  color: var(--color-gray-medium);
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.placeholder-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(0,0,0,0.05) 2px, transparent 2px),
+    radial-gradient(circle at 75% 75%, rgba(0,0,0,0.05) 2px, transparent 2px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+}
+
+.placeholder-text {
+  position: relative;
+  z-index: 1;
+  font-size: 0.9rem;
+  padding: var(--spacing-sm);
+}

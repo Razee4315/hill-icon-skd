@@ -16,6 +16,9 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
     
     steps:
     - name: Checkout
@@ -35,6 +38,9 @@ jobs:
 
     - name: List dist contents (debug)
       run: ls -la dist/
+
+    - name: Verify index.html content
+      run: head -10 dist/index.html
       
     - name: Setup Pages
       uses: actions/configure-pages@v4

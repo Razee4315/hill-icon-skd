@@ -77,7 +77,7 @@ const Tours: React.FC = () => {
                   <p className="tour-description">{tour.description}</p>
                   
                   <div className="tour-pricing">
-                    <span className="price-amount">{tour.price.currency} {tour.price.perPerson.toLocaleString()}</span>
+                    <span className="price-amount">{tour.price.currency} {tour.price.perPerson?.toLocaleString() || '0'}</span>
                     <span className="price-label">per person</span>
                     <span className="price-note">{tour.price.note}</span>
                   </div>

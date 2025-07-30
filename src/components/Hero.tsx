@@ -1,4 +1,5 @@
 import React from 'react';
+import { images } from '../utils/images';
 import './Hero.css';
 
 interface HeroProps {
@@ -9,7 +10,7 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({
-  videoSrc = "/src/assets/hero-section-video.mp4",
+  videoSrc = images.heroVideo,
   title = "Experience Serenity. Welcome to Hill Icon.",
   subtitle = "Discover the breathtaking beauty of Skardu with our premium accommodation, transport, and tour services.",
   showCTA = true

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { contactInfo } from '../data/servicesData';
-import whatsappIcon from '../assets/whatsapp.png';
+import { images } from '../utils/images';
 import './BookingForm.css';
 
 interface BookingFormProps {
@@ -232,7 +232,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
             type="submit"
             className="submit-whatsapp-btn"
           >
-            <img src={whatsappIcon} alt="WhatsApp" className="btn-icon" />
+            <img src={images.whatsapp} alt="WhatsApp" className="btn-icon" />
             Book via WhatsApp
           </button>
         </div>

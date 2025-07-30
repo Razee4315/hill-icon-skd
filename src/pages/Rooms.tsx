@@ -13,7 +13,7 @@ interface Room {
   image: string;
   gallery?: string[];
   price: {
-    perNight: number;
+    perNight?: number;
     currency: string;
     note: string;
   };
@@ -72,7 +72,7 @@ const Rooms: React.FC = () => {
                   <h3 className="room-name">{room.name}</h3>
                   <p className="room-description">{room.description}</p>
                   <div className="room-price">
-                    <span className="price-amount">{room.price.currency} {room.price.perNight.toLocaleString()}</span>
+                    <span className="price-amount">{room.price.currency} {room.price.perNight?.toLocaleString() || '0'}</span>
                     <span className="price-note">{room.price.note}</span>
                   </div>
                   <div className="room-amenities-preview">
@@ -118,7 +118,7 @@ const Rooms: React.FC = () => {
                   </div>
                   {selectedRoom.gallery && selectedRoom.gallery.length > 0 && (
                     <div className="gallery-thumbnails">
-                      {selectedRoom.gallery.map((image, index) => (
+                      {selectedRoom.gallery.map((_, index) => (
                         <div key={index} className="thumbnail">
                           <PlaceholderImage 
                             height={80}
@@ -134,7 +134,7 @@ const Rooms: React.FC = () => {
                 <div className="room-info">
                   <h2 className="room-detail-name">{selectedRoom.name}</h2>
                   <div className="room-detail-price">
-                    <span className="price-amount">{selectedRoom.price.currency} {selectedRoom.price.perNight.toLocaleString()}</span>
+                    <span className="price-amount">{selectedRoom.price.currency} {selectedRoom.price.perNight?.toLocaleString() || '0'}</span>
                     <span className="price-note">{selectedRoom.price.note}</span>
                   </div>
                   <p className="room-detail-description">

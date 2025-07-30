@@ -75,11 +75,11 @@ const Transport: React.FC = () => {
                   <div className="vehicle-pricing">
                     <div className="price-row">
                       <span className="price-label">Daily:</span>
-                      <span className="price-amount">{vehicle.price.currency} {vehicle.price.daily.toLocaleString()}</span>
+                      <span className="price-amount">{vehicle.price.currency} {vehicle.price.daily?.toLocaleString() || '0'}</span>
                     </div>
                     <div className="price-row">
                       <span className="price-label">Half Day:</span>
-                      <span className="price-amount">{vehicle.price.currency} {vehicle.price.halfDay.toLocaleString()}</span>
+                      <span className="price-amount">{vehicle.price.currency} {vehicle.price.halfDay?.toLocaleString() || '0'}</span>
                     </div>
                     <span className="price-note">{vehicle.price.note}</span>
                   </div>

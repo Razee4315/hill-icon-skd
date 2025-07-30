@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import ScrollToTop from './components/ScrollToTop';
+import FloatingWhatsApp from './components/ScrollToTop';
 import Home from './pages/Home';
 import Rooms from './pages/Rooms';
 import Transport from './pages/Transport';
@@ -27,7 +27,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
-        <ScrollToTop />
+        <FloatingWhatsApp />
       </div>
     </Router>
   );

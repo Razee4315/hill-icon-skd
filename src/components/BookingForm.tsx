@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import WhatsAppButton from './WhatsAppButton';
+import { contactInfo } from '../data/servicesData';
+import whatsappIcon from '../assets/whatsapp.png';
 import './BookingForm.css';
 
 interface BookingFormProps {
@@ -31,9 +32,6 @@ const BookingForm: React.FC<BookingFormProps> = ({
     requirements: ''
   });
 
-  const [message, setMessage] = useState('');
-  const [showWhatsApp, setShowWhatsApp] = useState(false);
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -42,51 +40,44 @@ const BookingForm: React.FC<BookingFormProps> = ({
     }));
   };
 
-  const generateMessage = () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
     if (!formData.fullName.trim() || !formData.phone.trim()) {
       alert('Please fill in your name and phone number.');
       return;
     }
 
-    let messageText = `Hello Hill Icon, I'd like to inquire about a ${serviceType} booking.\n\n`;
+    let messageText = `Hello Hill Icon! 🏔️\n\nI'd like to inquire about a ${serviceType} booking:\n\n`;
     
     if (serviceType === 'room') {
-      messageText += `Room Type: ${serviceName}\n`;
-      messageText += `Name: ${formData.fullName}\n`;
-      messageText += `Phone: ${formData.phone}\n`;
-      if (formData.checkIn) messageText += `Check-in: ${formData.checkIn}\n`;
-      if (formData.checkOut) messageText += `Check-out: ${formData.checkOut}\n`;
-      messageText += `Guests: ${formData.guests}\n`;
+      messageText += `🏨 Room Type: ${serviceName}\n`;
+      messageText += `👤 Name: ${formData.fullName}\n`;
+      messageText += `📞 Phone: ${formData.phone}\n`;
+      if (formData.checkIn) messageText += `📅 Check-in: ${formData.checkIn}\n`;
+      if (formData.checkOut) messageText += `📅 Check-out: ${formData.checkOut}\n`;
+      messageText += `👥 Guests: ${formData.guests}\n`;
     } else if (serviceType === 'transport') {
-      messageText += `Vehicle Type: ${serviceName}\n`;
-      messageText += `Name: ${formData.fullName}\n`;
-      messageText += `Phone: ${formData.phone}\n`;
-      if (formData.requirements) messageText += `Requirements: ${formData.requirements}\n`;
+      messageText += `🚗 Vehicle Type: ${serviceName}\n`;
+      messageText += `👤 Name: ${formData.fullName}\n`;
+      messageText += `📞 Phone: ${formData.phone}\n`;
+      if (formData.requirements) messageText += `📝 Requirements: ${formData.requirements}\n`;
     } else if (serviceType === 'tour') {
-      messageText += `Tour Package: ${serviceName}\n`;
-      messageText += `Name: ${formData.fullName}\n`;
-      messageText += `Phone: ${formData.phone}\n`;
-      messageText += `Guests: ${formData.guests}\n`;
-      if (formData.requirements) messageText += `Special Requirements: ${formData.requirements}\n`;
+      messageText += `🎯 Tour Package: ${serviceName}\n`;
+      messageText += `👤 Name: ${formData.fullName}\n`;
+      messageText += `📞 Phone: ${formData.phone}\n`;
+      messageText += `👥 Guests: ${formData.guests}\n`;
+      if (formData.requirements) messageText += `📝 Special Requirements: ${formData.requirements}\n`;
     }
 
-    messageText += '\nPlease confirm availability and pricing. Thank you.';
+    messageText += '\nPlease confirm availability and pricing. Thank you! 🙏';
     
-    setMessage(messageText);
-    setShowWhatsApp(true);
-  };
-
-  const resetForm = () => {
-    setFormData({
-      fullName: '',
-      phone: '',
-      checkIn: '',
-      checkOut: '',
-      guests: '1',
-      requirements: ''
-    });
-    setMessage('');
-    setShowWhatsApp(false);
+    // Direct WhatsApp integration
+    const cleanPhoneNumber = contactInfo.whatsapp.replace(/[^0-9]/g, '');
+    const encodedMessage = encodeURIComponent(messageText);
+    const whatsappUrl = `https://wa.me/${cleanPhoneNumber}?text=${encodedMessage}`;
+    
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -100,10 +91,11 @@ const BookingForm: React.FC<BookingFormProps> = ({
         )}
       </div>
 
-      <form className="booking-form-content" onSubmit={(e) => e.preventDefault()}>
+      <form className="booking-form-content" onSubmit={handleSubmit}>
         {/* Name Field */}
         <div className="form-group">
           <label htmlFor="fullName" className="form-label">
+            <span className="label-icon">👤</span>
             Full Name *
           </label>
           <input
@@ -121,6 +113,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
         {/* Phone Field */}
         <div className="form-group">
           <label htmlFor="phone" className="form-label">
+            <span className="label-icon">📞</span>
             Phone Number *
           </label>
           <input
@@ -141,6 +134,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="checkIn" className="form-label">
+                  <span className="label-icon">📅</span>
                   Check-in Date
                 </label>
                 <input
@@ -154,6 +148,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
               </div>
               <div className="form-group">
                 <label htmlFor="checkOut" className="form-label">
+                  <span className="label-icon">📅</span>
                   Check-out Date
                 </label>
                 <input
@@ -169,6 +164,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
 
             <div className="form-group">
               <label htmlFor="guests" className="form-label">
+                <span className="label-icon">👥</span>
                 Number of Guests
               </label>
               <select
@@ -190,6 +186,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
         {(serviceType === 'transport' || serviceType === 'tour') && (
           <div className="form-group">
             <label htmlFor="guests" className="form-label">
+              <span className="label-icon">👥</span>
               Number of Guests
             </label>
             <select
@@ -210,6 +207,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
         {(serviceType === 'transport' || serviceType === 'tour') && (
           <div className="form-group">
             <label htmlFor="requirements" className="form-label">
+              <span className="label-icon">📝</span>
               {serviceType === 'transport' ? 'Service Requirements' : 'Special Requirements'}
             </label>
             <textarea
@@ -228,28 +226,15 @@ const BookingForm: React.FC<BookingFormProps> = ({
           </div>
         )}
 
-        {/* Action Buttons */}
+        {/* Action Button */}
         <div className="form-actions">
-          {!showWhatsApp ? (
-            <button
-              type="button"
-              onClick={generateMessage}
-              className="prepare-message-btn"
-            >
-              Prepare Message
-            </button>
-          ) : (
-            <div className="whatsapp-section">
-              <WhatsAppButton message={message} />
-              <button
-                type="button"
-                onClick={resetForm}
-                className="reset-btn"
-              >
-                Edit Details
-              </button>
-            </div>
-          )}
+          <button
+            type="submit"
+            className="submit-whatsapp-btn"
+          >
+            <img src={whatsappIcon} alt="WhatsApp" className="btn-icon" />
+            Book via WhatsApp
+          </button>
         </div>
       </form>
     </div>

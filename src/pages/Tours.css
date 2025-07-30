@@ -412,6 +412,7 @@
   align-items: center;
   justify-content: center;
   padding: var(--spacing-md);
+  overflow-y: auto;
 }
 
 .booking-form-overlay {
@@ -427,8 +428,9 @@
 .booking-form-wrapper {
   position: relative;
   z-index: 1001;
-  max-height: 90vh;
-  overflow-y: auto;
+  max-width: 950px;
+  width: 100%;
+  margin: auto;
   animation: slideUp 0.3s ease-out;
 }
 
@@ -488,7 +490,7 @@
   }
   
   .booking-form-container {
-    padding: var(--spacing-sm);
+    padding: var(--spacing-md);
   }
 }
 

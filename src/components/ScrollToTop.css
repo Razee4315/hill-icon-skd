@@ -1,47 +1,162 @@
-.scroll-to-top {
+.floating-whatsapp {
   position: fixed;
-  bottom: var(--spacing-lg);
-  right: var(--spacing-lg);
-  width: 50px;
-  height: 50px;
-  background-color: var(--color-primary);
-  color: var(--color-secondary);
+  bottom: var(--spacing-xl);
+  right: var(--spacing-xl);
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: white;
   border: none;
   border-radius: 50%;
-  font-size: 1.5rem;
-  font-weight: var(--font-weight-bold);
   cursor: pointer;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(20px);
-  transition: all var(--transition-normal);
+  transform: scale(1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1000;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.15),
+    0 2px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: bounceIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.scroll-to-top.visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
+.floating-whatsapp::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 100%);
+  z-index: -1;
 }
 
-.scroll-to-top:hover {
-  background-color: var(--color-gray-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+.floating-whatsapp:hover {
+  background: linear-gradient(135deg, #128C7E 0%, #075E54 100%);
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.2),
+    0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-.scroll-to-top:active {
-  transform: translateY(0);
+.floating-whatsapp:active {
+  transform: translateY(-1px) scale(1.05);
+  transition: all 0.1s ease;
+}
+
+.floating-whatsapp .whatsapp-icon {
+  width: 28px;
+  height: 28px;
+  transition: transform 0.2s ease;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+}
+
+.floating-whatsapp:hover .whatsapp-icon {
+  transform: scale(1.1);
+}
+
+/* Floating WhatsApp Button Styles */
+
+/* Pulse animation for attention */
+.whatsapp-pulse {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(37, 211, 102, 0.6);
+  animation: pulse 2s infinite;
+  z-index: -1;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .scroll-to-top {
+  .floating-whatsapp {
+    bottom: var(--spacing-lg);
+    right: var(--spacing-lg);
+    width: 56px;
+    height: 56px;
+  }
+  
+  .floating-whatsapp .whatsapp-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .floating-whatsapp {
     bottom: var(--spacing-md);
     right: var(--spacing-md);
-    width: 45px;
-    height: 45px;
-    font-size: 1.3rem;
+    width: 52px;
+    height: 52px;
+  }
+  
+  .floating-whatsapp .whatsapp-icon {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+/* Animation for better UX */
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.3);
+  }
+  50% {
+    transform: translateY(-5px) scale(1.05);
+  }
+  70% {
+    transform: translateY(2px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Shake animation for extra attention (triggered periodically) */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+
+/* Animation will be applied by the original rule */
+
+/* Enhanced focus state for accessibility */
+.floating-whatsapp:focus {
+  outline: 3px solid rgba(37, 211, 102, 0.5);
+  outline-offset: 3px;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .floating-whatsapp {
+    box-shadow: 
+      0 4px 12px rgba(0, 0, 0, 0.2),
+      0 2px 6px rgba(0, 0, 0, 0.15);
+  }
+  
+  .floating-whatsapp:hover {
+    box-shadow: 
+      0 8px 20px rgba(0, 0, 0, 0.25),
+      0 4px 10px rgba(0, 0, 0, 0.2);
   }
 }

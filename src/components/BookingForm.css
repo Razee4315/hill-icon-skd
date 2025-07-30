@@ -1,26 +1,30 @@
 .booking-form {
   background: var(--color-secondary);
   border-radius: var(--border-radius-lg);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.15),
+    0 8px 25px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  max-width: 500px;
+  max-width: 900px;
   width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .booking-form-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--spacing-lg);
-  background-color: var(--color-gray-light);
-  border-bottom: 1px solid #e9ecef;
+  padding: var(--spacing-xl);
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .booking-form-header h3 {
   margin: 0;
-  font-size: 1.25rem;
-  font-weight: var(--font-weight-semibold);
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
   color: var(--color-primary);
+  letter-spacing: -0.5px;
 }
 
 .close-button {
@@ -45,74 +49,175 @@
 }
 
 .booking-form-content {
-  padding: var(--spacing-lg);
+  padding: var(--spacing-xl);
+}
+
+/* Enhanced label styling with icons */
+.form-label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  font-size: 0.95rem;
+}
+
+.label-icon {
+  font-size: 1rem;
+  opacity: 0.8;
 }
 
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-md);
+  gap: var(--spacing-xl);
+}
+
+/* Enhanced form input styling */
+.form-group {
+  margin-bottom: var(--spacing-lg);
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: var(--spacing-md);
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: var(--border-radius-md);
+  font-family: var(--font-family);
+  font-size: 1rem;
+  color: var(--color-primary);
+  background-color: var(--color-secondary);
+  transition: all var(--transition-normal);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: #25D366;
+  box-shadow: 
+    0 0 0 3px rgba(37, 211, 102, 0.1),
+    0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--color-gray-medium);
+  opacity: 0.7;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
 }
 
 .form-actions {
-  margin-top: var(--spacing-xl);
+  margin-top: var(--spacing-xxl);
   display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
+  justify-content: center;
 }
 
-.prepare-message-btn {
-  width: 100%;
-  padding: var(--spacing-md);
-  background-color: var(--color-primary);
-  color: var(--color-secondary);
+.submit-whatsapp-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-lg) var(--spacing-xxl);
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: white;
   border: none;
-  border-radius: var(--border-radius-sm);
+  border-radius: var(--border-radius-lg);
   font-family: var(--font-family);
-  font-weight: var(--font-weight-medium);
-  font-size: 1rem;
+  font-weight: var(--font-weight-semibold);
+  font-size: 1.1rem;
   cursor: pointer;
   transition: all var(--transition-normal);
-  min-height: 50px;
+  min-height: 56px;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.15),
+    0 2px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
 }
 
-.prepare-message-btn:hover {
-  background-color: var(--color-gray-dark);
-  transform: translateY(-2px);
+.submit-whatsapp-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
 }
 
-.whatsapp-section {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
+.submit-whatsapp-btn:hover::before {
+  left: 100%;
 }
 
-.reset-btn {
-  padding: var(--spacing-sm) var(--spacing-md);
-  background: none;
-  border: 2px solid var(--color-gray-medium);
-  color: var(--color-gray-medium);
-  border-radius: var(--border-radius-sm);
-  font-family: var(--font-family);
-  font-weight: var(--font-weight-medium);
-  cursor: pointer;
-  transition: all var(--transition-fast);
+.submit-whatsapp-btn:hover {
+  background: linear-gradient(135deg, #128C7E 0%, #075E54 100%);
+  transform: translateY(-3px);
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.2),
+    0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-.reset-btn:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
+.submit-whatsapp-btn:active {
+  transform: translateY(-1px);
+}
+
+.btn-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: var(--spacing-sm);
+  object-fit: contain;
 }
 
 /* Responsive Design */
+@media (max-width: 950px) {
+  .booking-form {
+    margin: 0 var(--spacing-md);
+    max-width: calc(100vw - 3rem);
+  }
+}
+
 @media (max-width: 768px) {
   .booking-form {
     margin: 0 var(--spacing-sm);
+    max-width: calc(100vw - 2rem);
   }
   
   .form-row {
     grid-template-columns: 1fr;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-lg);
+  }
+  
+  .booking-form-content {
+    padding: var(--spacing-lg);
+  }
+  
+  .booking-form-header {
+    padding: var(--spacing-lg);
+  }
+  
+  .booking-form-header h3 {
+    font-size: 1.3rem;
+  }
+  
+  .submit-whatsapp-btn {
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-size: 1rem;
+    min-height: 52px;
+  }
+}
+
+@media (max-width: 480px) {
+  .booking-form {
+    margin: 0 var(--spacing-xs);
+    max-width: calc(100vw - 1rem);
   }
   
   .booking-form-content {
@@ -121,5 +226,20 @@
   
   .booking-form-header {
     padding: var(--spacing-md);
+  }
+  
+  .booking-form-header h3 {
+    font-size: 1.2rem;
+  }
+  
+  .submit-whatsapp-btn {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: 0.95rem;
+    min-height: 48px;
+  }
+  
+  .form-input,
+  .form-textarea {
+    padding: var(--spacing-sm);
   }
 }

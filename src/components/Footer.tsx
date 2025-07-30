@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { contactInfo } from '../data/servicesData';
 import './Footer.css';
 
@@ -58,11 +59,11 @@ const Footer: React.FC = () => {
           <div className="footer-section">
             <h4 className="footer-subtitle">Quick Links</h4>
             <div className="footer-links">
-              <a href="/" className="footer-link">Home</a>
-              <a href="/rooms" className="footer-link">Rooms</a>
-              <a href="/transport" className="footer-link">Transport</a>
-              <a href="/tours" className="footer-link">Tours</a>
-              <a href="/contact" className="footer-link">Contact</a>
+              <Link to="/" className="footer-link">Home</Link>
+              <Link to="/rooms" className="footer-link">Rooms</Link>
+              <Link to="/transport" className="footer-link">Transport</Link>
+              <Link to="/tours" className="footer-link">Tours</Link>
+              <Link to="/contact" className="footer-link">Contact</Link>
             </div>
           </div>
 

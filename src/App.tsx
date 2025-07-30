@@ -13,7 +13,7 @@ import './App.css';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/hill-icon-skd">
       <div className="app-layout">
         <Navbar />
         <main className="main-content">

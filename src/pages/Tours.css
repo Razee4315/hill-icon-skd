@@ -59,6 +59,36 @@
   margin-bottom: var(--spacing-md);
 }
 
+.tour-pricing {
+  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: var(--color-gray-light);
+  border-radius: var(--border-radius-sm);
+  text-align: center;
+}
+
+.tour-pricing .price-amount {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.tour-pricing .price-label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--color-gray-medium);
+  margin-bottom: var(--spacing-xs);
+}
+
+.tour-pricing .price-note {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--color-gray-medium);
+  font-style: italic;
+}
+
 .tour-highlights-preview {
   margin-bottom: var(--spacing-md);
 }
@@ -119,17 +149,31 @@
 
 .view-details-btn {
   color: var(--color-primary);
-  background: none;
+  background: none !important;
   border: none;
   font-weight: var(--font-weight-medium);
   cursor: pointer;
   transition: color var(--transition-fast);
   padding: 0;
   font-size: 1rem;
+  outline: none;
 }
 
 .view-details-btn:hover {
   color: var(--color-gray-medium);
+  background: none !important;
+}
+
+.view-details-btn:focus {
+  color: var(--color-primary);
+  background: none !important;
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.view-details-btn:active {
+  color: var(--color-gray-medium);
+  background: none !important;
 }
 
 /* Tour Detail View */
@@ -203,6 +247,36 @@
   font-weight: var(--font-weight-bold);
   margin-bottom: var(--spacing-lg);
   color: var(--color-primary);
+}
+
+.tour-detail-pricing {
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-lg);
+  background-color: var(--color-gray-light);
+  border-radius: var(--border-radius-md);
+  text-align: center;
+}
+
+.tour-detail-pricing .price-amount {
+  display: block;
+  font-size: 2rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.tour-detail-pricing .price-label {
+  display: block;
+  font-size: 1rem;
+  color: var(--color-gray-medium);
+  margin-bottom: var(--spacing-sm);
+}
+
+.tour-detail-pricing .price-note {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--color-gray-medium);
+  font-style: italic;
 }
 
 .tour-detail-description {

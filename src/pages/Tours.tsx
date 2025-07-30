@@ -13,6 +13,11 @@ interface Tour {
   duration: string;
   image: string;
   highlights: string[];
+  price: {
+    perPerson: number;
+    currency: string;
+    note: string;
+  };
 }
 
 const Tours: React.FC = () => {
@@ -70,6 +75,12 @@ const Tours: React.FC = () => {
                 <div className="tour-content">
                   <h3 className="tour-name">{tour.name}</h3>
                   <p className="tour-description">{tour.description}</p>
+                  
+                  <div className="tour-pricing">
+                    <span className="price-amount">{tour.price.currency} {tour.price.perPerson.toLocaleString()}</span>
+                    <span className="price-label">per person</span>
+                    <span className="price-note">{tour.price.note}</span>
+                  </div>
                   
                   <div className="tour-highlights-preview">
                     <h4 className="highlights-title">Highlights:</h4>
@@ -132,6 +143,11 @@ const Tours: React.FC = () => {
                 {/* Tour Information */}
                 <div className="tour-info">
                   <h2 className="tour-detail-name">{selectedTour.name}</h2>
+                  <div className="tour-detail-pricing">
+                    <span className="price-amount">{selectedTour.price.currency} {selectedTour.price.perPerson.toLocaleString()}</span>
+                    <span className="price-label">per person</span>
+                    <span className="price-note">{selectedTour.price.note}</span>
+                  </div>
                   <p className="tour-detail-description">
                     {selectedTour.detailedDescription}
                   </p>

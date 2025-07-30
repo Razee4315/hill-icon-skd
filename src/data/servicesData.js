@@ -6,6 +6,11 @@ export const roomsData = [
     name: "Deluxe Suite",
     description: "Spacious suite with panoramic mountain views",
     detailedDescription: "Experience luxury in our Deluxe Suite featuring floor-to-ceiling windows with breathtaking views of the Karakoram mountains. This spacious accommodation offers modern amenities while maintaining the authentic charm of the region.",
+    price: {
+      perNight: 15000,
+      currency: "Rs",
+      note: "Price per night"
+    },
     amenities: [
       "Free WiFi",
       "Room Service",
@@ -28,6 +33,11 @@ export const roomsData = [
     name: "Premium Room",
     description: "Comfortable room with modern amenities",
     detailedDescription: "Our Premium Room combines comfort with style, featuring contemporary furnishings and all essential amenities for a memorable stay in Skardu. Perfect for couples and solo travelers seeking quality accommodation.",
+    price: {
+      perNight: 12000,
+      currency: "Rs",
+      note: "Price per night"
+    },
     amenities: [
       "Free WiFi",
       "Room Service",
@@ -48,6 +58,11 @@ export const roomsData = [
     name: "Family Suite",
     description: "Spacious accommodation perfect for families",
     detailedDescription: "Designed with families in mind, our Family Suite offers ample space and comfort for up to 6 guests. Features separate sleeping areas and a common living space with stunning mountain views.",
+    price: {
+      perNight: 20000,
+      currency: "Rs",
+      note: "Price per night"
+    },
     amenities: [
       "Free WiFi",
       "Room Service",
@@ -74,6 +89,12 @@ export const transportData = [
     name: "Premium Sedan",
     description: "Comfortable sedan for airport transfers and city travel",
     detailedDescription: "Our premium sedans are perfect for airport pickups, city tours, and comfortable travel on paved roads. Featuring air conditioning, comfortable seating, and professional drivers.",
+    price: {
+      daily: 8000,
+      halfDay: 5000,
+      currency: "Rs",
+      note: "Airport transfer: Rs 3,000"
+    },
     features: [
       "Air Conditioning",
       "Professional Driver",
@@ -89,6 +110,12 @@ export const transportData = [
     name: "Toyota Prado TZ",
     description: "Rugged SUV for valley tours and mountain terrain",
     detailedDescription: "Experience the rugged beauty of Skardu's valleys with our Toyota Prado TZ. Built for challenging terrain while maintaining comfort, perfect for adventure seekers and valley explorations.",
+    price: {
+      daily: 15000,
+      halfDay: 9000,
+      currency: "Rs",
+      note: "Fuel and driver included"
+    },
     features: [
       "4WD Capability",
       "High Ground Clearance",
@@ -105,6 +132,12 @@ export const transportData = [
     name: "Luxury Van",
     description: "Spacious van for group travel and family trips",
     detailedDescription: "Our luxury van accommodates larger groups comfortably, making it ideal for family trips, group tours, and corporate travel. Features modern amenities and ample luggage space.",
+    price: {
+      daily: 18000,
+      halfDay: 12000,
+      currency: "Rs",
+      note: "Up to 12 passengers"
+    },
     features: [
       "Seats up to 12 passengers",
       "Air Conditioning",
@@ -124,6 +157,11 @@ export const toursData = [
     name: "Deosai National Park Day Trip",
     description: "Explore the world's second-highest plateau",
     detailedDescription: "Journey to the breathtaking Deosai National Park, known as the 'Land of Giants'. Experience the world's second-highest plateau with its unique wildlife, stunning landscapes, and pristine natural beauty.",
+    price: {
+      perPerson: 12000,
+      currency: "Rs",
+      note: "Minimum 2 people, group discounts available"
+    },
     inclusions: [
       "Round-trip transport",
       "Professional guide",
@@ -145,6 +183,11 @@ export const toursData = [
     name: "Shigar Valley Heritage Tour",
     description: "Discover the cultural heritage of Shigar Valley",
     detailedDescription: "Immerse yourself in the rich cultural heritage of Shigar Valley. Visit the historic Shigar Fort, explore traditional Balti architecture, and experience the local way of life in this picturesque valley.",
+    price: {
+      perPerson: 8500,
+      currency: "Rs",
+      note: "Includes lunch and entry fees"
+    },
     inclusions: [
       "Round-trip transport",
       "Professional guide",
@@ -166,6 +209,11 @@ export const toursData = [
     name: "Skardu City & Lakes Tour",
     description: "Comprehensive tour of Skardu's main attractions",
     detailedDescription: "Explore the best of Skardu with visits to Shangrila Resort, Upper Kachura Lake, and Skardu Fort. This comprehensive tour showcases the natural beauty and historical significance of the region.",
+    price: {
+      perPerson: 10000,
+      currency: "Rs",
+      note: "All inclusive package"
+    },
     inclusions: [
       "Round-trip transport",
       "Professional guide",

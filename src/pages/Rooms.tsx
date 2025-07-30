@@ -12,6 +12,11 @@ interface Room {
   amenities: string[];
   image: string;
   gallery?: string[];
+  price: {
+    perNight: number;
+    currency: string;
+    note: string;
+  };
 }
 
 const Rooms: React.FC = () => {
@@ -66,6 +71,10 @@ const Rooms: React.FC = () => {
                 <div className="room-content">
                   <h3 className="room-name">{room.name}</h3>
                   <p className="room-description">{room.description}</p>
+                  <div className="room-price">
+                    <span className="price-amount">{room.price.currency} {room.price.perNight.toLocaleString()}</span>
+                    <span className="price-note">{room.price.note}</span>
+                  </div>
                   <div className="room-amenities-preview">
                     {room.amenities.slice(0, 3).map((amenity, index) => (
                       <span key={index} className="amenity-tag">
@@ -124,6 +133,10 @@ const Rooms: React.FC = () => {
                 {/* Room Information */}
                 <div className="room-info">
                   <h2 className="room-detail-name">{selectedRoom.name}</h2>
+                  <div className="room-detail-price">
+                    <span className="price-amount">{selectedRoom.price.currency} {selectedRoom.price.perNight.toLocaleString()}</span>
+                    <span className="price-note">{selectedRoom.price.note}</span>
+                  </div>
                   <p className="room-detail-description">
                     {selectedRoom.detailedDescription}
                   </p>

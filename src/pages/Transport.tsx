@@ -12,6 +12,12 @@ interface Vehicle {
   features: string[];
   image: string;
   idealFor: string;
+  price: {
+    daily: number;
+    halfDay: number;
+    currency: string;
+    note: string;
+  };
 }
 
 const Transport: React.FC = () => {
@@ -66,6 +72,17 @@ const Transport: React.FC = () => {
                 <div className="vehicle-content">
                   <h3 className="vehicle-name">{vehicle.name}</h3>
                   <p className="vehicle-description">{vehicle.description}</p>
+                  <div className="vehicle-pricing">
+                    <div className="price-row">
+                      <span className="price-label">Daily:</span>
+                      <span className="price-amount">{vehicle.price.currency} {vehicle.price.daily.toLocaleString()}</span>
+                    </div>
+                    <div className="price-row">
+                      <span className="price-label">Half Day:</span>
+                      <span className="price-amount">{vehicle.price.currency} {vehicle.price.halfDay.toLocaleString()}</span>
+                    </div>
+                    <span className="price-note">{vehicle.price.note}</span>
+                  </div>
                   <div className="ideal-for">
                     <span className="ideal-for-label">Ideal for:</span>
                     <span className="ideal-for-text">{vehicle.idealFor}</span>
@@ -116,6 +133,19 @@ const Transport: React.FC = () => {
                 {/* Vehicle Information */}
                 <div className="vehicle-info">
                   <h2 className="vehicle-detail-name">{selectedVehicle.name}</h2>
+                  <div className="vehicle-detail-pricing">
+                    <div className="pricing-grid">
+                      <div className="price-item">
+                        <span className="price-label">Daily Rate</span>
+                        <span className="price-amount">{selectedVehicle.price.currency} {selectedVehicle.price.daily.toLocaleString()}</span>
+                      </div>
+                      <div className="price-item">
+                        <span className="price-label">Half Day Rate</span>
+                        <span className="price-amount">{selectedVehicle.price.currency} {selectedVehicle.price.halfDay.toLocaleString()}</span>
+                      </div>
+                    </div>
+                    <span className="price-note">{selectedVehicle.price.note}</span>
+                  </div>
                   <p className="vehicle-detail-description">
                     {selectedVehicle.detailedDescription}
                   </p>

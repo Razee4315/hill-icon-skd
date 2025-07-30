@@ -21,11 +21,11 @@ export const roomsData = [
       "Flat Screen TV",
       "Balcony"
     ],
-    image: "/src/assets/room-deluxe.jpg",
+    image: "/images/room-deluxe.jpg",
     gallery: [
-      "/src/assets/room-deluxe.jpg",
-      "/src/assets/room-delux-2.jpg",
-      "/src/assets/double-bed-queen.jpg"
+      "/images/room-deluxe.jpg",
+      "/images/room-delux-2.jpg",
+      "/images/double-bed-queen.jpg"
     ]
   },
   {
@@ -47,10 +47,10 @@ export const roomsData = [
       "Flat Screen TV",
       "Work Desk"
     ],
-    image: "/src/assets/double-bed.jpg",
+    image: "/images/double-bed.jpg",
     gallery: [
-      "/src/assets/double-bed.jpg",
-      "/src/assets/guest.jpg"
+      "/images/double-bed.jpg",
+      "/images/guest.jpg"
     ]
   },
   {
@@ -74,11 +74,65 @@ export const roomsData = [
       "Separate Living Area",
       "Balcony"
     ],
-    image: "/src/assets/guest-pc.jpeg",
+    image: "/images/guest-pc.jpeg",
     gallery: [
-      "/src/assets/guest-pc.jpeg",
-      "/src/assets/mess.jpg",
-      "/src/assets/reciption.jpg"
+      "/images/guest-pc.jpeg",
+      "/images/mess.jpg",
+      "/images/reciption.jpg"
+    ]
+  },
+  {
+    id: 4,
+    name: "Mountain View Suite",
+    description: "Spectacular suite with panoramic mountain vistas",
+    detailedDescription: "Indulge in unparalleled luxury with our Mountain View Suite, featuring expansive windows showcasing the majestic Karakoram range. This premium accommodation offers the perfect blend of comfort and natural beauty.",
+    price: {
+      perNight: 18000,
+      currency: "Rs",
+      note: "Price per night"
+    },
+    amenities: [
+      "Free WiFi",
+      "24/7 Room Service", 
+      "Panoramic Mountain View",
+      "Air Conditioning",
+      "Premium Bathroom",
+      "Mini Bar",
+      "Smart TV",
+      "Private Balcony",
+      "Seating Area"
+    ],
+    image: "/images/view-from-top.jpg",
+    gallery: [
+      "/images/view-from-top.jpg",
+      "/images/view-from-hill.jpg",
+      "/images/roof-view.jpg"
+    ]
+  },
+  {
+    id: 5,
+    name: "Standard Room",
+    description: "Comfortable and affordable accommodation",
+    detailedDescription: "Perfect for budget-conscious travelers who don't want to compromise on quality. Our Standard Room offers all essential amenities in a cozy, well-appointed space with lovely valley views.",
+    price: {
+      perNight: 8000,
+      currency: "Rs",
+      note: "Price per night"
+    },
+    amenities: [
+      "Free WiFi",
+      "Room Service",
+      "Valley View",
+      "Heating",
+      "Private Bathroom",
+      "TV",
+      "Work Desk",
+      "Daily Housekeeping"
+    ],
+    image: "/images/img-20220511-wa0015.jpg",
+    gallery: [
+      "/images/img-20220511-wa0015.jpg",
+      "/images/guest.jpg"
     ]
   }
 ];
@@ -102,7 +156,7 @@ export const transportData = [
       "Comfortable Seating",
       "Luggage Space"
     ],
-    image: "/src/assets/premium-sedan.jpg",
+    image: "/images/side.jpg",
     idealFor: "Airport transfers, city tours, business travel"
   },
   {
@@ -124,7 +178,7 @@ export const transportData = [
       "Spacious Interior",
       "Mountain Terrain Ready"
     ],
-    image: "/src/assets/toyota-prado.jpg",
+    image: "/images/side.jpg",
     idealFor: "Valley tours, mountain terrain, adventure trips"
   },
   {
@@ -146,7 +200,7 @@ export const transportData = [
       "Comfortable Seating",
       "Entertainment System"
     ],
-    image: "/src/assets/luxury-van.jpg",
+    image: "/images/side.jpg",
     idealFor: "Group travel, family trips, corporate transport"
   }
 ];
@@ -170,7 +224,7 @@ export const toursData = [
       "Photography stops"
     ],
     duration: "Full Day (8-10 hours)",
-    image: "/src/assets/deosai-tour.jpg",
+    image: "/images/view-from-hill.jpg",
     highlights: [
       "Deosai Plains",
       "Wildlife spotting",
@@ -196,7 +250,7 @@ export const toursData = [
       "Cultural experiences"
     ],
     duration: "Full Day (6-8 hours)",
-    image: "/src/assets/shigar-tour.jpg",
+    image: "/images/trip-group.jpg",
     highlights: [
       "Shigar Fort",
       "Traditional architecture",
@@ -222,12 +276,41 @@ export const toursData = [
       "Fort exploration"
     ],
     duration: "Full Day (7-9 hours)",
-    image: "/src/assets/skardu-lakes-tour.jpg",
+    image: "/images/view-from-top.jpg",
     highlights: [
       "Shangrila Resort",
       "Upper Kachura Lake",
       "Skardu Fort",
       "Indus River views"
+    ]
+  },
+  {
+    id: 4,
+    name: "Adventure Camp & Bonfire Experience",
+    description: "Outdoor camping with traditional bonfire night",
+    detailedDescription: "Experience the magic of Skardu under the stars with our adventure camping tour. Enjoy traditional bonfire activities, stargazing, local music, and authentic outdoor dining in the heart of nature.",
+    price: {
+      perPerson: 15000,
+      currency: "Rs",
+      note: "Includes camping gear and meals"
+    },
+    inclusions: [
+      "Camping equipment",
+      "Professional guide",
+      "Bonfire setup",
+      "Traditional dinner",
+      "Breakfast",
+      "Stargazing session"
+    ],
+    duration: "Overnight (2 Days / 1 Night)",
+    image: "/images/bone-fire.jpg",
+    highlights: [
+      "Bonfire under stars",
+      "Traditional music",
+      "Outdoor camping",
+      "Local cuisine",
+      "Stargazing",
+      "Photography"
     ]
   }
 ];

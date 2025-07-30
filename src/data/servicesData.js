@@ -21,11 +21,11 @@ export const roomsData = [
       "Flat Screen TV",
       "Balcony"
     ],
-    image: "/images/room-deluxe.jpg",
+    image: "/src/assets/room-deluxe.jpg",
     gallery: [
-      "/images/room-deluxe.jpg",
-      "/images/room-delux-2.jpg",
-      "/images/double-bed-queen.jpg"
+      "/src/assets/room-deluxe.jpg",
+      "/src/assets/room-delux-2.jpg",
+      "/src/assets/double-bed-queen.jpg"
     ]
   },
   {
@@ -47,10 +47,10 @@ export const roomsData = [
       "Flat Screen TV",
       "Work Desk"
     ],
-    image: "/images/double-bed.jpg",
+    image: "/src/assets/double-bed.jpg",
     gallery: [
-      "/images/double-bed.jpg",
-      "/images/guest.jpg"
+      "/src/assets/double-bed.jpg",
+      "/src/assets/guest.jpg"
     ]
   },
   {
@@ -74,11 +74,11 @@ export const roomsData = [
       "Separate Living Area",
       "Balcony"
     ],
-    image: "/images/guest-pc.jpeg",
+    image: "/src/assets/guest-pc.jpeg",
     gallery: [
-      "/images/guest-pc.jpeg",
-      "/images/mess.jpg",
-      "/images/reciption.jpg"
+      "/src/assets/guest-pc.jpeg",
+      "/src/assets/mess.jpg",
+      "/src/assets/reciption.jpg"
     ]
   },
   {
@@ -102,11 +102,11 @@ export const roomsData = [
       "Private Balcony",
       "Seating Area"
     ],
-    image: "/images/view-from-top.jpg",
+    image: "/src/assets/view-from-top.jpg",
     gallery: [
-      "/images/view-from-top.jpg",
-      "/images/view-from-hill.jpg",
-      "/images/roof-view.jpg"
+      "/src/assets/view-from-top.jpg",
+      "/src/assets/view-from-hill.jpg",
+      "/src/assets/roof-view.jpg"
     ]
   },
   {
@@ -129,10 +129,10 @@ export const roomsData = [
       "Work Desk",
       "Daily Housekeeping"
     ],
-    image: "/images/img-20220511-wa0015.jpg",
+    image: "/src/assets/img-20220511-wa0015.jpg",
     gallery: [
-      "/images/img-20220511-wa0015.jpg",
-      "/images/guest.jpg"
+      "/src/assets/img-20220511-wa0015.jpg",
+      "/src/assets/guest.jpg"
     ]
   }
 ];
@@ -156,7 +156,7 @@ export const transportData = [
       "Comfortable Seating",
       "Luggage Space"
     ],
-    image: "/images/side.jpg",
+    image: "/src/assets/guest-pc.jpg",
     idealFor: "Airport transfers, city tours, business travel"
   },
   {
@@ -178,7 +178,7 @@ export const transportData = [
       "Spacious Interior",
       "Mountain Terrain Ready"
     ],
-    image: "/images/side.jpg",
+    image: "/src/assets/guest-pc.jpg",
     idealFor: "Valley tours, mountain terrain, adventure trips"
   },
   {
@@ -200,7 +200,7 @@ export const transportData = [
       "Comfortable Seating",
       "Entertainment System"
     ],
-    image: "/images/side.jpg",
+    image: "/src/assets/guest-pc.jpg",
     idealFor: "Group travel, family trips, corporate transport"
   }
 ];
@@ -224,7 +224,7 @@ export const toursData = [
       "Photography stops"
     ],
     duration: "Full Day (8-10 hours)",
-    image: "/images/view-from-hill.jpg",
+    image: "/src/assets/view-from-hill.jpg",
     highlights: [
       "Deosai Plains",
       "Wildlife spotting",
@@ -250,7 +250,7 @@ export const toursData = [
       "Cultural experiences"
     ],
     duration: "Full Day (6-8 hours)",
-    image: "/images/trip-group.jpg",
+    image: "/src/assets/trip-group.jpg",
     highlights: [
       "Shigar Fort",
       "Traditional architecture",
@@ -276,7 +276,7 @@ export const toursData = [
       "Fort exploration"
     ],
     duration: "Full Day (7-9 hours)",
-    image: "/images/view-from-top.jpg",
+    image: "/src/assets/view-from-top.jpg",
     highlights: [
       "Shangrila Resort",
       "Upper Kachura Lake",
@@ -303,7 +303,7 @@ export const toursData = [
       "Stargazing session"
     ],
     duration: "Overnight (2 Days / 1 Night)",
-    image: "/images/bone-fire.jpg",
+    image: "/src/assets/bone-fire.jpg",
     highlights: [
       "Bonfire under stars",
       "Traditional music",

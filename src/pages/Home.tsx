@@ -10,7 +10,7 @@ const Home: React.FC = () => {
       id: 'rooms',
       title: 'Premium Accommodation',
       description: 'Experience luxury and comfort in our carefully designed rooms with breathtaking mountain views.',
-      image: '/images/room-deluxe.jpg',
+      image: '/src/assets/room-deluxe.jpg',
       link: '/rooms',
       features: ['Mountain Views', 'Modern Amenities', 'Room Service']
     },
@@ -18,7 +18,7 @@ const Home: React.FC = () => {
       id: 'transport',
       title: 'Reliable Transport',
       description: 'Professional transport services for all terrains, from airport transfers to valley explorations.',
-      image: '/images/side.jpg',
+      image: '/src/assets/side.jpg',
       link: '/transport',
       features: ['Professional Drivers', 'All Terrain Vehicles', 'Safe & Comfortable']
     },
@@ -26,7 +26,7 @@ const Home: React.FC = () => {
       id: 'tours',
       title: 'Guided Tours',
       description: 'Discover the natural beauty and cultural heritage of Skardu with our expertly guided tours.',
-      image: '/images/view-from-hill.jpg',
+      image: '/src/assets/view-from-hill.jpg',
       link: '/tours',
       features: ['Expert Guides', 'Cultural Experiences', 'Natural Wonders']
     }
@@ -129,7 +129,7 @@ const Home: React.FC = () => {
             
             <div className="about-image">
               <img
-                src="/images/front.jpg"
+                src="/src/assets/front.jpg"
                 alt="Hill Icon Experience"
                 onError={(e) => {
                   // Fallback to placeholder if image fails to load

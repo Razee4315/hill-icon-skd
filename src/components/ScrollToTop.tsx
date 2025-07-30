@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { contactInfo } from '../data/servicesData';
-import whatsappIcon from '/images/whatsapp.png';
+import whatsappIcon from '../assets/whatsapp.png';
 import './ScrollToTop.css';
 
 const FloatingWhatsApp: React.FC = () => {

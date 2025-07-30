@@ -9,7 +9,7 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({
-  videoSrc = "/images/hero-section-video.mp4",
+  videoSrc = "/src/assets/hero-section-video.mp4",
   title = "Experience Serenity. Welcome to Hill Icon.",
   subtitle = "Discover the breathtaking beauty of Skardu with our premium accommodation, transport, and tour services.",
   showCTA = true

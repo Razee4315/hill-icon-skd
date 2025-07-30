@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { contactInfo } from '../data/servicesData';
-import whatsappIcon from '/images/whatsapp.png';
+import whatsappIcon from '../assets/whatsapp.png';
 import './BookingForm.css';
 
 interface BookingFormProps {

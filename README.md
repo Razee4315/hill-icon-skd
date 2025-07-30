@@ -1,4 +1,4 @@
-# Hill Icon Website
+# Hill Icon Skardu Website
 
 A modern, responsive website for Hill Icon - a premium accommodation, transport, and tour service provider in Skardu, Pakistan.
 

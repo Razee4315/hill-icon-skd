@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CheckCircle } from '@mui/icons-material';
 import { transportData } from '../data/servicesData';
 import BookingForm from '../components/BookingForm';
@@ -45,6 +45,13 @@ const Transport: React.FC = () => {
     setSelectedVehicle(null);
     setShowBookingForm(false);
   };
+
+  // Ensure detail view starts from top when a vehicle is selected
+  useEffect(() => {
+    if (selectedVehicle) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    }
+  }, [selectedVehicle]);
 
   return (
     <div className="transport-page">

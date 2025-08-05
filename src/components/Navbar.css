@@ -47,7 +47,7 @@
 /* Modern Navigation Links */
 .navbar-links {
   display: flex;
-  gap: 2rem;
+  gap: 1.25rem;
   align-items: center;
 }
 
@@ -56,7 +56,7 @@
   text-decoration: none;
   font-weight: 500;
   font-size: 0.95rem;
-  padding: 0.75rem 1.25rem;
+  padding: 0.6rem 0.9rem;
   border-radius: 50px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -216,6 +216,22 @@
 
   .navbar-logo h2 {
     font-size: 1.5rem;
+  }
+}
+
+/* Reduce visual load on medium screens: keep icons, hide labels */
+@media (max-width: 1100px) {
+  .navbar-links {
+    gap: 0.75rem;
+  }
+
+  .navbar-link {
+    padding: 0.5rem;
+    border-radius: 10px;
+  }
+
+  .navbar-link .label {
+    display: none;
   }
 }
 

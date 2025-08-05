@@ -56,43 +56,55 @@ const Navbar: React.FC = () => {
               to="/" 
               className={`navbar-link ${isActive('/') ? 'active' : ''}`}
               onClick={handleSameRouteClick('/')}
+              title="Home"
+              aria-label="Home"
             >
-              <HomeIcon fontSize="small" style={{ marginRight: 6 }} /> Home
+              <HomeIcon fontSize="small" style={{ marginRight: 6 }} /> <span className="label">Home</span>
             </Link>
             <Link 
               to="/rooms" 
               className={`navbar-link ${isActive('/rooms') ? 'active' : ''}`}
               onClick={handleSameRouteClick('/rooms')}
+              title="Rooms"
+              aria-label="Rooms"
             >
-              <Hotel fontSize="small" style={{ marginRight: 6 }} /> Rooms
+              <Hotel fontSize="small" style={{ marginRight: 6 }} /> <span className="label">Rooms</span>
             </Link>
             <Link 
               to="/transport" 
               className={`navbar-link ${isActive('/transport') ? 'active' : ''}`}
               onClick={handleSameRouteClick('/transport')}
+              title="Transport"
+              aria-label="Transport"
             >
-              <DirectionsCar fontSize="small" style={{ marginRight: 6 }} /> Transport
+              <DirectionsCar fontSize="small" style={{ marginRight: 6 }} /> <span className="label">Transport</span>
             </Link>
             <Link 
               to="/tours" 
               className={`navbar-link ${isActive('/tours') ? 'active' : ''}`}
               onClick={handleSameRouteClick('/tours')}
+              title="Tours"
+              aria-label="Tours"
             >
-              <Terrain fontSize="small" style={{ marginRight: 6 }} /> Tours
+              <Terrain fontSize="small" style={{ marginRight: 6 }} /> <span className="label">Tours</span>
             </Link>
             <Link 
               to="/gallery" 
               className={`navbar-link ${isActive('/gallery') ? 'active' : ''}`}
               onClick={handleSameRouteClick('/gallery')}
+              title="Gallery"
+              aria-label="Gallery"
             >
-              <PhotoAlbum fontSize="small" style={{ marginRight: 6 }} /> Gallery
+              <PhotoAlbum fontSize="small" style={{ marginRight: 6 }} /> <span className="label">Gallery</span>
             </Link>
             <Link 
               to="/contact" 
               className={`navbar-link ${isActive('/contact') ? 'active' : ''}`}
               onClick={handleSameRouteClick('/contact')}
+              title="Contact"
+              aria-label="Contact"
             >
-              <ContactMail fontSize="small" style={{ marginRight: 6 }} /> Contact
+              <ContactMail fontSize="small" style={{ marginRight: 6 }} /> <span className="label">Contact</span>
             </Link>
           </div>
 
@@ -117,42 +129,42 @@ const Navbar: React.FC = () => {
             className={`navbar-mobile-link ${isActive('/') ? 'active' : ''}`}
             onClick={handleSameRouteClick('/')}
           >
-            <HomeIcon fontSize="small" style={{ marginRight: 6 }} /> Home
+            <HomeIcon fontSize="small" style={{ marginRight: 6 }} /> <span className="label">Home</span>
           </Link>
           <Link 
             to="/rooms" 
             className={`navbar-mobile-link ${isActive('/rooms') ? 'active' : ''}`}
             onClick={handleSameRouteClick('/rooms')}
           >
-            <Hotel fontSize="small" style={{ marginRight: 6 }} /> Rooms
+            <Hotel fontSize="small" style={{ marginRight: 6 }} /> <span className="label">Rooms</span>
           </Link>
           <Link 
             to="/transport" 
             className={`navbar-mobile-link ${isActive('/transport') ? 'active' : ''}`}
             onClick={handleSameRouteClick('/transport')}
           >
-            <DirectionsCar fontSize="small" style={{ marginRight: 6 }} /> Transport
+            <DirectionsCar fontSize="small" style={{ marginRight: 6 }} /> <span className="label">Transport</span>
           </Link>
           <Link 
             to="/tours" 
             className={`navbar-mobile-link ${isActive('/tours') ? 'active' : ''}`}
             onClick={handleSameRouteClick('/tours')}
           >
-            <Terrain fontSize="small" style={{ marginRight: 6 }} /> Tours
+            <Terrain fontSize="small" style={{ marginRight: 6 }} /> <span className="label">Tours</span>
           </Link>
           <Link 
             to="/gallery" 
             className={`navbar-mobile-link ${isActive('/gallery') ? 'active' : ''}`}
             onClick={handleSameRouteClick('/gallery')}
           >
-            <PhotoAlbum fontSize="small" style={{ marginRight: 6 }} /> Gallery
+            <PhotoAlbum fontSize="small" style={{ marginRight: 6 }} /> <span className="label">Gallery</span>
           </Link>
           <Link 
             to="/contact" 
             className={`navbar-mobile-link ${isActive('/contact') ? 'active' : ''}`}
             onClick={handleSameRouteClick('/contact')}
           >
-            <ContactMail fontSize="small" style={{ marginRight: 6 }} /> Contact
+            <ContactMail fontSize="small" style={{ marginRight: 6 }} /> <span className="label">Contact</span>
           </Link>
         </div>
       </div>

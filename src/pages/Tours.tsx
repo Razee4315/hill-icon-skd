@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Terrain, CheckCircle } from '@mui/icons-material';
 import { toursData } from '../data/servicesData';
 import BookingForm from '../components/BookingForm';
@@ -42,6 +42,13 @@ const Tours: React.FC = () => {
     setSelectedTour(null);
     setShowBookingForm(false);
   };
+
+  // Ensure detail view starts from top when a tour is selected
+  useEffect(() => {
+    if (selectedTour) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    }
+  }, [selectedTour]);
 
   return (
     <div className="tours-page">

@@ -47,6 +47,13 @@ const Rooms: React.FC = () => {
     setActiveImage(null);
   };
 
+  // Ensure detail view starts from top when a room is selected
+  useEffect(() => {
+    if (selectedRoom) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    }
+  }, [selectedRoom]);
+
   // Reset view when user clicks the same nav item again
   useEffect(() => {
     const handler = (e: Event) => {

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CheckCircle } from '@mui/icons-material';
 import { roomsData } from '../data/servicesData';
 import BookingForm from '../components/BookingForm';
+import ImageModal from '../components/ImageModal';
 import PlaceholderImage from '../components/PlaceholderImage';
 import './Rooms.css';
 
@@ -23,10 +24,13 @@ interface Room {
 const Rooms: React.FC = () => {
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
   const [showBookingForm, setShowBookingForm] = useState(false);
+  const [activeImage, setActiveImage] = useState<string | null>(null);
+  const [preview, setPreview] = useState<{ src: string; alt: string } | null>(null);
 
   const handleRoomSelect = (room: Room) => {
     setSelectedRoom(room);
     setShowBookingForm(false);
+    setActiveImage(room.image || null);
   };
 
   const handleBookNow = () => {
@@ -40,7 +44,21 @@ const Rooms: React.FC = () => {
   const handleBackToList = () => {
     setSelectedRoom(null);
     setShowBookingForm(false);
+    setActiveImage(null);
   };
+
+  // Reset view when user clicks the same nav item again
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const custom = e as CustomEvent<{ path: string }>;
+      if (custom.detail?.path === '/rooms') {
+        handleBackToList();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    };
+    window.addEventListener('navigate-same-route', handler as EventListener);
+    return () => window.removeEventListener('navigate-same-route', handler as EventListener);
+  }, []);
 
   return (
     <div className="rooms-page">
@@ -48,10 +66,6 @@ const Rooms: React.FC = () => {
         {/* Page Header */}
         <div className="page-header">
           <h1 className="page-title">Our Rooms</h1>
-          <p className="page-subtitle">
-            Experience comfort and luxury with breathtaking views of the Karakoram mountains. 
-            Each room is thoughtfully designed to provide you with an unforgettable stay in Skardu.
-          </p>
         </div>
 
         {!selectedRoom ? (
@@ -64,17 +78,21 @@ const Rooms: React.FC = () => {
                 onClick={() => handleRoomSelect(room)}
               >
                 <div className="room-image">
-                  <PlaceholderImage 
-                    height={250}
-                    text={`${room.name} Image`}
-                  />
+                  {room.image ? (
+                    <img
+                      src={room.image}
+                      alt={room.name}
+                      style={{ width: '100%', height: 250, objectFit: 'cover', borderRadius: 12 }}
+                    />
+                  ) : (
+                    <PlaceholderImage height={250} text={`${room.name} Image`} />
+                  )}
                 </div>
                 <div className="room-content">
                   <h3 className="room-name">{room.name}</h3>
                   <p className="room-description">{room.description}</p>
                   <div className="room-price">
                     <span className="price-amount">{room.price.currency} {room.price.perNight?.toLocaleString() || '0'}</span>
-                    <span className="price-note">{room.price.note}</span>
                   </div>
                   <div className="room-amenities-preview">
                     {room.amenities.slice(0, 3).map((amenity, index) => (
@@ -112,24 +130,46 @@ const Rooms: React.FC = () => {
                 {/* Room Gallery */}
                 <div className="room-gallery">
                   <div className="main-image">
-                    <PlaceholderImage 
-                      height={400}
-                      text={`${selectedRoom.name} Main Image`}
-                    />
+                    {activeImage ? (
+                      <img
+                        src={activeImage}
+                        alt={selectedRoom.name}
+                        style={{ width: '100%', height: 400, objectFit: 'cover', borderRadius: 12, cursor: 'zoom-in' }}
+                        onClick={() => setPreview({ src: activeImage, alt: selectedRoom.name })}
+                      />
+                    ) : (
+                      <PlaceholderImage height={400} text={`${selectedRoom.name} Main Image`} />
+                    )}
                   </div>
                   {selectedRoom.gallery && selectedRoom.gallery.length > 0 && (
                     <div className="gallery-thumbnails">
-                      {selectedRoom.gallery.map((_, index) => (
+                      {[selectedRoom.image, ...selectedRoom.gallery].filter(Boolean).map((src, index) => (
                         <div key={index} className="thumbnail">
-                          <PlaceholderImage 
-                            height={80}
-                            text={`Image ${index + 1}`}
-                          />
+                          {src ? (
+                            <img
+                              src={src}
+                              alt={`${selectedRoom.name} ${index + 1}`}
+                              style={{ width: '100%', height: 80, objectFit: 'cover', borderRadius: 8, cursor: 'pointer', outline: src === activeImage ? '2px solid #2e7d32' : 'none' }}
+                              onClick={() => setActiveImage(src)}
+                            />
+                          ) : (
+                            <PlaceholderImage height={80} text={`Image ${index + 1}`} />
+                          )}
                         </div>
                       ))}
                     </div>
                   )}
                 </div>
+
+                {/* Image Preview Modal */}
+                <ImageModal
+                  open={!!preview}
+                  src={preview?.src || ''}
+                  alt={preview?.alt}
+                  onClose={() => setPreview(null)}
+                  maxWidth="80vw"
+                  maxHeight="80vh"
+                />
 
                 {/* Room Information */}
                 <div className="room-info">

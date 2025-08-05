@@ -1,45 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { images } from '../utils/images';
+import ImageModal from '../components/ImageModal';
 
-// Import available images from "images and videos" folder
-import boneFire from '../../images and videos/bone-fire.jpg';
-import doubleBedQueen from '../../images and videos/double-bed-queen.jpg';
-import doubleBed from '../../images and videos/double-bed.jpg';
-import front from '../../images and videos/front.jpg';
-import groupPic from '../../images and videos/group-pic.jpg';
-import guestPc from '../../images and videos/guest-pc.jpeg';
-import guest from '../../images and videos/guest.jpg';
-import img20220511 from '../../images and videos/img-20220511-wa0015.jpg';
-import mess from '../../images and videos/mess.jpg';
-import reception from '../../images and videos/reciption.jpg';
-import roofView from '../../images and videos/roof-view.jpg';
-import roomDelux2 from '../../images and videos/room-delux-2.jpg';
-import roomDeluxe from '../../images and videos/room-deluxe.jpg';
-import side from '../../images and videos/side.jpg';
-import tripGroup from '../../images and videos/trip-group.jpg';
-import viewFromHill from '../../images and videos/view-from-hill.jpg';
-import viewFromTop from '../../images and videos/view-from-top.jpg';
-
-const images: { src: string; alt: string }[] = [
-  { src: groupPic, alt: 'Guests group photo' },
-  { src: tripGroup, alt: 'Trip group at Hill Icon' },
-  { src: guest, alt: 'Happy guest' },
-  { src: guestPc, alt: 'Guest at PC' },
-  { src: boneFire, alt: 'Bonfire night' },
-  { src: front, alt: 'Hotel front view' },
-  { src: roofView, alt: 'Roof view' },
-  { src: viewFromHill, alt: 'View from hill' },
-  { src: viewFromTop, alt: 'View from top' },
-  { src: roomDeluxe, alt: 'Deluxe room' },
-  { src: roomDelux2, alt: 'Deluxe room 2' },
-  { src: doubleBedQueen, alt: 'Queen double bed' },
-  { src: doubleBed, alt: 'Double bed' },
-  { src: side, alt: 'Side view' },
-  { src: img20220511, alt: 'Memorable moment' },
-  { src: reception, alt: 'Reception' },
-  { src: mess, alt: 'Dining / Mess' },
+const galleryImages: { src: string; alt: string }[] = [
+  { src: images.groupPic, alt: 'Guests group photo' },
+  { src: images.tripGroup, alt: 'Trip group at Hill Icon' },
+  { src: images.guest, alt: 'Happy guest' },
+  { src: images.guestPic, alt: 'Guest with computer' },
+  { src: images.boneFire, alt: 'Bonfire night' },
+  { src: images.front, alt: 'Hotel front view' },
+  { src: images.roofView1, alt: 'Roof view 1' },
+  { src: images.roofView2, alt: 'Roof view 2' },
+  { src: images.viewFromRoungChumik, alt: 'View from Roung Chumik' },
+  { src: images.receptionFront, alt: 'Reception front' },
+  { src: images.receptionBack, alt: 'Reception back' },
+  { src: images.garden1, alt: 'Garden' },
+  { src: images.twinRoom1, alt: 'Twin Room' },
+  { src: images.deluxeRoom1, alt: 'Deluxe Room' },
+  { src: images.familyRoom1, alt: 'Family Room' },
+  { src: images.suiteRoom1, alt: 'Suite Room' },
 ];
 
 const Gallery: React.FC = () => {
+  const [preview, setPreview] = useState<{ src: string; alt: string } | null>(null);
   return (
     <section className="section">
       <div className="container">
@@ -55,7 +38,7 @@ const Gallery: React.FC = () => {
             gap: '12px',
           }}
         >
-          {images.map((img, idx) => (
+          {galleryImages.map((img, idx) => (
             <div
               key={idx}
               style={{
@@ -73,11 +56,22 @@ const Gallery: React.FC = () => {
                   width: '100%',
                   height: 360,
                   objectFit: 'cover',
+                  cursor: 'zoom-in'
                 }}
+                onClick={() => setPreview(img)}
               />
             </div>
           ))}
         </div>
+
+        <ImageModal
+          open={!!preview}
+          src={preview?.src || ''}
+          alt={preview?.alt}
+          onClose={() => setPreview(null)}
+          maxWidth="80vw"
+          maxHeight="80vh"
+        />
       </div>
     </section>
   );

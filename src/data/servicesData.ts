@@ -67,136 +67,104 @@ interface DiningInfo {
 export const roomsData: Room[] = [
   {
     id: 1,
-    name: "Deluxe Suite",
+    name: "Deluxe Room",
     description: "Spacious suite with panoramic mountain views",
     detailedDescription: "Experience luxury in our Deluxe Suite featuring floor-to-ceiling windows with breathtaking views of the Karakoram mountains. This spacious accommodation offers modern amenities while maintaining the authentic charm of the region.",
     price: {
-      perNight: 15000,
+      perNight: 7000,
       currency: "Rs",
-      note: "Price per night"
+      note: "All prices are per night. Free breakfast is available for up to 4 guests only. Additional guests will be charged separately for breakfast."
     },
     amenities: [
       "Free WiFi",
+      "Free Parking",
       "Room Service",
-      "Mountain View",
-      "Air Conditioning",
+      "Seating Area",
       "Private Bathroom",
-      "Mini Bar",
-      "Flat Screen TV",
-      "Balcony"
+      "Mountain View"
     ],
-    image: images.roomDeluxe,
+    image: images.deluxeRoom1,
     gallery: [
-      images.roomDeluxe,
-      images.roomDelux2,
-      images.doubleBedQueen
+      images.deluxeRoom1,
+      images.deluxeRoom2,
+      images.deluxeRoom3
     ]
   },
   {
     id: 2,
-    name: "Premium Room",
+    name: "Twin Bed Room",
     description: "Comfortable room with modern amenities",
     detailedDescription: "Our Premium Room combines comfort with style, featuring contemporary furnishings and all essential amenities for a memorable stay in Skardu. Perfect for couples and solo travelers seeking quality accommodation.",
     price: {
-      perNight: 12000,
+      perNight: 5000,
       currency: "Rs",
-      note: "Price per night"
+      note: "All prices are per night. Free breakfast is available for up to 4 guests only. Additional guests will be charged separately for breakfast."
     },
     amenities: [
       "Free WiFi",
+      "Free Parking",
       "Room Service",
-      "Valley View",
-      "Heating",
+      "Seating Area",
       "Private Bathroom",
-      "Flat Screen TV",
-      "Work Desk"
+      "Mountain View"
     ],
-    image: images.doubleBed,
+    image: images.twinRoom1,
     gallery: [
-      images.doubleBed,
-      images.guest
+      images.twinRoom1,
+      images.twinRoom2,
+      images.twinRoom3
     ]
   },
   {
     id: 3,
-    name: "Family Suite",
+    name: "Family Room",
     description: "Spacious accommodation perfect for families",
     detailedDescription: "Designed with families in mind, our Family Suite offers ample space and comfort for up to 6 guests. Features separate sleeping areas and a common living space with stunning mountain views.",
     price: {
-      perNight: 20000,
+      perNight: 8000,
       currency: "Rs",
-      note: "Price per night"
+      note: "All prices are per night. Free breakfast is available for up to 4 guests only. Additional guests will be charged separately for breakfast."
     },
     amenities: [
       "Free WiFi",
+      "Free Parking",
       "Room Service",
-      "Mountain View",
-      "Air Conditioning",
+      "Seating Area",
       "Private Bathroom",
-      "Kitchenette",
-      "Flat Screen TV",
-      "Separate Living Area",
-      "Balcony"
+      "Mountain View"
     ],
-    image: images.guestPc,
+    image: images.familyRoom1,
     gallery: [
-      images.guestPc,
-      images.mess,
-      images.reception
+      images.familyRoom1,
+      images.familyBathroom
     ]
   },
   {
     id: 4,
-    name: "Mountain View Suite",
+    name: "Suite Room",
     description: "Spectacular suite with panoramic mountain vistas",
     detailedDescription: "Indulge in unparalleled luxury with our Mountain View Suite, featuring expansive windows showcasing the majestic Karakoram range. This premium accommodation offers the perfect blend of comfort and natural beauty.",
     price: {
-      perNight: 18000,
+      perNight: 9000,
       currency: "Rs",
-      note: "Price per night"
+      note: "All prices are per night. Free breakfast is available for up to 4 guests only. Additional guests will be charged separately for breakfast."
     },
     amenities: [
       "Free WiFi",
-      "24/7 Room Service", 
-      "Panoramic Mountain View",
-      "Air Conditioning",
-      "Premium Bathroom",
-      "Mini Bar",
-      "Smart TV",
-      "Private Balcony",
-      "Seating Area"
-    ],
-    image: images.viewFromTop,
-    gallery: [
-      images.viewFromTop,
-      images.viewFromHill,
-      images.roofView
-    ]
-  },
-  {
-    id: 5,
-    name: "Standard Room",
-    description: "Comfortable and affordable accommodation",
-    detailedDescription: "Perfect for budget-conscious travelers who don't want to compromise on quality. Our Standard Room offers all essential amenities in a cozy, well-appointed space with lovely valley views.",
-    price: {
-      perNight: 8000,
-      currency: "Rs",
-      note: "Price per night"
-    },
-    amenities: [
-      "Free WiFi",
+      "Free Parking",
       "Room Service",
-      "Valley View",
-      "Heating",
+      "Seating Area",
       "Private Bathroom",
-      "TV",
-      "Work Desk",
-      "Daily Housekeeping"
+      "Mountain View",
+      "Sofa Sitting Area",
+      "Garden View"
     ],
-    image: images.imgRoom,
+    image: images.suiteRoom1,
     gallery: [
-      images.imgRoom,
-      images.guest
+      images.suiteRoom1,
+      images.suiteRoom2,
+      images.suiteRoom3,
+      images.garden1
     ]
   }
 ];
@@ -288,7 +256,7 @@ export const toursData: Tour[] = [
       "Photography stops"
     ],
     duration: "Full Day (8-10 hours)",
-    image: images.viewFromHill,
+    image: images.viewFromRoungChumik,
     highlights: [
       "Deosai Plains",
       "Wildlife spotting",
@@ -340,7 +308,7 @@ export const toursData: Tour[] = [
       "Fort exploration"
     ],
     duration: "Full Day (7-9 hours)",
-    image: images.viewFromTop,
+    image: images.roofView1,
     highlights: [
       "Shangrila Resort",
       "Upper Kachura Lake",

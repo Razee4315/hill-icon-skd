@@ -30,6 +30,17 @@ const Navbar: React.FC = () => {
     return location.pathname === path;
   };
 
+  // Helper to handle clicking the same route: scroll to top and notify pages to reset
+  const handleSameRouteClick = (path: string) => (e: React.MouseEvent) => {
+    if (location.pathname === path) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.dispatchEvent(new CustomEvent('navigate-same-route', { detail: { path } }));
+    } else {
+      closeMenu();
+    }
+  };
+
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container">
@@ -44,36 +55,42 @@ const Navbar: React.FC = () => {
             <Link 
               to="/" 
               className={`navbar-link ${isActive('/') ? 'active' : ''}`}
+              onClick={handleSameRouteClick('/')}
             >
               <HomeIcon fontSize="small" style={{ marginRight: 6 }} /> Home
             </Link>
             <Link 
               to="/rooms" 
               className={`navbar-link ${isActive('/rooms') ? 'active' : ''}`}
+              onClick={handleSameRouteClick('/rooms')}
             >
               <Hotel fontSize="small" style={{ marginRight: 6 }} /> Rooms
             </Link>
             <Link 
               to="/transport" 
               className={`navbar-link ${isActive('/transport') ? 'active' : ''}`}
+              onClick={handleSameRouteClick('/transport')}
             >
               <DirectionsCar fontSize="small" style={{ marginRight: 6 }} /> Transport
             </Link>
             <Link 
               to="/tours" 
               className={`navbar-link ${isActive('/tours') ? 'active' : ''}`}
+              onClick={handleSameRouteClick('/tours')}
             >
               <Terrain fontSize="small" style={{ marginRight: 6 }} /> Tours
             </Link>
             <Link 
               to="/gallery" 
               className={`navbar-link ${isActive('/gallery') ? 'active' : ''}`}
+              onClick={handleSameRouteClick('/gallery')}
             >
               <PhotoAlbum fontSize="small" style={{ marginRight: 6 }} /> Gallery
             </Link>
             <Link 
               to="/contact" 
               className={`navbar-link ${isActive('/contact') ? 'active' : ''}`}
+              onClick={handleSameRouteClick('/contact')}
             >
               <ContactMail fontSize="small" style={{ marginRight: 6 }} /> Contact
             </Link>
@@ -98,42 +115,42 @@ const Navbar: React.FC = () => {
           <Link 
             to="/" 
             className={`navbar-mobile-link ${isActive('/') ? 'active' : ''}`}
-            onClick={closeMenu}
+            onClick={handleSameRouteClick('/')}
           >
             <HomeIcon fontSize="small" style={{ marginRight: 6 }} /> Home
           </Link>
           <Link 
             to="/rooms" 
             className={`navbar-mobile-link ${isActive('/rooms') ? 'active' : ''}`}
-            onClick={closeMenu}
+            onClick={handleSameRouteClick('/rooms')}
           >
             <Hotel fontSize="small" style={{ marginRight: 6 }} /> Rooms
           </Link>
           <Link 
             to="/transport" 
             className={`navbar-mobile-link ${isActive('/transport') ? 'active' : ''}`}
-            onClick={closeMenu}
+            onClick={handleSameRouteClick('/transport')}
           >
             <DirectionsCar fontSize="small" style={{ marginRight: 6 }} /> Transport
           </Link>
           <Link 
             to="/tours" 
             className={`navbar-mobile-link ${isActive('/tours') ? 'active' : ''}`}
-            onClick={closeMenu}
+            onClick={handleSameRouteClick('/tours')}
           >
             <Terrain fontSize="small" style={{ marginRight: 6 }} /> Tours
           </Link>
           <Link 
             to="/gallery" 
             className={`navbar-mobile-link ${isActive('/gallery') ? 'active' : ''}`}
-            onClick={closeMenu}
+            onClick={handleSameRouteClick('/gallery')}
           >
             <PhotoAlbum fontSize="small" style={{ marginRight: 6 }} /> Gallery
           </Link>
           <Link 
             to="/contact" 
             className={`navbar-mobile-link ${isActive('/contact') ? 'active' : ''}`}
-            onClick={closeMenu}
+            onClick={handleSameRouteClick('/contact')}
           >
             <ContactMail fontSize="small" style={{ marginRight: 6 }} /> Contact
           </Link>

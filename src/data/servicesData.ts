@@ -31,6 +31,7 @@ interface Vehicle {
   features: string[];
   image: string;
   idealFor: string;
+  airportTransfer?: number;
 }
 
 interface Tour {
@@ -172,35 +173,33 @@ export const roomsData: Room[] = [
 export const transportData: Vehicle[] = [
   {
     id: 1,
-    name: "Premium Sedan",
-    description: "Comfortable sedan for airport transfers and city travel",
-    detailedDescription: "Our premium sedans are perfect for airport pickups, city tours, and comfortable travel on paved roads. Featuring air conditioning, comfortable seating, and professional drivers.",
+    name: "Toyota Premio",
+    description: "Comfortable sedan for city travel and airport pickups",
+    detailedDescription: "The Toyota Premio offers a smooth, comfortable ride for city travel and airport transfers. Ideal for solo travelers, couples, or small families looking for comfort and reliability.",
     price: {
-      daily: 8000,
-      halfDay: 5000,
+      daily: 6000,
       currency: "Rs",
-      note: "Airport transfer: Rs 3,000"
+      note: "Fuel at guest’s expense"
     },
     features: [
       "Air Conditioning",
       "Professional Driver",
-      "GPS Navigation",
       "Comfortable Seating",
       "Luggage Space"
     ],
-    image: images.side,
+    image: images.premioCar,
+    airportTransfer: 2000,
     idealFor: "Airport transfers, city tours, business travel"
   },
   {
     id: 2,
-    name: "Toyota Prado TZ",
+    name: "Prado TZ (Up Model)",
     description: "Rugged SUV for valley tours and mountain terrain",
-    detailedDescription: "Experience the rugged beauty of Skardu's valleys with our Toyota Prado TZ. Built for challenging terrain while maintaining comfort, perfect for adventure seekers and valley explorations.",
+    detailedDescription: "Experience Skardu's valleys and mountain terrain with confidence in the Prado TZ (Up Model). Combining comfort with off-road capability, it's ideal for adventure and scenic trips.",
     price: {
-      daily: 15000,
-      halfDay: 9000,
+      daily: 10000,
       currency: "Rs",
-      note: "Fuel and driver included"
+      note: "Fuel at guest’s expense"
     },
     features: [
       "4WD Capability",
@@ -210,7 +209,8 @@ export const transportData: Vehicle[] = [
       "Spacious Interior",
       "Mountain Terrain Ready"
     ],
-    image: images.side,
+    image: images.pradoTZ,
+    airportTransfer: 3000,
     idealFor: "Valley tours, mountain terrain, adventure trips"
   },
   {

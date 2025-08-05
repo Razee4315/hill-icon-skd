@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { CheckCircle } from '@mui/icons-material';
 import { transportData } from '../data/servicesData';
 import BookingForm from '../components/BookingForm';
-import PlaceholderImage from '../components/PlaceholderImage';
+import ImageModal from '../components/ImageModal';
+// Removed PlaceholderImage in favor of real images provided in data
 import './Transport.css';
 
 interface Vehicle {
@@ -15,15 +16,17 @@ interface Vehicle {
   idealFor: string;
   price: {
     daily: number;
-    halfDay: number;
     currency: string;
     note: string;
   };
+  airportTransfer?: number;
 }
 
 const Transport: React.FC = () => {
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
   const [showBookingForm, setShowBookingForm] = useState(false);
+  const [preview, setPreview] = useState<{ src: string; alt: string } | null>(null);
+  const vehicles = transportData.filter(v => v.name.toLowerCase() !== 'luxury van');
 
   const handleVehicleSelect = (vehicle: Vehicle) => {
     setSelectedVehicle(vehicle);
@@ -50,44 +53,34 @@ const Transport: React.FC = () => {
         <div className="page-header">
           <h1 className="page-title">Transport Services</h1>
           <p className="page-subtitle">
-            Professional transport services for all your travel needs in Skardu. 
-            From comfortable airport transfers to rugged mountain adventures, we have the right vehicle for every journey.
+            Reliable transport in Skardu — airport transfers and full‑day rentals.
           </p>
         </div>
 
         {!selectedVehicle ? (
           /* Vehicle Listing */
-          <div className="vehicles-grid">
-            {transportData.map((vehicle) => (
+          <>
+            <div className="vehicles-grid">
+            {vehicles.map((vehicle) => (
               <div 
                 key={vehicle.id} 
                 className="vehicle-card"
                 onClick={() => handleVehicleSelect(vehicle)}
               >
                 <div className="vehicle-image">
-                  <PlaceholderImage 
-                    height={250}
-                    text={`${vehicle.name} Image`}
-                  />
+                  <img src={vehicle.image} alt={`${vehicle.name}`} style={{ width: '100%', height: 250, objectFit: 'cover', borderRadius: 12 }} />
                 </div>
                 <div className="vehicle-content">
                   <h3 className="vehicle-name">{vehicle.name}</h3>
                   <p className="vehicle-description">{vehicle.description}</p>
-                  <div className="vehicle-pricing">
-                    <div className="price-row">
-                      <span className="price-label">Daily:</span>
-                      <span className="price-amount">{vehicle.price.currency} {vehicle.price.daily?.toLocaleString() || '0'}</span>
-                    </div>
-                    <div className="price-row">
-                      <span className="price-label">Half Day:</span>
-                      <span className="price-amount">{vehicle.price.currency} {vehicle.price.halfDay?.toLocaleString() || '0'}</span>
-                    </div>
-                    <span className="price-note">{vehicle.price.note}</span>
+                  <div className="room-price">
+                    <span className="price-amount">{vehicle.price.currency} {vehicle.price.daily?.toLocaleString() || '0'}</span>
                   </div>
-                  <div className="ideal-for">
-                    <span className="ideal-for-label">Ideal for:</span>
-                    <span className="ideal-for-text">{vehicle.idealFor}</span>
-                  </div>
+                  {vehicle.airportTransfer && (
+                    <div className="price-note" aria-label="airport-transfer-rate">
+                      Airport transfer: {vehicle.price.currency} {vehicle.airportTransfer.toLocaleString()}
+                    </div>
+                  )}
                   <div className="vehicle-features-preview">
                     {vehicle.features.slice(0, 3).map((feature, index) => (
                       <span key={index} className="feature-tag">
@@ -106,7 +99,8 @@ const Transport: React.FC = () => {
                 </div>
               </div>
             ))}
-          </div>
+            </div>
+          </>
         ) : (
           /* Vehicle Detail View */
           <div className="vehicle-detail">
@@ -124,9 +118,11 @@ const Transport: React.FC = () => {
                 {/* Vehicle Image */}
                 <div className="vehicle-gallery">
                   <div className="main-image">
-                    <PlaceholderImage 
-                      height={400}
-                      text={`${selectedVehicle.name} Image`}
+                    <img
+                      src={selectedVehicle.image}
+                      alt={selectedVehicle.name}
+                      style={{ width: '100%', height: 400, objectFit: 'cover', borderRadius: 12, cursor: 'zoom-in' }}
+                      onClick={() => setPreview({ src: selectedVehicle.image, alt: selectedVehicle.name })}
                     />
                   </div>
                 </div>
@@ -134,28 +130,18 @@ const Transport: React.FC = () => {
                 {/* Vehicle Information */}
                 <div className="vehicle-info">
                   <h2 className="vehicle-detail-name">{selectedVehicle.name}</h2>
-                  <div className="vehicle-detail-pricing">
-                    <div className="pricing-grid">
-                      <div className="price-item">
-                        <span className="price-label">Daily Rate</span>
-                        <span className="price-amount">{selectedVehicle.price.currency} {selectedVehicle.price.daily.toLocaleString()}</span>
-                      </div>
-                      <div className="price-item">
-                        <span className="price-label">Half Day Rate</span>
-                        <span className="price-amount">{selectedVehicle.price.currency} {selectedVehicle.price.halfDay.toLocaleString()}</span>
-                      </div>
-                    </div>
+                  <div className="room-detail-price">
+                    <span className="price-amount">{selectedVehicle.price.currency} {selectedVehicle.price.daily.toLocaleString()}</span>
                     <span className="price-note">{selectedVehicle.price.note}</span>
+                    {selectedVehicle.airportTransfer && (
+                      <span className="price-note">Airport transfer: {selectedVehicle.price.currency} {selectedVehicle.airportTransfer.toLocaleString()}</span>
+                    )}
                   </div>
                   <p className="vehicle-detail-description">
                     {selectedVehicle.detailedDescription}
                   </p>
 
-                  {/* Ideal For */}
-                  <div className="ideal-for-section">
-                    <h3 className="section-title">Ideal For</h3>
-                    <p className="ideal-for-detail">{selectedVehicle.idealFor}</p>
-                  </div>
+                  {/* Removed Ideal For section as requested */}
 
                   {/* Features */}
                   <div className="features-section">
@@ -199,6 +185,16 @@ const Transport: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* Image Preview Modal */}
+      <ImageModal
+        open={!!preview}
+        src={preview?.src || ''}
+        alt={preview?.alt}
+        onClose={() => setPreview(null)}
+        maxWidth="80vw"
+        maxHeight="80vh"
+      />
     </div>
   );
 };

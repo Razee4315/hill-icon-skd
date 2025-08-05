@@ -36,14 +36,14 @@
   background: var(--color-secondary);
   border-radius: var(--border-radius-lg);
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
   cursor: pointer;
 }
 
 .service-card:hover {
-  transform: translateY(-12px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
 }
 
 /* Service Image */
@@ -57,7 +57,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.25s ease;
 }
 
 .fallback-placeholder {
@@ -69,68 +69,10 @@
 }
 
 .service-card:hover .service-image img {
-  transform: scale(1.1);
+  transform: scale(1.03);
 }
 
-.service-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(2px);
-}
-
-.service-card:hover .service-overlay {
-  opacity: 1;
-  visibility: visible;
-}
-
-.service-link {
-  color: var(--color-secondary);
-  text-decoration: none;
-  font-weight: var(--font-weight-semibold);
-  padding: var(--spacing-md) var(--spacing-xl);
-  border: 2px solid var(--color-secondary);
-  border-radius: var(--border-radius-lg);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  font-size: 1.1rem;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  position: relative;
-  overflow: hidden;
-  transform: translateY(20px);
-  animation: slideUp 0.6s ease-out 0.2s both;
-}
-
-.service-link::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.5s;
-}
-
-.service-link:hover::before {
-  left: 100%;
-}
-
-.service-link:hover {
-  background-color: var(--color-secondary);
-  color: var(--color-primary);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
-}
+/* (overlay and service-link removed per request) */
 
 /* Service Content */
 .service-content {
@@ -191,7 +133,6 @@
 
 .service-cta:hover {
   color: var(--color-gray-dark);
-  transform: translateX(4px);
 }
 
 .service-cta:hover::after {

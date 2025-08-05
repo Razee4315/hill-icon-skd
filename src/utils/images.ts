@@ -25,6 +25,8 @@ import garden1 from '../../images and videos/garden_1.jpg';
 import viewFromRoungChumik from '../../images and videos/View_from_Roung_Chumik.jpg';
 import roofView1 from '../../images and videos/roof_view_1.jpg';
 import roofView2 from '../../images and videos/roof_view_2.jpg';
+import premioCar from '../../images and videos/premio_car.jpg';
+import pradoTZ from '../../images and videos/Prado_TZ.jpg';
 import tripGroup from '../../images and videos/trip_group_pic.jpg';
 import boneFire from '../../images and videos/bone-fire.jpg';
 import side from '../../images and videos/Guest_house_Side_View.jpg';
@@ -61,6 +63,9 @@ export const images = {
   viewFromRoungChumik,
   roofView1,
   roofView2,
+  // Transport (cars)
+  premioCar,
+  pradoTZ,
   tripGroup: tripGroup,
   boneFire: boneFire,
   side: side,

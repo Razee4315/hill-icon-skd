@@ -12,7 +12,7 @@ const Home: React.FC = () => {
       id: 'rooms',
       title: 'Premium Accommodation',
       description: 'Experience luxury and comfort in our carefully designed rooms with breathtaking mountain views.',
-      image: images.roomDeluxe,
+      image: images.deluxeRoom1,
       link: '/rooms',
       features: ['Mountain Views', 'Modern Amenities', 'Room Service']
     },
@@ -28,7 +28,7 @@ const Home: React.FC = () => {
       id: 'tours',
       title: 'Guided Tours',
       description: 'Discover the natural beauty and cultural heritage of Skardu with our expertly guided tours.',
-      image: images.viewFromHill,
+      image: images.viewFromRoungChumik,
       link: '/tours',
       features: ['Expert Guides', 'Cultural Experiences', 'Natural Wonders']
     }
@@ -68,11 +68,6 @@ const Home: React.FC = () => {
                     text={`${service.title} Image`}
                     className="fallback-placeholder"
                   />
-                  <div className="service-overlay">
-                    <Link to={service.link} className="service-link">
-                      Explore {service.title}
-                    </Link>
-                  </div>
                 </div>
                 
                 <div className="service-content">

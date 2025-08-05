@@ -71,7 +71,9 @@ const Rooms: React.FC = () => {
         {!selectedRoom ? (
           /* Room Listing */
           <div className="rooms-grid">
-            {roomsData.map((room) => (
+            {[...roomsData]
+              .sort((a, b) => (a.name === 'Suite Room' ? -1 : b.name === 'Suite Room' ? 1 : 0))
+              .map((room) => (
               <div 
                 key={room.id} 
                 className="room-card"

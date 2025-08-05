@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Home as HomeIcon, Hotel, DirectionsCar, Terrain, ContactMail } from '@mui/icons-material';
+import { Home as HomeIcon, Hotel, DirectionsCar, Terrain, ContactMail, PhotoAlbum } from '@mui/icons-material';
 import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
 
@@ -66,6 +66,12 @@ const Navbar: React.FC = () => {
               <Terrain fontSize="small" style={{ marginRight: 6 }} /> Tours
             </Link>
             <Link 
+              to="/gallery" 
+              className={`navbar-link ${isActive('/gallery') ? 'active' : ''}`}
+            >
+              <PhotoAlbum fontSize="small" style={{ marginRight: 6 }} /> Gallery
+            </Link>
+            <Link 
               to="/contact" 
               className={`navbar-link ${isActive('/contact') ? 'active' : ''}`}
             >
@@ -116,6 +122,13 @@ const Navbar: React.FC = () => {
             onClick={closeMenu}
           >
             <Terrain fontSize="small" style={{ marginRight: 6 }} /> Tours
+          </Link>
+          <Link 
+            to="/gallery" 
+            className={`navbar-mobile-link ${isActive('/gallery') ? 'active' : ''}`}
+            onClick={closeMenu}
+          >
+            <PhotoAlbum fontSize="small" style={{ marginRight: 6 }} /> Gallery
           </Link>
           <Link 
             to="/contact" 

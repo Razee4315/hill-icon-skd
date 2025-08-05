@@ -128,7 +128,7 @@ const Transport: React.FC = () => {
                     <img
                       src={selectedVehicle.image}
                       alt={selectedVehicle.name}
-                      style={{ width: '100%', height: 400, objectFit: 'cover', borderRadius: 12, cursor: 'zoom-in' }}
+                      style={{ width: '100%', height: 400, objectFit: 'cover', objectPosition: 'center top', borderRadius: 12, cursor: 'zoom-in' }}
                       onClick={() => setPreview({ src: selectedVehicle.image, alt: selectedVehicle.name })}
                     />
                   </div>

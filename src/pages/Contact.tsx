@@ -115,14 +115,14 @@ I'd like to get in touch with you regarding your services.`;
           <div className="map-section">
             <div className="map-container">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52234.89542827736!2d75.63663!3d35.2971!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38e463cf9c8cd6b9%3A0x7e0c2c0b0b0b0b0b!2sSkardu%2C%20Gilgit-Baltistan%2C%20Pakistan!5e0!3m2!1sen!2s!4v1640000000000!5m2!1sen!2s"
+                src="https://www.google.com/maps?q=35.2782813,75.6519939&z=17&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Skardu Location"
+                title="Hill Icon Resort and Restaurant Location"
               />
             </div>
           </div>

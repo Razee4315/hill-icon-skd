@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { CheckCircle } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero';
+import Preloader from '../components/Preloader';
 import PlaceholderImage from '../components/PlaceholderImage';
 import { images } from '../utils/images';
 import './Home.css';
 
 const Home: React.FC = () => {
+  // Preloader state: visible until hero video can play or a timeout occurs
+  const [loading, setLoading] = useState(true);
+
+  // Safety timeout in case canplaythrough never fires (network conditions)
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 6000);
+    return () => clearTimeout(t);
+  }, []);
   const services = [
     {
       id: 'rooms',
@@ -36,8 +45,11 @@ const Home: React.FC = () => {
 
   return (
     <div className="home">
+      {/* Global Preloader Overlay */}
+      <Preloader visible={loading} />
+
       {/* Hero Section */}
-      <Hero />
+      <Hero onVideoReady={() => setLoading(false)} />
 
       {/* Services Overview Section */}
       <section id="services-overview" className="services-overview section">

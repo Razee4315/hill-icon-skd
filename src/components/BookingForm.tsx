@@ -49,29 +49,29 @@ const BookingForm: React.FC<BookingFormProps> = ({
       return;
     }
 
-    let messageText = `Hello Hill Icon! 🏔️\n\nI'd like to inquire about a ${serviceType} booking:\n\n`;
+    let messageText = `Hello Hill Icon!\n\nI'd like to inquire about a ${serviceType} booking:\n\n`;
     
     if (serviceType === 'room') {
-      messageText += `🏨 Room Type: ${serviceName}\n`;
-      messageText += `👤 Name: ${formData.fullName}\n`;
-      messageText += `📞 Phone: ${formData.phone}\n`;
-      if (formData.checkIn) messageText += `📅 Check-in: ${formData.checkIn}\n`;
-      if (formData.checkOut) messageText += `📅 Check-out: ${formData.checkOut}\n`;
-      messageText += `👥 Guests: ${formData.guests}\n`;
+      messageText += `Room Type: ${serviceName}\n`;
+      messageText += `Name: ${formData.fullName}\n`;
+      messageText += `Phone: ${formData.phone}\n`;
+      if (formData.checkIn) messageText += `Check-in: ${formData.checkIn}\n`;
+      if (formData.checkOut) messageText += `Check-out: ${formData.checkOut}\n`;
+      messageText += `Guests: ${formData.guests}\n`;
     } else if (serviceType === 'transport') {
-      messageText += `🚗 Vehicle Type: ${serviceName}\n`;
-      messageText += `👤 Name: ${formData.fullName}\n`;
-      messageText += `📞 Phone: ${formData.phone}\n`;
-      if (formData.requirements) messageText += `📝 Requirements: ${formData.requirements}\n`;
+      messageText += `Vehicle Type: ${serviceName}\n`;
+      messageText += `Name: ${formData.fullName}\n`;
+      messageText += `Phone: ${formData.phone}\n`;
+      if (formData.requirements) messageText += `Requirements: ${formData.requirements}\n`;
     } else if (serviceType === 'tour') {
-      messageText += `🎯 Tour Package: ${serviceName}\n`;
-      messageText += `👤 Name: ${formData.fullName}\n`;
-      messageText += `📞 Phone: ${formData.phone}\n`;
-      messageText += `👥 Guests: ${formData.guests}\n`;
-      if (formData.requirements) messageText += `📝 Special Requirements: ${formData.requirements}\n`;
+      messageText += `Tour Package: ${serviceName}\n`;
+      messageText += `Name: ${formData.fullName}\n`;
+      messageText += `Phone: ${formData.phone}\n`;
+      messageText += `Guests: ${formData.guests}\n`;
+      if (formData.requirements) messageText += `Special Requirements: ${formData.requirements}\n`;
     }
 
-    messageText += '\nPlease confirm availability and pricing. Thank you! 🙏';
+    messageText += '\nPlease confirm availability and pricing. Thank you!';
     
     // Direct WhatsApp integration
     const cleanPhoneNumber = contactInfo.whatsapp.replace(/[^0-9]/g, '');

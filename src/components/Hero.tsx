@@ -7,13 +7,15 @@ interface HeroProps {
   title?: string;
   subtitle?: string;
   showCTA?: boolean;
+  onVideoReady?: () => void; // notify when video can play
 }
 
 const Hero: React.FC<HeroProps> = ({
   videoSrc = images.heroVideo,
   title = "Welcome to Hill Icon Skardu.",
   subtitle = "Experience Comfort, Feel at Home – Right Here in the Heart of Skardu",
-  showCTA = true
+  showCTA = true,
+  onVideoReady
 }) => {
   const scrollToServices = () => {
     const servicesSection = document.getElementById('services-overview');
@@ -33,6 +35,7 @@ const Hero: React.FC<HeroProps> = ({
           loop
           playsInline
           poster="/src/assets/front.jpg"
+          onCanPlayThrough={() => onVideoReady && onVideoReady()}
         >
           <source src={videoSrc} type="video/mp4" />
           {/* Fallback for browsers that don't support video */}

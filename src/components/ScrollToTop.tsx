@@ -22,13 +22,13 @@ const FloatingWhatsApp: React.FC = () => {
   }, [location.pathname]);
 
   const handleWhatsAppClick = () => {
-    const defaultMessage = `Hello Hill Icon! 👋
+    const defaultMessage = `Hello Hill Icon!
 
 I'm interested in your services in Skardu. Could you please provide me with more information about:
 
-• Room bookings and availability
-• Transport services  
-• Tour packages
+- Room bookings and availability
+- Transport services
+- Tour packages
 
 Thank you!`;
 

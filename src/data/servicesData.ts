@@ -54,7 +54,6 @@ interface ContactInfo {
   socialMedia: {
     facebook: string;
     instagram: string;
-    twitter: string;
   };
   aboutUs: string;
 }
@@ -240,23 +239,22 @@ export const transportData: Vehicle[] = [
 export const toursData: Tour[] = [
   {
     id: 1,
-    name: "Deosai National Park Day Trip",
-    description: "Explore the world's second-highest plateau",
-    detailedDescription: "Journey to the breathtaking Deosai National Park, known as the 'Land of Giants'. Experience the world's second-highest plateau with its unique wildlife, stunning landscapes, and pristine natural beauty.",
+    name: "Deosai Tour - Prado TZ (Up Model)",
+    description: "Explore Deosai with Prado TZ (Up Model)",
+    detailedDescription: "Journey to the breathtaking Deosai National Park, known as the 'Land of Giants'. This package includes transport via Prado TZ (Up Model) for a comfortable and capable ride across the plateau.",
     price: {
-      perPerson: 12000,
+      perPerson: 25000,
       currency: "Rs",
-      note: "Minimum 2 people, group discounts available"
+      note: "Vehicle: Prado TZ (Up Model)"
     },
     inclusions: [
-      "Round-trip transport",
-      "Professional guide",
-      "Packed lunch",
-      "Entry permits",
-      "Photography stops"
+      "Breakfast will be on us",
+      "Jeep Rent",
+      "Tour taxes",
+      "Entry tickets"
     ],
     duration: "Full Day (8-10 hours)",
-    image: images.viewFromRoungChumik,
+    image: images.deosai1,
     highlights: [
       "Deosai Plains",
       "Wildlife spotting",
@@ -266,96 +264,40 @@ export const toursData: Tour[] = [
   },
   {
     id: 2,
-    name: "Shigar Valley Heritage Tour",
-    description: "Discover the cultural heritage of Shigar Valley",
-    detailedDescription: "Immerse yourself in the rich cultural heritage of Shigar Valley. Visit the historic Shigar Fort, explore traditional Balti architecture, and experience the local way of life in this picturesque valley.",
+    name: "Deosai Tour - TZ (Down Model)",
+    description: "Explore Deosai with TZ (Down Model)",
+    detailedDescription: "Journey to the breathtaking Deosai National Park, known as the 'Land of Giants'. This package includes transport via TZ (Down Model) for a budget-friendly option while exploring the plateau.",
     price: {
-      perPerson: 8500,
+      perPerson: 35000,
       currency: "Rs",
-      note: "Includes lunch and entry fees"
+      note: "Vehicle: TZ (Down Model)"
     },
     inclusions: [
-      "Round-trip transport",
-      "Professional guide",
-      "Fort entry tickets",
-      "Traditional lunch",
-      "Cultural experiences"
+      "Breakfast will be on us",
+      "Jeep Rent",
+      "Tour taxes",
+      "Entry tickets"
     ],
-    duration: "Full Day (6-8 hours)",
-    image: images.tripGroup,
+    duration: "Full Day (8-10 hours)",
+    image: images.deosai2,
     highlights: [
-      "Shigar Fort",
-      "Traditional architecture",
-      "Local culture",
-      "Apricot orchards"
+      "Deosai Plains",
+      "Wildlife spotting",
+      "Sheosar Lake",
+      "Mountain photography"
     ]
   },
-  {
-    id: 3,
-    name: "Skardu City & Lakes Tour",
-    description: "Comprehensive tour of Skardu's main attractions",
-    detailedDescription: "Explore the best of Skardu with visits to Shangrila Resort, Upper Kachura Lake, and Skardu Fort. This comprehensive tour showcases the natural beauty and historical significance of the region.",
-    price: {
-      perPerson: 10000,
-      currency: "Rs",
-      note: "All inclusive package"
-    },
-    inclusions: [
-      "Round-trip transport",
-      "Professional guide",
-      "Lake boat ride",
-      "Lunch at Shangrila",
-      "Fort exploration"
-    ],
-    duration: "Full Day (7-9 hours)",
-    image: images.roofView1,
-    highlights: [
-      "Shangrila Resort",
-      "Upper Kachura Lake",
-      "Skardu Fort",
-      "Indus River views"
-    ]
-  },
-  {
-    id: 4,
-    name: "Adventure Camp & Bonfire Experience",
-    description: "Outdoor camping with traditional bonfire night",
-    detailedDescription: "Experience the magic of Skardu under the stars with our adventure camping tour. Enjoy traditional bonfire activities, stargazing, local music, and authentic outdoor dining in the heart of nature.",
-    price: {
-      perPerson: 15000,
-      currency: "Rs",
-      note: "Includes camping gear and meals"
-    },
-    inclusions: [
-      "Camping equipment",
-      "Professional guide",
-      "Bonfire setup",
-      "Traditional dinner",
-      "Breakfast",
-      "Stargazing session"
-    ],
-    duration: "Overnight (2 Days / 1 Night)",
-    image: images.boneFire,
-    highlights: [
-      "Bonfire under stars",
-      "Traditional music",
-      "Outdoor camping",
-      "Local cuisine",
-      "Stargazing",
-      "Photography"
-    ]
-  }
+  
 ];
 
 export const contactInfo: ContactInfo = {
-  whatsapp: "+923001234567",
-  phone: "+92 5815 123456",
+  whatsapp: "+923487997495",
+  phone: "+92 348 7997495",
   email: "info@hillicon.com",
-  address: "Main Skardu Road, Skardu, Gilgit-Baltistan, Pakistan",
+  address: "Olding Nangsoq Skardu, Gilgit-Baltistan, Pakistan",
   socialMedia: {
-    facebook: "https://facebook.com/hillicon",
-    instagram: "https://instagram.com/hillicon",
-    twitter: "https://twitter.com/hillicon"
+    facebook: "https://www.facebook.com/hillicon",
+    instagram: "https://www.instagram.com/hill_icon_resort/"
   },
   aboutUs: "Hill Icon provides premium accommodation, transport, and tour services in the breathtaking Skardu region. We are committed to offering exceptional experiences while showcasing the natural beauty and cultural richness of Northern Pakistan."
 };

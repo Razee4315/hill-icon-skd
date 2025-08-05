@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Email, WhatsApp, LocationOn, Facebook, Instagram, Twitter } from '@mui/icons-material';
+import { Phone, Email, WhatsApp, LocationOn, Facebook, Instagram } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { contactInfo } from '../data/servicesData';
 import './Footer.css';
@@ -93,17 +93,6 @@ const Footer: React.FC = () => {
                   aria-label="Instagram"
                 >
                   <Instagram fontSize="small" style={{ marginRight: 6 }} /> Instagram
-                </a>
-              )}
-              {contactInfo.socialMedia.twitter && (
-                <a 
-                  href={contactInfo.socialMedia.twitter} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="social-link"
-                  aria-label="Twitter"
-                >
-                  <Twitter fontSize="small" style={{ marginRight: 6 }} /> Twitter
                 </a>
               )}
             </div>

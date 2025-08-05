@@ -36,6 +36,8 @@ import receptionFront from '../../images and videos/reciption_front.jpg';
 import receptionBack from '../../images and videos/reciption_back.jpg';
 import guestPic from '../../images and videos/guest-pic.jpeg';
 import guest from '../../images and videos/guest.jpg';
+import deosai1 from '../../images and videos/Deosai_1.jpg';
+import deosai2 from '../../images and videos/Deosai_2.jpg';
 
 export const images = {
   // App icons
@@ -74,5 +76,8 @@ export const images = {
   guestPic: guestPic,
   guest: guest,
   receptionFront,
-  receptionBack
+  receptionBack,
+  // Deosai images
+  deosai1,
+  deosai2
 };

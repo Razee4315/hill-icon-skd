@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Terrain, CheckCircle } from '@mui/icons-material';
 import { toursData } from '../data/servicesData';
 import BookingForm from '../components/BookingForm';
-import PlaceholderImage from '../components/PlaceholderImage';
 import './Tours.css';
 
 interface Tour {
@@ -56,10 +55,6 @@ const Tours: React.FC = () => {
         {/* Page Header */}
         <div className="page-header">
           <h1 className="page-title">Guided Tours</h1>
-          <p className="page-subtitle">
-            Discover the breathtaking beauty and rich cultural heritage of Skardu with our expertly guided tours. 
-            From pristine lakes to ancient forts, experience the wonders of Northern Pakistan.
-          </p>
         </div>
 
         {!selectedTour ? (
@@ -72,9 +67,10 @@ const Tours: React.FC = () => {
                 onClick={() => handleTourSelect(tour)}
               >
                 <div className="tour-image">
-                  <PlaceholderImage 
-                    height={250}
-                    text={`${tour.name} Image`}
+                  <img
+                    src={tour.image}
+                    alt={tour.name}
+                    style={{ width: '100%', height: 220, objectFit: 'cover', display: 'block' }}
                   />
                   <div className="tour-duration">
                     <span>{tour.duration}</span>
@@ -85,32 +81,21 @@ const Tours: React.FC = () => {
                   <p className="tour-description">{tour.description}</p>
                   
                   <div className="tour-pricing">
-                    <span className="price-amount">{tour.price.currency} {tour.price.perPerson?.toLocaleString() || '0'}</span>
-                    <span className="price-label">per person</span>
+                    {typeof tour.price.perPerson === 'number' ? (
+                      <>
+                        <span className="price-amount">{tour.price.currency} {tour.price.perPerson.toLocaleString()}</span>
+                        <span className="price-label">per person</span>
+                      </>
+                    ) : null}
                     <span className="price-note">{tour.price.note}</span>
                   </div>
                   
-                  <div className="tour-highlights-preview">
-                    <h4 className="highlights-title">Highlights:</h4>
-                    <div className="highlights-list">
-                      {tour.highlights.slice(0, 3).map((highlight, index) => (
-                        <span key={index} className="highlight-tag">
-                          {highlight}
-                        </span>
-                      ))}
-                      {tour.highlights.length > 3 && (
-                        <span className="highlight-more">
-                          +{tour.highlights.length - 3} more
-                        </span>
-                      )}
-                    </div>
-                  </div>
+                  {/* Highlights removed from card to only show inside the detail view */}
                   
                   <div className="tour-inclusions-preview">
                     <span className="inclusions-label">Includes:</span>
                     <span className="inclusions-text">
-                      {tour.inclusions.slice(0, 2).join(', ')}
-                      {tour.inclusions.length > 2 && '...'}
+                      {tour.inclusions.join(', ')}
                     </span>
                   </div>
                   
@@ -138,9 +123,10 @@ const Tours: React.FC = () => {
                 {/* Tour Image */}
                 <div className="tour-gallery">
                   <div className="main-image">
-                    <PlaceholderImage 
-                      height={400}
-                      text={`${selectedTour.name} Image`}
+                    <img
+                      src={selectedTour.image}
+                      alt={selectedTour.name}
+                      style={{ width: '100%', height: 400, objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
                     />
                     <div className="tour-duration-detail">
                       <span>{selectedTour.duration}</span>
@@ -152,8 +138,12 @@ const Tours: React.FC = () => {
                 <div className="tour-info">
                   <h2 className="tour-detail-name">{selectedTour.name}</h2>
                   <div className="tour-detail-pricing">
-                    <span className="price-amount">{selectedTour.price.currency} {selectedTour.price.perPerson.toLocaleString()}</span>
-                    <span className="price-label">per person</span>
+                    {typeof selectedTour.price.perPerson === 'number' ? (
+                      <>
+                        <span className="price-amount">{selectedTour.price.currency} {selectedTour.price.perPerson.toLocaleString()}</span>
+                        <span className="price-label">per person</span>
+                      </>
+                    ) : null}
                     <span className="price-note">{selectedTour.price.note}</span>
                   </div>
                   <p className="tour-detail-description">

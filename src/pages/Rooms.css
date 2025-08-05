@@ -179,7 +179,8 @@
 /* Room Gallery */
 .room-gallery {
   position: sticky;
-  top: var(--spacing-lg);
+  /* Avoid image clipping under fixed header */
+  top: 96px;
 }
 
 .main-image {

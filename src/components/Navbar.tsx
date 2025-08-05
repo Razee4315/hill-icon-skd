@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Home as HomeIcon, Hotel, DirectionsCar, Terrain, ContactMail } from '@mui/icons-material';
 import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
 
@@ -44,31 +45,31 @@ const Navbar: React.FC = () => {
               to="/" 
               className={`navbar-link ${isActive('/') ? 'active' : ''}`}
             >
-              Home
+              <HomeIcon fontSize="small" style={{ marginRight: 6 }} /> Home
             </Link>
             <Link 
               to="/rooms" 
               className={`navbar-link ${isActive('/rooms') ? 'active' : ''}`}
             >
-              Rooms
+              <Hotel fontSize="small" style={{ marginRight: 6 }} /> Rooms
             </Link>
             <Link 
               to="/transport" 
               className={`navbar-link ${isActive('/transport') ? 'active' : ''}`}
             >
-              Transport
+              <DirectionsCar fontSize="small" style={{ marginRight: 6 }} /> Transport
             </Link>
             <Link 
               to="/tours" 
               className={`navbar-link ${isActive('/tours') ? 'active' : ''}`}
             >
-              Tours
+              <Terrain fontSize="small" style={{ marginRight: 6 }} /> Tours
             </Link>
             <Link 
               to="/contact" 
               className={`navbar-link ${isActive('/contact') ? 'active' : ''}`}
             >
-              Contact
+              <ContactMail fontSize="small" style={{ marginRight: 6 }} /> Contact
             </Link>
           </div>
 
@@ -93,35 +94,35 @@ const Navbar: React.FC = () => {
             className={`navbar-mobile-link ${isActive('/') ? 'active' : ''}`}
             onClick={closeMenu}
           >
-            Home
+            <HomeIcon fontSize="small" style={{ marginRight: 6 }} /> Home
           </Link>
           <Link 
             to="/rooms" 
             className={`navbar-mobile-link ${isActive('/rooms') ? 'active' : ''}`}
             onClick={closeMenu}
           >
-            Rooms
+            <Hotel fontSize="small" style={{ marginRight: 6 }} /> Rooms
           </Link>
           <Link 
             to="/transport" 
             className={`navbar-mobile-link ${isActive('/transport') ? 'active' : ''}`}
             onClick={closeMenu}
           >
-            Transport
+            <DirectionsCar fontSize="small" style={{ marginRight: 6 }} /> Transport
           </Link>
           <Link 
             to="/tours" 
             className={`navbar-mobile-link ${isActive('/tours') ? 'active' : ''}`}
             onClick={closeMenu}
           >
-            Tours
+            <Terrain fontSize="small" style={{ marginRight: 6 }} /> Tours
           </Link>
           <Link 
             to="/contact" 
             className={`navbar-mobile-link ${isActive('/contact') ? 'active' : ''}`}
             onClick={closeMenu}
           >
-            Contact
+            <ContactMail fontSize="small" style={{ marginRight: 6 }} /> Contact
           </Link>
         </div>
       </div>

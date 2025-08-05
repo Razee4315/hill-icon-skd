@@ -157,19 +157,16 @@
 }
 
 .service-feature {
-  position: relative;
-  padding-left: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin-bottom: var(--spacing-xs);
   color: var(--color-gray-dark);
   font-size: 0.95rem;
 }
 
-.service-feature::before {
-  content: '✓';
-  position: absolute;
-  left: 0;
+.service-feature .feature-icon {
   color: var(--color-primary);
-  font-weight: var(--font-weight-bold);
 }
 
 .service-cta {

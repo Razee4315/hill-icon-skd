@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CheckCircle } from '@mui/icons-material';
 import { roomsData } from '../data/servicesData';
 import BookingForm from '../components/BookingForm';
 import PlaceholderImage from '../components/PlaceholderImage';
@@ -147,7 +148,7 @@ const Rooms: React.FC = () => {
                     <div className="amenities-grid">
                       {selectedRoom.amenities.map((amenity, index) => (
                         <div key={index} className="amenity-item">
-                          <span className="amenity-icon">✓</span>
+                          <CheckCircle fontSize="small" className="amenity-icon" />
                           <span className="amenity-name">{amenity}</span>
                         </div>
                       ))}

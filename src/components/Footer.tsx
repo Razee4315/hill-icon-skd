@@ -1,4 +1,5 @@
 import React from 'react';
+import { Phone, Email, WhatsApp, LocationOn, Facebook, Instagram, Twitter } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { contactInfo } from '../data/servicesData';
 import './Footer.css';
@@ -28,28 +29,29 @@ const Footer: React.FC = () => {
             <h4 className="footer-subtitle">Contact Us</h4>
             <div className="footer-contact">
               <div className="contact-item">
-                <span className="contact-label">Phone:</span>
+                <span className="contact-label"><Phone fontSize="small" style={{ verticalAlign: 'middle' }} /> Phone:</span>
                 <a href={`tel:${contactInfo.phone}`} className="contact-link">
                   {contactInfo.phone}
                 </a>
               </div>
               <div className="contact-item">
-                <span className="contact-label">Email:</span>
+                <span className="contact-label"><Email fontSize="small" style={{ verticalAlign: 'middle' }} /> Email:</span>
                 <a href={`mailto:${contactInfo.email}`} className="contact-link">
                   {contactInfo.email}
                 </a>
               </div>
               <div className="contact-item">
-                <span className="contact-label">WhatsApp:</span>
+                <span className="contact-label"><WhatsApp fontSize="small" style={{ verticalAlign: 'middle' }} /> WhatsApp:</span>
                 <button 
                   onClick={handleWhatsAppClick}
                   className="contact-link whatsapp-btn"
                 >
+                  <WhatsApp fontSize="small" style={{ marginRight: 6 }} />
                   {contactInfo.whatsapp}
                 </button>
               </div>
               <div className="contact-item">
-                <span className="contact-label">Address:</span>
+                <span className="contact-label"><LocationOn fontSize="small" style={{ verticalAlign: 'middle' }} /> Address:</span>
                 <span className="contact-text">{contactInfo.address}</span>
               </div>
             </div>
@@ -79,7 +81,7 @@ const Footer: React.FC = () => {
                   className="social-link"
                   aria-label="Facebook"
                 >
-                  Facebook
+                  <Facebook fontSize="small" style={{ marginRight: 6 }} /> Facebook
                 </a>
               )}
               {contactInfo.socialMedia.instagram && (
@@ -90,7 +92,7 @@ const Footer: React.FC = () => {
                   className="social-link"
                   aria-label="Instagram"
                 >
-                  Instagram
+                  <Instagram fontSize="small" style={{ marginRight: 6 }} /> Instagram
                 </a>
               )}
               {contactInfo.socialMedia.twitter && (
@@ -101,7 +103,7 @@ const Footer: React.FC = () => {
                   className="social-link"
                   aria-label="Twitter"
                 >
-                  Twitter
+                  <Twitter fontSize="small" style={{ marginRight: 6 }} /> Twitter
                 </a>
               )}
             </div>

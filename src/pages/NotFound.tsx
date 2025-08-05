@@ -1,4 +1,5 @@
 import React from 'react';
+import { Terrain } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import './NotFound.css';
 
@@ -9,7 +10,9 @@ const NotFound: React.FC = () => {
         <div className="not-found-content">
           <div className="not-found-illustration">
             <h1 className="error-code">404</h1>
-            <div className="mountain-illustration">🏔️</div>
+            <div className="mountain-illustration">
+              <Terrain fontSize="large" />
+            </div>
           </div>
           
           <div className="not-found-text">

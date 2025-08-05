@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Person, Phone, CalendarToday, Group, Close, Notes } from '@mui/icons-material';
 import { contactInfo } from '../data/servicesData';
 import { images } from '../utils/images';
 import './BookingForm.css';
@@ -86,7 +87,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
         <h3>Book {serviceName}</h3>
         {onClose && (
           <button className="close-button" onClick={onClose} aria-label="Close">
-            ×
+            <Close fontSize="small" />
           </button>
         )}
       </div>
@@ -95,7 +96,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
         {/* Name Field */}
         <div className="form-group">
           <label htmlFor="fullName" className="form-label">
-            <span className="label-icon">👤</span>
+            <Person fontSize="small" className="label-icon" />
             Full Name *
           </label>
           <input
@@ -113,7 +114,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
         {/* Phone Field */}
         <div className="form-group">
           <label htmlFor="phone" className="form-label">
-            <span className="label-icon">📞</span>
+            <Phone fontSize="small" className="label-icon" />
             Phone Number *
           </label>
           <input
@@ -134,7 +135,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="checkIn" className="form-label">
-                  <span className="label-icon">📅</span>
+                  <CalendarToday fontSize="small" className="label-icon" />
                   Check-in Date
                 </label>
                 <input
@@ -148,7 +149,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
               </div>
               <div className="form-group">
                 <label htmlFor="checkOut" className="form-label">
-                  <span className="label-icon">📅</span>
+                  <CalendarToday fontSize="small" className="label-icon" />
                   Check-out Date
                 </label>
                 <input
@@ -164,7 +165,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
 
             <div className="form-group">
               <label htmlFor="guests" className="form-label">
-                <span className="label-icon">👥</span>
+                <Group fontSize="small" className="label-icon" />
                 Number of Guests
               </label>
               <select
@@ -186,7 +187,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
         {(serviceType === 'transport' || serviceType === 'tour') && (
           <div className="form-group">
             <label htmlFor="guests" className="form-label">
-              <span className="label-icon">👥</span>
+              <Group fontSize="small" className="label-icon" />
               Number of Guests
             </label>
             <select
@@ -207,7 +208,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
         {(serviceType === 'transport' || serviceType === 'tour') && (
           <div className="form-group">
             <label htmlFor="requirements" className="form-label">
-              <span className="label-icon">📝</span>
+              <Notes fontSize="small" className="label-icon" />
               {serviceType === 'transport' ? 'Service Requirements' : 'Special Requirements'}
             </label>
             <textarea

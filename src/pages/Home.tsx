@@ -1,4 +1,5 @@
 import React from 'react';
+import { CheckCircle } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero';
 import PlaceholderImage from '../components/PlaceholderImage';
@@ -81,7 +82,8 @@ const Home: React.FC = () => {
                   <ul className="service-features">
                     {service.features.map((feature, index) => (
                       <li key={index} className="service-feature">
-                        {feature}
+                        <CheckCircle fontSize="small" className="feature-icon" />
+                        <span>{feature}</span>
                       </li>
                     ))}
                   </ul>

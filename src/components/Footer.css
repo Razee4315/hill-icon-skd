@@ -58,6 +58,9 @@
   font-weight: var(--font-weight-medium);
   color: var(--color-secondary);
   font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .contact-link {
@@ -65,6 +68,9 @@
   text-decoration: none;
   transition: color var(--transition-fast);
   font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .contact-link:hover {
@@ -79,6 +85,9 @@
   font-size: 0.95rem;
   cursor: pointer;
   text-align: left;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .contact-text {
@@ -120,6 +129,9 @@
   transition: all var(--transition-fast);
   font-size: 0.95rem;
   padding: var(--spacing-xs) 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .social-link:hover {

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Terrain, CheckCircle } from '@mui/icons-material';
 import { toursData } from '../data/servicesData';
 import BookingForm from '../components/BookingForm';
 import PlaceholderImage from '../components/PlaceholderImage';
@@ -158,7 +159,7 @@ const Tours: React.FC = () => {
                     <div className="highlights-grid">
                       {selectedTour.highlights.map((highlight, index) => (
                         <div key={index} className="highlight-item">
-                          <span className="highlight-icon">🏔️</span>
+                          <Terrain fontSize="small" className="highlight-icon" />
                           <span className="highlight-name">{highlight}</span>
                         </div>
                       ))}
@@ -171,7 +172,7 @@ const Tours: React.FC = () => {
                     <div className="inclusions-grid">
                       {selectedTour.inclusions.map((inclusion, index) => (
                         <div key={index} className="inclusion-item">
-                          <span className="inclusion-icon">✓</span>
+                          <CheckCircle fontSize="small" className="inclusion-icon" />
                           <span className="inclusion-name">{inclusion}</span>
                         </div>
                       ))}

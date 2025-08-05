@@ -11,8 +11,8 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({
   videoSrc = images.heroVideo,
-  title = "Experience Serenity. Welcome to Hill Icon.",
-  subtitle = "Discover the breathtaking beauty of Skardu with our premium accommodation, transport, and tour services.",
+  title = "Welcome to Hill Icon Skardu.",
+  subtitle = "Experience Comfort, Feel at Home – Right Here in the Heart of Skardu",
   showCTA = true
 }) => {
   const scrollToServices = () => {

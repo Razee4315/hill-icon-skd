@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CheckCircle } from '@mui/icons-material';
 import { transportData } from '../data/servicesData';
 import BookingForm from '../components/BookingForm';
 import PlaceholderImage from '../components/PlaceholderImage';
@@ -162,7 +163,7 @@ const Transport: React.FC = () => {
                     <div className="features-grid">
                       {selectedVehicle.features.map((feature, index) => (
                         <div key={index} className="feature-item">
-                          <span className="feature-icon">✓</span>
+                          <CheckCircle fontSize="small" className="feature-icon" />
                           <span className="feature-name">{feature}</span>
                         </div>
                       ))}

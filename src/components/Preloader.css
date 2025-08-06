@@ -1,25 +1,30 @@
+/* Overlay keeps centering; background softened to avoid harsh block */
 .preloader-overlay{
   position: fixed;
   inset: 0;
-  background: #0b0b0b;
+  background: #0b0b0b; /* Opaque so background is not visible */
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 9999;
 }
 .preloader-box{
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-  background: rgba(255,255,255,0.06);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: transparent;
+  box-shadow: none;
 }
-.preloader-image{
-  width: 120px;
-  height: 120px;
-  object-fit: contain;
+
+/* Requested loader styles */
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: fit-content;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 30px;
+  color: #fff;
+  clip-path: inset(0 3ch 0 0);
+  animation: l4 1s steps(4) infinite;
 }
+.loader:before {
+  content: "Loading...";
+}
+@keyframes l4 { to { clip-path: inset(0 -1ch 0 0) } }

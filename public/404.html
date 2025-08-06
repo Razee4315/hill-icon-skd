@@ -3,23 +3,22 @@
   <head>
     <meta charset="utf-8">
     <title>Redirecting...</title>
-    <meta http-equiv="refresh" content="0; URL='/'" />
     <script type="text/javascript">
       // Single Page Apps for GitHub Pages
-      // MIT License
       // https://github.com/rafgraph/spa-github-pages
       (function(l) {
-        // Change this to 1 for project pages (repo at: <user>.github.io/<repo>)
-        // Change to 0 for user/organization pages (at: <user>.github.io)
-        var segmentCount = 1;
-        var path = l.pathname.slice(1).split('/');
-        var newPath = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-          '/' + path.slice(0, segmentCount).join('/') + '/?/' +
-          path.slice(segmentCount).join('/').replace(/&/g, '~and~') +
-          (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        // Adjust segmentCount for project pages: <user>.github.io/<repo>
+        var segmentCount = 1; // 1 for project pages, 0 for user/org pages
+        var locationParts = l.pathname.slice(1).split('/');
+        var repo = locationParts.slice(0, segmentCount).join('/');
+        var target = locationParts.slice(segmentCount).join('/');
+        var search = l.search.slice(1).replace(/&/g, '~and~');
+        var newUrl = l.protocol + '//' + l.host + '/' +
+          (repo ? repo + '/' : '') + '?/' +
+          (target ? target : '') + (search ? (target ? '&' : '') + search : '') +
           l.hash;
-        l.replace(newPath);
-      }(window.location));
+        l.replace(newUrl);
+      })(window.location);
     </script>
   </head>
   <body></body>

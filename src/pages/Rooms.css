@@ -13,6 +13,7 @@
 /* Guard container from causing horizontal scroll on mobile */
 .rooms-page .container {
   overflow-x: hidden;
+  scrollbar-gutter: stable both-edges;
 }
 
 /* Page Header */
@@ -39,7 +40,7 @@
 /* Rooms Grid */
 .rooms-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: var(--spacing-xl);
 }
 
@@ -436,7 +437,7 @@
 
 @media (max-width: 768px) {
   .page-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
   
   .rooms-grid {
@@ -445,7 +446,7 @@
   }
   
   .room-card {
-    max-width: 500px;
+    max-width: 480px;
     margin: 0 auto;
   }
 
@@ -458,21 +459,26 @@
   /* On mobile, avoid cropping images: show full image without overflow */
   .room-card-image {
     height: auto;
-    max-height: 60vh;
+    max-height: 50vh;
     object-fit: contain;
     border-radius: 12px;
   }
   
   .room-main-image {
     height: auto;
-    max-height: 70vh;
+    max-height: 60vh;
     object-fit: contain;
     border-radius: 12px;
     margin: 0 auto;
   }
+
+  /* Constrain booking form to comfortable width */
+  .booking-form-wrapper {
+    max-width: 640px;
+  }
   
   .room-detail-name {
-    font-size: 2rem;
+    font-size: 1.75rem;
   }
   
   .amenities-grid {
@@ -493,6 +499,10 @@
     padding: var(--spacing-md) 0;
   }
   
+  .page-title {
+    font-size: 1.75rem;
+  }
+
   .amenity-item {
     padding: var(--spacing-xs) var(--spacing-sm);
   }

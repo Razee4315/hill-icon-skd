@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { images } from '../utils/images';
 import './Hero.css';
 
@@ -49,22 +50,39 @@ const Hero: React.FC<HeroProps> = ({
       {/* Hero Content */}
       <div className="hero-content">
         <div className="container">
-          <div className="hero-text">
+          <motion.div 
+            className="hero-text"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+          >
             <h1 className="hero-title">{title}</h1>
             {subtitle && (
-              <p className="hero-subtitle">{subtitle}</p>
+              <motion.p 
+                className="hero-subtitle"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1, duration: 0.5, ease: 'easeOut' }}
+              >
+                {subtitle}
+              </motion.p>
             )}
             {showCTA && (
-              <div className="hero-cta">
+              <motion.div 
+                className="hero-cta"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.5, ease: 'easeOut' }}
+              >
                 <button 
                   className="hero-btn primary"
                   onClick={scrollToServices}
                 >
                   Explore Our Services
                 </button>
-              </div>
+              </motion.div>
             )}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

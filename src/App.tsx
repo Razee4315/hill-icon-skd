@@ -1,5 +1,5 @@
 // import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import FloatingWhatsApp from './components/ScrollToTop';
@@ -11,23 +11,123 @@ import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
 import './App.css';
 import Gallery from './pages/Gallery';
+import { AnimatePresence, motion } from 'framer-motion';
+
+function AnimatedRoutes() {
+  const location = useLocation();
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route
+          path="/"
+          element={
+            <motion.main
+              className="main-content"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.35, ease: 'easeOut' }}
+            >
+              <Home />
+            </motion.main>
+          }
+        />
+        <Route
+          path="/rooms"
+          element={
+            <motion.main
+              className="main-content"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.35, ease: 'easeOut' }}
+            >
+              <Rooms />
+            </motion.main>
+          }
+        />
+        <Route
+          path="/transport"
+          element={
+            <motion.main
+              className="main-content"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.35, ease: 'easeOut' }}
+            >
+              <Transport />
+            </motion.main>
+          }
+        />
+        <Route
+          path="/tours"
+          element={
+            <motion.main
+              className="main-content"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.35, ease: 'easeOut' }}
+            >
+              <Tours />
+            </motion.main>
+          }
+        />
+        <Route
+          path="/gallery"
+          element={
+            <motion.main
+              className="main-content"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.35, ease: 'easeOut' }}
+            >
+              <Gallery />
+            </motion.main>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <motion.main
+              className="main-content"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.35, ease: 'easeOut' }}
+            >
+              <Contact />
+            </motion.main>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <motion.main
+              className="main-content"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.35, ease: 'easeOut' }}
+            >
+              <NotFound />
+            </motion.main>
+          }
+        />
+      </Routes>
+    </AnimatePresence>
+  );
+}
 
 function App() {
   return (
     <Router basename="/hill-icon-skd">
       <div className="app-layout">
         <Navbar />
-        <main className="main-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/rooms" element={<Rooms />} />
-            <Route path="/transport" element={<Transport />} />
-            <Route path="/tours" element={<Tours />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </main>
+        {/* Animated routed pages */}
+        <AnimatedRoutes />
         <Footer />
         <FloatingWhatsApp />
       </div>

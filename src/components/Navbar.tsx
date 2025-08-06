@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Home as HomeIcon, Hotel, DirectionsCar, Terrain, ContactMail, PhotoAlbum } from '@mui/icons-material';
 import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
@@ -42,7 +43,12 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+    <motion.nav 
+      className={`navbar ${isScrolled ? 'scrolled' : ''}`}
+      initial={{ y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.35, ease: 'easeOut' }}
+    >
       <div className="container">
         <div className="navbar-content">
           {/* Logo */}
@@ -123,52 +129,63 @@ const Navbar: React.FC = () => {
         </div>
 
         {/* Mobile Navigation */}
-        <div className={`navbar-mobile ${isMenuOpen ? 'open' : ''}`}>
-          <Link 
-            to="/" 
-            className={`navbar-mobile-link ${isActive('/') ? 'active' : ''}`}
-            onClick={handleSameRouteClick('/')}
-          >
-            <HomeIcon fontSize="small" style={{ marginRight: 6 }} /> <span className="label">Home</span>
-          </Link>
-          <Link 
-            to="/rooms" 
-            className={`navbar-mobile-link ${isActive('/rooms') ? 'active' : ''}`}
-            onClick={handleSameRouteClick('/rooms')}
-          >
-            <Hotel fontSize="small" style={{ marginRight: 6 }} /> <span className="label">Rooms</span>
-          </Link>
-          <Link 
-            to="/transport" 
-            className={`navbar-mobile-link ${isActive('/transport') ? 'active' : ''}`}
-            onClick={handleSameRouteClick('/transport')}
-          >
-            <DirectionsCar fontSize="small" style={{ marginRight: 6 }} /> <span className="label">Transport</span>
-          </Link>
-          <Link 
-            to="/tours" 
-            className={`navbar-mobile-link ${isActive('/tours') ? 'active' : ''}`}
-            onClick={handleSameRouteClick('/tours')}
-          >
-            <Terrain fontSize="small" style={{ marginRight: 6 }} /> <span className="label">Tours</span>
-          </Link>
-          <Link 
-            to="/gallery" 
-            className={`navbar-mobile-link ${isActive('/gallery') ? 'active' : ''}`}
-            onClick={handleSameRouteClick('/gallery')}
-          >
-            <PhotoAlbum fontSize="small" style={{ marginRight: 6 }} /> <span className="label">Gallery</span>
-          </Link>
-          <Link 
-            to="/contact" 
-            className={`navbar-mobile-link ${isActive('/contact') ? 'active' : ''}`}
-            onClick={handleSameRouteClick('/contact')}
-          >
-            <ContactMail fontSize="small" style={{ marginRight: 6 }} /> <span className="label">Contact</span>
-          </Link>
-        </div>
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div 
+              key="mobile-nav"
+              className={`navbar-mobile ${isMenuOpen ? 'open' : ''}`}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
+            >
+              <Link 
+                to="/" 
+                className={`navbar-mobile-link ${isActive('/') ? 'active' : ''}`}
+                onClick={handleSameRouteClick('/')}
+              >
+                <HomeIcon fontSize="small" style={{ marginRight: 6 }} /> <span className="label">Home</span>
+              </Link>
+              <Link 
+                to="/rooms" 
+                className={`navbar-mobile-link ${isActive('/rooms') ? 'active' : ''}`}
+                onClick={handleSameRouteClick('/rooms')}
+              >
+                <Hotel fontSize="small" style={{ marginRight: 6 }} /> <span className="label">Rooms</span>
+              </Link>
+              <Link 
+                to="/transport" 
+                className={`navbar-mobile-link ${isActive('/transport') ? 'active' : ''}`}
+                onClick={handleSameRouteClick('/transport')}
+              >
+                <DirectionsCar fontSize="small" style={{ marginRight: 6 }} /> <span className="label">Transport</span>
+              </Link>
+              <Link 
+                to="/tours" 
+                className={`navbar-mobile-link ${isActive('/tours') ? 'active' : ''}`}
+                onClick={handleSameRouteClick('/tours')}
+              >
+                <Terrain fontSize="small" style={{ marginRight: 6 }} /> <span className="label">Tours</span>
+              </Link>
+              <Link 
+                to="/gallery" 
+                className={`navbar-mobile-link ${isActive('/gallery') ? 'active' : ''}`}
+                onClick={handleSameRouteClick('/gallery')}
+              >
+                <PhotoAlbum fontSize="small" style={{ marginRight: 6 }} /> <span className="label">Gallery</span>
+              </Link>
+              <Link 
+                to="/contact" 
+                className={`navbar-mobile-link ${isActive('/contact') ? 'active' : ''}`}
+                onClick={handleSameRouteClick('/contact')}
+              >
+                <ContactMail fontSize="small" style={{ marginRight: 6 }} /> <span className="label">Contact</span>
+              </Link>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 

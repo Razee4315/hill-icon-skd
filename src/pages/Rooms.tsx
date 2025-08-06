@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle } from '@mui/icons-material';
 import { roomsData } from '../data/servicesData';
 import BookingForm from '../components/BookingForm';
@@ -89,11 +90,16 @@ const Rooms: React.FC = () => {
           <div className="rooms-grid">
             {[...roomsData]
               .sort((a, b) => (a.name === 'Suite Room' ? -1 : b.name === 'Suite Room' ? 1 : 0))
-              .map((room) => (
-              <div 
-                key={room.id} 
+              .map((room, idx) => (
+              <motion.div 
+                key={room.id}
                 className="room-card"
                 onClick={() => handleRoomSelect(room)}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, ease: 'easeOut', delay: Math.min(idx * 0.05, 0.4) }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
                 <div className="room-image">
                   {room.image ? (
@@ -128,7 +134,7 @@ const Rooms: React.FC = () => {
                     View Details →
                   </button>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         ) : (
@@ -228,18 +234,32 @@ const Rooms: React.FC = () => {
               </div>
 
               {/* Booking Form */}
-              {showBookingForm && (
-                <div className="booking-form-container">
-                  <div className="booking-form-overlay" onClick={handleCloseBooking}></div>
-                  <div className="booking-form-wrapper">
-                    <BookingForm
-                      serviceType="room"
-                      serviceName={selectedRoom.name}
-                      onClose={handleCloseBooking}
+              <AnimatePresence>
+                {showBookingForm && (
+                  <motion.div className="booking-form-container">
+                    <motion.div 
+                      className="booking-form-overlay" 
+                      onClick={handleCloseBooking}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
                     />
-                  </div>
-                </div>
-              )}
+                    <motion.div 
+                      className="booking-form-wrapper"
+                      initial={{ opacity: 0, y: 16 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 16 }}
+                      transition={{ duration: 0.25, ease: 'easeOut' }}
+                    >
+                      <BookingForm
+                        serviceType="room"
+                        serviceName={selectedRoom.name}
+                        onClose={handleCloseBooking}
+                      />
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         )}

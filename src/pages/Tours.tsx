@@ -24,6 +24,21 @@ const Tours: React.FC = () => {
   const [selectedTour, setSelectedTour] = useState<Tour | null>(null);
   const [showBookingForm, setShowBookingForm] = useState(false);
 
+  // Hide floating WhatsApp button when booking form is open
+  useEffect(() => {
+    if (showBookingForm) {
+      document.body.classList.add('hide-floating-whatsapp');
+      document.body.classList.add('modal-open');
+    } else {
+      document.body.classList.remove('hide-floating-whatsapp');
+      document.body.classList.remove('modal-open');
+    }
+    return () => {
+      document.body.classList.remove('hide-floating-whatsapp');
+      document.body.classList.remove('modal-open');
+    };
+  }, [showBookingForm]);
+
   const handleTourSelect = (tour: Tour) => {
     setSelectedTour(tour);
     setShowBookingForm(false);

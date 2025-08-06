@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { images } from '../utils/images';
 import './Hero.css';
 
 interface HeroProps {
@@ -12,12 +11,44 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({
-  videoSrc = images.heroVideo,
+  videoSrc,
   title = "Welcome to Hill Icon Skardu.",
   subtitle = "Experience Comfort, Feel at Home – Right Here in the Heart of Skardu",
   showCTA = true,
   onVideoReady
 }) => {
+  const videoRef = React.useRef<HTMLVideoElement | null>(null);
+  // Serve from public so path is stable under base (/hill-icon-skd/)
+  const defaultPublicSrc = `${import.meta.env.BASE_URL}media/hero.mp4`;
+  const [resolvedSrc, setResolvedSrc] = React.useState<string>(videoSrc || defaultPublicSrc);
+
+  // Ensure autoplay works across browsers by attempting programmatic play
+  React.useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    const tryPlay = async () => {
+      try {
+        await v.play();
+      } catch (_e) {
+        // Some browsers block autoplay; ensure muted is set and retry
+        v.muted = true;
+        try {
+          await v.play();
+        } catch (_e2) {
+          // If it still fails, we silently ignore to avoid UI disruption
+        }
+      }
+    };
+    // If metadata is ready, try immediately; otherwise wait for it
+    if (v.readyState >= 2) {
+      tryPlay();
+    } else {
+      const onLoaded = () => tryPlay();
+      v.addEventListener('loadeddata', onLoaded, { once: true });
+      return () => v.removeEventListener('loadeddata', onLoaded);
+    }
+  }, []);
+
   const scrollToServices = () => {
     const servicesSection = document.getElementById('services-overview');
     if (servicesSection) {
@@ -30,15 +61,29 @@ const Hero: React.FC<HeroProps> = ({
       {/* Video Background */}
       <div className="hero-video-container">
         <video
+          ref={videoRef}
           className="hero-video"
           autoPlay
           muted
           loop
           playsInline
-          poster="/src/assets/front.jpg"
-          onCanPlayThrough={() => onVideoReady && onVideoReady()}
+          preload="auto"
+          src={resolvedSrc}
+          onLoadedData={() => {
+            // helpful during debugging to see if the video loaded
+            // eslint-disable-next-line no-console
+            console.debug('Hero video loaded:', { src: resolvedSrc });
+            onVideoReady && onVideoReady();
+          }}
+          onError={(e) => {
+            // eslint-disable-next-line no-console
+            console.error('Hero video failed to load/play', { src: resolvedSrc, error: e });
+            // Always fall back to the known-good public asset path
+            if (resolvedSrc !== defaultPublicSrc) {
+              setResolvedSrc(defaultPublicSrc);
+            }
+          }}
         >
-          <source src={videoSrc} type="video/mp4" />
           {/* Fallback for browsers that don't support video */}
           Your browser does not support the video tag.
         </video>

@@ -57,6 +57,17 @@
   transform: scale(1.1);
 }
 
+/* Hide floating WhatsApp when explicitly requested via body class */
+body.hide-floating-whatsapp .floating-whatsapp {
+  display: none !important;
+}
+
+/* Also hide automatically when any booking modal is present */
+/* Modern browsers support :has; this provides a foolproof fallback */
+body:has(.booking-form-container) .floating-whatsapp {
+  display: none !important;
+}
+
 /* Floating WhatsApp Button Styles */
 
 /* Pulse animation for attention */

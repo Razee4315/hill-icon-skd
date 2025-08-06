@@ -28,6 +28,21 @@ const Rooms: React.FC = () => {
   const [activeImage, setActiveImage] = useState<string | null>(null);
   const [preview, setPreview] = useState<{ src: string; alt: string } | null>(null);
 
+  // Hide floating WhatsApp button when booking form is open
+  useEffect(() => {
+    if (showBookingForm) {
+      document.body.classList.add('hide-floating-whatsapp');
+      document.body.classList.add('modal-open');
+    } else {
+      document.body.classList.remove('hide-floating-whatsapp');
+      document.body.classList.remove('modal-open');
+    }
+    return () => {
+      document.body.classList.remove('hide-floating-whatsapp');
+      document.body.classList.remove('modal-open');
+    };
+  }, [showBookingForm]);
+
   const handleRoomSelect = (room: Room) => {
     setSelectedRoom(room);
     setShowBookingForm(false);

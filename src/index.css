@@ -60,8 +60,17 @@ body {
 }
 
 /* Prevent accidental horizontal scroll on all pages */
+html, body, #root {
+  height: 100%;
+}
+
+/* Lock page scroll when a modal is open */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Prevent accidental horizontal scroll on all pages */
 html, body {
-  max-width: 100%;
   overflow-x: hidden;
 }
 

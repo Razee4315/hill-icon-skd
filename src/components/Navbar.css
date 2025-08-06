@@ -149,18 +149,14 @@
   top: 100%;
   left: 0;
   right: 0;
-  transform: translateY(-20px);
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Framer Motion handles height and opacity. Avoid double-transitions that can delay background paint. */
+  will-change: height, opacity;
+  contain: paint;
+  overflow: hidden; /* prevent content flash during height animation */
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
-.navbar-mobile.open {
-  transform: translateY(0);
-  opacity: 1;
-  visibility: visible;
-}
+
 
 .navbar-mobile-link {
   color: var(--color-primary);
@@ -175,6 +171,28 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
+}
+
+/* List-style layout for mobile menu */
+.navbar-mobile-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.25rem 0;
+}
+
+.navbar-mobile-item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.navbar-mobile-item:last-child {
+  border-bottom: none;
+}
+
+.navbar-mobile-item .navbar-mobile-link {
+  margin: 0;              /* full-width tap area */
+  border-radius: 0;       /* list look */
+  padding: 1rem var(--spacing-lg);
+  width: 100%;
 }
 
 .navbar-mobile-link:hover {

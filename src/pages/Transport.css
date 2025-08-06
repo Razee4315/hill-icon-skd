@@ -394,12 +394,16 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 1000;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: var(--spacing-md);
-  overflow-y: auto;
+  align-items: center;
+  padding: 12px;
+  padding-top: 56px; /* avoid collision with fixed navbar with minimal space */
+  z-index: 2000; /* above navbar */
+  overflow: hidden; /* prevent outer scroll */
+  height: 100svh; /* fit safe viewport on desktop */
 }
 
 .booking-form-overlay {
@@ -415,7 +419,7 @@
 .booking-form-wrapper {
   position: relative;
   z-index: 1001;
-  max-width: 950px;
+  max-width: 860px;
   width: 100%;
   margin: auto;
   animation: slideUp 0.3s ease-out;

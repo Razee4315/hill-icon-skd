@@ -54,9 +54,21 @@ body {
   font-weight: var(--font-weight-normal);
   line-height: 1.6;
   color: var(--color-primary);
-  background-color: var(--color-secondary);
+  background-color: var(--color-gray-light);
   margin: 0;
   min-height: 100vh;
+}
+
+/* Prevent accidental horizontal scroll on all pages */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Make all images responsive by default */
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 /* Typography */

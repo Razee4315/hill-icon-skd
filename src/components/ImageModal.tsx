@@ -25,6 +25,8 @@ const ImageModal: React.FC<ImageModalProps> = ({ src, alt, open, onClose, maxWid
 
   if (!open) return null;
 
+  const isFullscreen = (maxWidth === '100vw' || maxHeight === '100vh');
+
   return (
     <div
       role="dialog"
@@ -38,7 +40,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ src, alt, open, onClose, maxWid
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: 1000,
-        padding: 16,
+        padding: isFullscreen ? 0 : 16,
         cursor: 'zoom-out'
       }}
     >
@@ -51,7 +53,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ src, alt, open, onClose, maxWid
           width: 'auto',
           height: 'auto',
           boxShadow: '0 10px 30px rgba(0,0,0,0.4)',
-          borderRadius: 12,
+          borderRadius: isFullscreen ? 0 : 12,
           overflow: 'hidden',
           cursor: 'default'
         }}
@@ -63,8 +65,8 @@ const ImageModal: React.FC<ImageModalProps> = ({ src, alt, open, onClose, maxWid
             display: 'block',
             maxWidth: typeof maxWidth === 'number' ? `${maxWidth}px` : maxWidth,
             maxHeight: typeof maxHeight === 'number' ? `${maxHeight}px` : maxHeight,
-            width: '100%',
-            height: '100%',
+            width: isFullscreen ? '100vw' : '100%',
+            height: isFullscreen ? '100vh' : '100%',
             objectFit: 'contain',
             background: '#000'
           }}

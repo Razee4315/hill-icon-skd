@@ -67,6 +67,15 @@ const Rooms: React.FC = () => {
     return () => window.removeEventListener('navigate-same-route', handler as EventListener);
   }, []);
 
+  // Detect mobile to adjust modal sizing for full-screen preview
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
   return (
     <div className="rooms-page">
       <div className="container">
@@ -91,7 +100,7 @@ const Rooms: React.FC = () => {
                     <img
                       src={room.image}
                       alt={room.name}
-                      style={{ width: '100%', height: 250, objectFit: 'cover', borderRadius: 12 }}
+                      className="room-card-image"
                     />
                   ) : (
                     <PlaceholderImage height={250} text={`${room.name} Image`} />
@@ -143,8 +152,10 @@ const Rooms: React.FC = () => {
                       <img
                         src={activeImage}
                         alt={selectedRoom.name}
-                        style={{ width: '100%', height: 400, objectFit: 'cover', objectPosition: 'center top', borderRadius: 12, cursor: 'zoom-in' }}
-                        onClick={() => setPreview({ src: activeImage, alt: selectedRoom.name })}
+                        className="room-main-image"
+                        onClick={() => {
+                          if (!isMobile) setPreview({ src: activeImage, alt: selectedRoom.name });
+                        }}
                       />
                     ) : (
                       <PlaceholderImage height={400} text={`${selectedRoom.name} Main Image`} />
@@ -176,8 +187,8 @@ const Rooms: React.FC = () => {
                   src={preview?.src || ''}
                   alt={preview?.alt}
                   onClose={() => setPreview(null)}
-                  maxWidth="80vw"
-                  maxHeight="80vh"
+                  maxWidth={isMobile ? '100vw' : '80vw'}
+                  maxHeight={isMobile ? '100vh' : '80vh'}
                 />
 
                 {/* Room Information */}

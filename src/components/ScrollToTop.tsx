@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { contactInfo } from '../data/servicesData';
-import { images } from '../utils/images';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import './ScrollToTop.css';
 
 const FloatingWhatsApp: React.FC = () => {
@@ -47,11 +47,7 @@ Thank you!`;
       onClick={handleWhatsAppClick}
       aria-label="Contact us on WhatsApp"
     >
-      <img 
-        src={images.whatsapp} 
-        alt="WhatsApp" 
-        className="whatsapp-icon"
-      />
+      <WhatsAppIcon className="whatsapp-icon" />
       <span className="whatsapp-pulse"></span>
     </button>
   );

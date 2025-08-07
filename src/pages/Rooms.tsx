@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle } from '@mui/icons-material';
 import { roomsData } from '../data/servicesData';
@@ -27,6 +28,8 @@ const Rooms: React.FC = () => {
   const [showBookingForm, setShowBookingForm] = useState(false);
   const [activeImage, setActiveImage] = useState<string | null>(null);
   const [preview, setPreview] = useState<{ src: string; alt: string } | null>(null);
+  const navigate = useNavigate();
+  const params = useParams<{ id: string }>();
 
   // Hide floating WhatsApp button when booking form is open
   useEffect(() => {
@@ -44,9 +47,10 @@ const Rooms: React.FC = () => {
   }, [showBookingForm]);
 
   const handleRoomSelect = (room: Room) => {
-    setSelectedRoom(room);
-    setShowBookingForm(false);
-    setActiveImage(room.image || null);
+    // Route-driven selection to avoid double-render flicker
+    navigate(`/rooms/${room.id}`);
+    // Smooth scroll after navigation
+    setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }), 0);
   };
 
   const handleBookNow = () => {
@@ -58,9 +62,9 @@ const Rooms: React.FC = () => {
   };
 
   const handleBackToList = () => {
-    setSelectedRoom(null);
-    setShowBookingForm(false);
-    setActiveImage(null);
+    navigate('/rooms');
+    // Reset scroll to top when returning to list
+    setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }), 0);
   };
 
   // Ensure detail view starts from top when a room is selected
@@ -69,6 +73,22 @@ const Rooms: React.FC = () => {
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }
   }, [selectedRoom]);
+
+  // Sync URL param to selection (deep-link support)
+  useEffect(() => {
+    if (!params.id) {
+      setSelectedRoom(null);
+      setActiveImage(null);
+      setShowBookingForm(false);
+      return;
+    }
+    const roomById = roomsData.find(r => String(r.id) === params.id);
+    if (roomById) {
+      setSelectedRoom(roomById);
+      setActiveImage(roomById.image || null);
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    }
+  }, [params.id]);
 
   // Reset view when user clicks the same nav item again
   useEffect(() => {
@@ -94,6 +114,7 @@ const Rooms: React.FC = () => {
 
   return (
     <div className="rooms-page">
+      
       <div className="container">
         {/* Page Header */}
         <div className="page-header">
@@ -122,6 +143,8 @@ const Rooms: React.FC = () => {
                       src={room.image}
                       alt={room.name}
                       className="room-card-image"
+                      loading="lazy"
+                      decoding="async"
                     />
                   ) : (
                     <PlaceholderImage height={250} text={`${room.name} Image`} />
@@ -169,11 +192,13 @@ const Rooms: React.FC = () => {
                 {/* Room Gallery */}
                 <div className="room-gallery">
                   <div className="main-image">
-                    {activeImage ? (
+                     {activeImage ? (
                       <img
                         src={activeImage}
                         alt={selectedRoom.name}
                         className="room-main-image"
+                         loading="eager"
+                         decoding="async"
                         onClick={() => {
                           if (!isMobile) setPreview({ src: activeImage, alt: selectedRoom.name });
                         }}
@@ -191,6 +216,8 @@ const Rooms: React.FC = () => {
                               src={src}
                               alt={`${selectedRoom.name} ${index + 1}`}
                               style={{ width: '100%', height: 80, objectFit: 'cover', borderRadius: 8, cursor: 'pointer', outline: src === activeImage ? '2px solid #2e7d32' : 'none' }}
+                              loading="lazy"
+                              decoding="async"
                               onClick={() => setActiveImage(src)}
                             />
                           ) : (

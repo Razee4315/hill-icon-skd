@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Terrain, CheckCircle } from '@mui/icons-material';
 import { toursData } from '../data/servicesData';
 import BookingForm from '../components/BookingForm';
@@ -14,7 +15,7 @@ interface Tour {
   image: string;
   highlights: string[];
   price: {
-    perPerson: number;
+    perPerson?: number;
     currency: string;
     note: string;
   };
@@ -23,6 +24,8 @@ interface Tour {
 const Tours: React.FC = () => {
   const [selectedTour, setSelectedTour] = useState<Tour | null>(null);
   const [showBookingForm, setShowBookingForm] = useState(false);
+  const navigate = useNavigate();
+  const params = useParams<{ id: string }>();
 
   // Hide floating WhatsApp button when booking form is open
   useEffect(() => {
@@ -40,8 +43,9 @@ const Tours: React.FC = () => {
   }, [showBookingForm]);
 
   const handleTourSelect = (tour: Tour) => {
-    setSelectedTour(tour);
-    setShowBookingForm(false);
+    navigate(`/tours/${tour.id}`);
+    // Ensure we jump to top when entering detail view
+    setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }), 0);
   };
 
   const handleBookNow = () => {
@@ -53,8 +57,9 @@ const Tours: React.FC = () => {
   };
 
   const handleBackToList = () => {
-    setSelectedTour(null);
-    setShowBookingForm(false);
+    navigate('/tours');
+    // Reset scroll to top when returning to list
+    setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }), 0);
   };
 
   // Ensure detail view starts from top when a tour is selected
@@ -64,8 +69,23 @@ const Tours: React.FC = () => {
     }
   }, [selectedTour]);
 
+  // Sync URL param to selection (deep-link support)
+  useEffect(() => {
+    if (!params.id) {
+      setSelectedTour(null);
+      setShowBookingForm(false);
+      return;
+    }
+    const tourById = toursData.find(t => String(t.id) === params.id);
+    if (tourById) {
+      setSelectedTour(tourById);
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    }
+  }, [params.id]);
+
   return (
     <div className="tours-page">
+      
       <div className="container">
         {/* Page Header */}
         <div className="page-header">
@@ -86,6 +106,8 @@ const Tours: React.FC = () => {
                     src={tour.image}
                     alt={tour.name}
                     style={{ width: '100%', height: 220, objectFit: 'cover', display: 'block' }}
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="tour-duration">
                     <span>{tour.duration}</span>

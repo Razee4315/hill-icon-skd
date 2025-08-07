@@ -45,6 +45,7 @@ const Home: React.FC = () => {
 
   return (
     <div className="home">
+      
       {/* Global Preloader Overlay */}
       <Preloader visible={loading} />
 
@@ -95,7 +96,11 @@ const Home: React.FC = () => {
                     ))}
                   </ul>
                   
-                  <Link to={service.link} className="service-cta">
+                  <Link
+                    to={service.link}
+                    className="service-cta"
+                    onClick={() => setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }), 0)}
+                  >
                     Learn More →
                   </Link>
                 </div>

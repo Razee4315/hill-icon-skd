@@ -1,6 +1,6 @@
 import React from 'react';
 import { Phone, Email, WhatsApp, LocationOn, Facebook, Instagram } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { contactInfo } from '../data/servicesData';
 import './Footer.css';
 
@@ -10,6 +10,23 @@ const Footer: React.FC = () => {
   const handleWhatsAppClick = () => {
     const whatsappUrl = `https://wa.me/${contactInfo.whatsapp.replace(/[^0-9]/g, '')}`;
     window.open(whatsappUrl, '_blank');
+  };
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const navigateAndTop = (path: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (location.pathname === path) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      return;
+    }
+    navigate(path);
+    // ensure next tick scroll
+    setTimeout(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }));
+    }, 0);
   };
 
   return (
@@ -58,16 +75,17 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Quick Links */}
-          <div className="footer-section">
+          <nav className="footer-section" aria-label="Footer">
             <h4 className="footer-subtitle">Quick Links</h4>
             <div className="footer-links">
-              <Link to="/" className="footer-link">Home</Link>
-              <Link to="/rooms" className="footer-link">Rooms</Link>
-              <Link to="/transport" className="footer-link">Transport</Link>
-              <Link to="/tours" className="footer-link">Tours</Link>
-              <Link to="/contact" className="footer-link">Contact</Link>
+              <Link to="/" className="footer-link" onClick={navigateAndTop('/')}>Home</Link>
+              <Link to="/rooms" className="footer-link" onClick={navigateAndTop('/rooms')}>Rooms</Link>
+              <Link to="/transport" className="footer-link" onClick={navigateAndTop('/transport')}>Transport</Link>
+              <Link to="/tours" className="footer-link" onClick={navigateAndTop('/tours')}>Tours</Link>
+              <Link to="/gallery" className="footer-link" onClick={navigateAndTop('/gallery')}>Gallery</Link>
+              <Link to="/contact" className="footer-link" onClick={navigateAndTop('/contact')}>Contact</Link>
             </div>
-          </div>
+          </nav>
 
           {/* Social Media */}
           <div className="footer-section">

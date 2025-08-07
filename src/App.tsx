@@ -47,6 +47,20 @@ function AnimatedRoutes() {
           }
         />
         <Route
+          path="/rooms/:id"
+          element={
+            <motion.main
+              className="main-content"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.35, ease: 'easeOut' }}
+            >
+              <Rooms />
+            </motion.main>
+          }
+        />
+        <Route
           path="/transport"
           element={
             <motion.main
@@ -61,7 +75,35 @@ function AnimatedRoutes() {
           }
         />
         <Route
+          path="/transport/:id"
+          element={
+            <motion.main
+              className="main-content"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.35, ease: 'easeOut' }}
+            >
+              <Transport />
+            </motion.main>
+          }
+        />
+        <Route
           path="/tours"
+          element={
+            <motion.main
+              className="main-content"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.35, ease: 'easeOut' }}
+            >
+              <Tours />
+            </motion.main>
+          }
+        />
+        <Route
+          path="/tours/:id"
           element={
             <motion.main
               className="main-content"
@@ -122,8 +164,9 @@ function AnimatedRoutes() {
 }
 
 function App() {
+  const basename = import.meta.env.MODE === 'production' ? '/hill-icon-skd' : '/';
   return (
-    <Router basename="/hill-icon-skd">
+    <Router basename={basename}>
       <div className="app-layout">
         <Navbar />
         {/* Animated routed pages */}

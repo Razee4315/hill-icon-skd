@@ -35,10 +35,12 @@ const Hero: React.FC<HeroProps> = ({
           muted
           loop
           playsInline
-          poster="/src/assets/front.jpg"
+          preload="metadata"
+          poster={images.front}
           onCanPlayThrough={() => onVideoReady && onVideoReady()}
         >
           <source src={videoSrc} type="video/mp4" />
+          <track kind="captions" />
           {/* Fallback for browsers that don't support video */}
           Your browser does not support the video tag.
         </video>

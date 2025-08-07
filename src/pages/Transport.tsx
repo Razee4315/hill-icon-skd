@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { CheckCircle } from '@mui/icons-material';
 import { transportData } from '../data/servicesData';
 import BookingForm from '../components/BookingForm';
@@ -15,7 +16,7 @@ interface Vehicle {
   image: string;
   idealFor: string;
   price: {
-    daily: number;
+    daily?: number;
     currency: string;
     note: string;
   };
@@ -27,6 +28,8 @@ const Transport: React.FC = () => {
   const [showBookingForm, setShowBookingForm] = useState(false);
   const [preview, setPreview] = useState<{ src: string; alt: string } | null>(null);
   const vehicles = transportData.filter(v => v.name.toLowerCase() !== 'luxury van');
+  const navigate = useNavigate();
+  const params = useParams<{ id: string }>();
 
   // Hide floating WhatsApp button when booking form is open
   useEffect(() => {
@@ -44,8 +47,9 @@ const Transport: React.FC = () => {
   }, [showBookingForm]);
 
   const handleVehicleSelect = (vehicle: Vehicle) => {
-    setSelectedVehicle(vehicle);
-    setShowBookingForm(false);
+    navigate(`/transport/${vehicle.id}`);
+    // Ensure we jump to top when entering detail view
+    setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }), 0);
   };
 
   const handleInquireNow = () => {
@@ -57,8 +61,9 @@ const Transport: React.FC = () => {
   };
 
   const handleBackToList = () => {
-    setSelectedVehicle(null);
-    setShowBookingForm(false);
+    navigate('/transport');
+    // Reset scroll to top when returning to list
+    setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }), 0);
   };
 
   // Ensure detail view starts from top when a vehicle is selected
@@ -68,8 +73,23 @@ const Transport: React.FC = () => {
     }
   }, [selectedVehicle]);
 
+  // Sync URL param to selection (deep-link support)
+  useEffect(() => {
+    if (!params.id) {
+      setSelectedVehicle(null);
+      setShowBookingForm(false);
+      return;
+    }
+    const vehById = transportData.find(v => String(v.id) === params.id);
+    if (vehById) {
+      setSelectedVehicle(vehById);
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    }
+  }, [params.id]);
+
   return (
     <div className="transport-page">
+      
       <div className="container">
         {/* Page Header */}
         <div className="page-header">
@@ -90,7 +110,7 @@ const Transport: React.FC = () => {
                 onClick={() => handleVehicleSelect(vehicle)}
               >
                 <div className="vehicle-image">
-                  <img src={vehicle.image} alt={`${vehicle.name}`} style={{ width: '100%', height: 250, objectFit: 'contain', borderRadius: 12, backgroundColor: '#f5f5f5' }} />
+                  <img src={vehicle.image} alt={`${vehicle.name}`} style={{ width: '100%', height: 250, objectFit: 'contain', borderRadius: 12, backgroundColor: '#f5f5f5' }} loading="lazy" decoding="async" />
                 </div>
                 <div className="vehicle-content">
                   <h3 className="vehicle-name">{vehicle.name}</h3>
@@ -153,7 +173,7 @@ const Transport: React.FC = () => {
                 <div className="vehicle-info">
                   <h2 className="vehicle-detail-name">{selectedVehicle.name}</h2>
                   <div className="room-detail-price">
-                    <span className="price-amount">{selectedVehicle.price.currency} {selectedVehicle.price.daily.toLocaleString()}</span>
+                    <span className="price-amount">{selectedVehicle.price.currency} {selectedVehicle.price.daily?.toLocaleString() || '0'}</span>
                     <span className="price-note">{selectedVehicle.price.note}</span>
                     {selectedVehicle.airportTransfer && (
                       <span className="price-note">Airport transfer: {selectedVehicle.price.currency} {selectedVehicle.airportTransfer.toLocaleString()}</span>

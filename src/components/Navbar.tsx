@@ -35,10 +35,17 @@ const Navbar: React.FC = () => {
   const handleSameRouteClick = (path: string) => (e: React.MouseEvent) => {
     if (location.pathname === path) {
       e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Use a double scroll to overcome any pending reflow/animations
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }), 0);
       window.dispatchEvent(new CustomEvent('navigate-same-route', { detail: { path } }));
     } else {
       closeMenu();
+      // Schedule a scroll for route changes initiated via navbar
+      setTimeout(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+        requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }));
+      }, 0);
     }
   };
 
@@ -52,7 +59,9 @@ const Navbar: React.FC = () => {
       <div className="container">
         <div className="navbar-content">
           {/* Logo */}
-          <Link to="/" className="navbar-logo" onClick={closeMenu}>
+          <Link to="/" className="navbar-logo" onClick={handleSameRouteClick('/')}
+            aria-label="Hill Icon Home"
+          >
             <h2>Hill Icon</h2>
           </Link>
 

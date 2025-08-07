@@ -34,7 +34,7 @@ const Gallery: React.FC = () => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
             gap: '12px',
           }}
         >
@@ -54,11 +54,15 @@ const Gallery: React.FC = () => {
                 style={{
                   display: 'block',
                   width: '100%',
-                  height: 360,
+                  height: 'clamp(200px, 30vw, 360px)',
                   objectFit: 'cover',
                   cursor: 'zoom-in'
                 }}
-                onClick={() => setPreview(img)}
+                onClick={() => {
+                  setPreview(img);
+                  // Make sure the modal opening doesn't interfere with scroll position globally
+                  setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' }), 0);
+                }}
               />
             </div>
           ))}
@@ -69,8 +73,8 @@ const Gallery: React.FC = () => {
           src={preview?.src || ''}
           alt={preview?.alt}
           onClose={() => setPreview(null)}
-          maxWidth="80vw"
-          maxHeight="80vh"
+          maxWidth="90vw"
+          maxHeight="90vh"
         />
       </div>
     </section>

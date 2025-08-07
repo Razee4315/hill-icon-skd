@@ -243,7 +243,7 @@ export const toursData: Tour[] = [
     description: "Explore Deosai with Prado TZ (Up Model)",
     detailedDescription: "Journey to the breathtaking Deosai National Park, known as the 'Land of Giants'. This package includes transport via Prado TZ (Up Model) for a comfortable and capable ride across the plateau.",
     price: {
-      perPerson: 25000,
+      perPerson: 35000,
       currency: "Rs",
       note: "Vehicle: Prado TZ (Up Model)"
     },
@@ -268,7 +268,7 @@ export const toursData: Tour[] = [
     description: "Explore Deosai with TZ (Down Model)",
     detailedDescription: "Journey to the breathtaking Deosai National Park, known as the 'Land of Giants'. This package includes transport via TZ (Down Model) for a budget-friendly option while exploring the plateau.",
     price: {
-      perPerson: 35000,
+      perPerson: 25000,
       currency: "Rs",
       note: "Vehicle: TZ (Down Model)"
     },

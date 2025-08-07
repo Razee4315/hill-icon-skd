@@ -10,9 +10,9 @@
   box-sizing: border-box;
 }
 
-/* Guard container from causing horizontal scroll on mobile */
+/* Allow sticky to work: avoid overflow on ancestors */
 .rooms-page .container {
-  overflow-x: hidden;
+  overflow: visible;
   scrollbar-gutter: stable both-edges;
 }
 
@@ -194,7 +194,7 @@
 .room-detail-content {
   position: relative;
   width: 100%;
-  overflow-x: hidden;
+  overflow: visible;
 }
 
 .room-detail-main {
@@ -210,6 +210,7 @@
   /* Avoid image clipping under fixed header */
   top: 96px;
   width: 100%;
+  align-self: start; /* ensure the sticky column starts at top of grid cell */
 }
 
 .main-image {
@@ -433,15 +434,15 @@
     grid-template-columns: 1fr;
     gap: var(--spacing-xl);
   }
-  
-  .room-gallery {
-    position: static;
-  }
 }
 
 @media (max-width: 768px) {
   .page-title {
     font-size: 2rem;
+  }
+  /* Slightly reduce sticky offset on small laptops/large phones if enabled */
+  .room-gallery {
+    top: 72px;
   }
   
   .rooms-grid {

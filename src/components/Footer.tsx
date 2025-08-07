@@ -115,6 +115,14 @@ const Footer: React.FC = () => {
               )}
             </div>
           </div>
+          
+          {/* Legal / Policy */}
+          <div className="footer-section">
+            <h4 className="footer-subtitle">Legal</h4>
+            <div className="footer-links">
+              <Link to="/policy" className="footer-link" onClick={navigateAndTop('/policy')}>Hotel Policy</Link>
+            </div>
+          </div>
         </div>
 
         {/* Copyright */}

@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Home as HomeIcon, Hotel, DirectionsCar, Terrain, ContactMail, PhotoAlbum } from '@mui/icons-material';
 import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
+import logo from './logo.png';
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -62,7 +63,7 @@ const Navbar: React.FC = () => {
           <Link to="/" className="navbar-logo" onClick={handleSameRouteClick('/')}
             aria-label="Hill Icon Home"
           >
-            <h2>Hill Icon</h2>
+            <img src={logo} alt="Hill Icon" width={600} height={200} />
           </Link>
 
           {/* Desktop Navigation */}

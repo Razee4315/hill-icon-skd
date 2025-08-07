@@ -12,6 +12,7 @@ import NotFound from './pages/NotFound';
 import './App.css';
 import Gallery from './pages/Gallery';
 import { AnimatePresence, motion } from 'framer-motion';
+import Policy from './pages/Policy';
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -141,6 +142,20 @@ function AnimatedRoutes() {
               transition={{ duration: 0.35, ease: 'easeOut' }}
             >
               <Contact />
+            </motion.main>
+          }
+        />
+        <Route
+          path="/policy"
+          element={
+            <motion.main
+              className="main-content"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.35, ease: 'easeOut' }}
+            >
+              <Policy />
             </motion.main>
           }
         />

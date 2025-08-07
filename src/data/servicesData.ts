@@ -287,6 +287,31 @@ export const toursData: Tour[] = [
       "Mountain photography"
     ]
   },
+  {
+    id: 3,
+    name: "Shigar & Nearby Highlights",
+    description: "Visit Shigar Valley with stops at the Cold Desert and Khaplu Fort",
+    detailedDescription: "Discover Shigar Valley and popular nearby points. This full-day experience typically includes the Shigar Fort area, the mesmerizing Cold Desert (Katpana), scenic valley viewpoints, and a cultural stop at Khaplu Fort. Ideal for travelers who want to see multiple highlights without long drives between each.",
+    price: {
+      currency: "Rs",
+      note: "Pricing changes in Skardu. Please contact us for current rates."
+    },
+    inclusions: [
+      "Professional driver",
+      "Comfortable vehicle",
+      "Tour taxes",
+      "Entry tickets (where applicable)"
+    ],
+    duration: "Full Day (6-8 hours)",
+    image: images.roofView1,
+    highlights: [
+      "Shigar Fort",
+      "Cold Desert (Katpana)",
+      "Khaplu Fort",
+      "Shigar Valley viewpoints",
+      "Local culture and crafts"
+    ]
+  },
   
 ];
 

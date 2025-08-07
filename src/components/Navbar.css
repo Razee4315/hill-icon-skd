@@ -10,14 +10,22 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Expand navbar container width so links can shift right visibly */
+.navbar .container {
+  max-width: 1400px;
+}
+@media (min-width: 1600px) {
+  .navbar .container { max-width: 1600px; }
+}
+
 .navbar-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start; /* let logo lead, links define their own spacing */
   align-items: center;
   padding: 1rem 0;
-  max-width: 1200px;
+  max-width: 1440px; /* widen navbar row so links sit further right */
   margin: 0 auto;
-  padding-left: var(--spacing-md);
+  padding-left: var(--spacing-xl); /* add inner padding to keep logo in view */
   padding-right: var(--spacing-md);
 }
 
@@ -26,22 +34,21 @@
   text-decoration: none;
   color: var(--color-primary);
   transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0; /* keep logo fully visible on the left */
 }
 
-.navbar-logo h2 {
-  margin: 0;
-  font-weight: 600;
-  font-size: 1.75rem;
-  letter-spacing: -0.02em;
-  background: linear-gradient(135deg, var(--color-primary) 0%, #2c3e50 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.navbar-logo img {
+  display: block;
+  width: clamp(280px, 26vw, 380px); /* larger on desktop */
+  height: auto;
+  object-fit: contain;
 }
 
-.navbar-logo:hover h2 {
-  transform: scale(1.05);
-  transition: transform 0.3s ease;
+.navbar-logo:hover img {
+  transform: scale(1.02);
+  transition: transform 0.2s ease;
 }
 
 /* Modern Navigation Links */
@@ -49,6 +56,7 @@
   display: flex;
   gap: 1.25rem;
   align-items: center;
+  margin-left: clamp(20px, 8vw, 180px); /* push links right without forcing logo off-screen */
 }
 
 .navbar-link {
@@ -221,6 +229,7 @@
 
   .navbar-toggle {
     display: block;
+    margin-left: auto; /* push menu button to the far right on mobile */
   }
 
   .navbar-mobile {
@@ -229,11 +238,35 @@
 
   .navbar-content {
     position: relative;
+    justify-content: space-between; /* space out logo and menu button */
     padding: 0.75rem var(--spacing-md);
   }
 
-  .navbar-logo h2 {
-    font-size: 1.5rem;
+  .navbar-logo {
+    margin-left: 0; /* reset on mobile */
+    margin-top: 8px; /* lower logo slightly on mobile */
+  }
+  .navbar-logo img {
+    width: clamp(240px, 68vw, 360px); /* even larger mobile logo */
+  }
+}
+
+@media (min-width: 1200px) {
+  .navbar-logo img {
+    width: clamp(320px, 28vw, 460px); /* allow a bit larger on very wide screens */
+  }
+}
+
+@media (min-width: 1600px) {
+  .navbar-content {
+    max-width: 1600px; /* give extra room on ultra-wide screens */
+  }
+}
+
+/* Slightly lower logo on desktop for visual balance */
+@media (min-width: 768px) {
+  .navbar-logo {
+    margin-top: 6px;
   }
 }
 

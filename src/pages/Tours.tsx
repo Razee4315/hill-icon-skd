@@ -118,13 +118,7 @@ const Tours: React.FC = () => {
                   <p className="tour-description">{tour.description}</p>
                   
                   <div className="tour-pricing">
-                    {typeof tour.price.perPerson === 'number' ? (
-                      <>
-                        <span className="price-amount">{tour.price.currency} {tour.price.perPerson.toLocaleString()}</span>
-                        <span className="price-label">per person</span>
-                      </>
-                    ) : null}
-                    <span className="price-note">{tour.price.note}</span>
+                    <span className="price-note">Pricing changes in Skardu. Please contact us for current rates.</span>
                   </div>
                   
                   {/* Highlights removed from card to only show inside the detail view */}
@@ -175,13 +169,7 @@ const Tours: React.FC = () => {
                 <div className="tour-info">
                   <h2 className="tour-detail-name">{selectedTour.name}</h2>
                   <div className="tour-detail-pricing">
-                    {typeof selectedTour.price.perPerson === 'number' ? (
-                      <>
-                        <span className="price-amount">{selectedTour.price.currency} {selectedTour.price.perPerson.toLocaleString()}</span>
-                        <span className="price-label">per person</span>
-                      </>
-                    ) : null}
-                    <span className="price-note">{selectedTour.price.note}</span>
+                    <span className="price-note">Pricing changes in Skardu. Please contact us for current rates.</span>
                   </div>
                   <p className="tour-detail-description">
                     {selectedTour.detailedDescription}

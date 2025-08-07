@@ -434,6 +434,10 @@
     grid-template-columns: 1fr;
     gap: var(--spacing-xl);
   }
+  /* Disable sticky gallery on tablet/mobile to avoid covering content */
+  .room-gallery {
+    position: static;
+  }
 }
 
 @media (max-width: 768px) {

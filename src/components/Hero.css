@@ -72,7 +72,8 @@
 
 .hero-title {
   font-size: 3.5rem;
-  font-weight: var(--font-weight-semibold);
+  font-family: var(--font-display);
+  font-weight: 700;
   line-height: 1.1;
   margin-bottom: var(--spacing-lg);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -80,8 +81,9 @@
 }
 
 .hero-subtitle {
-  font-size: 1.25rem;
-  font-weight: var(--font-weight-normal);
+  font-size: 1.1rem;
+  font-family: var(--font-family);
+  font-weight: 400;
   line-height: 1.6;
   margin-bottom: var(--spacing-xl);
   color: rgba(255, 255, 255, 0.9);
@@ -138,7 +140,7 @@
   }
   
   .hero-subtitle {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 }
 
@@ -149,12 +151,12 @@
   }
   
   .hero-title {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
     margin-bottom: var(--spacing-md);
   }
   
   .hero-subtitle {
-    font-size: 1rem;
+    font-size: 0.95rem;
     margin-bottom: var(--spacing-lg);
   }
   
@@ -179,12 +181,12 @@
   }
   
   .hero-title {
-    font-size: 2rem;
+    font-size: 1.9rem;
     line-height: 1.2;
   }
   
   .hero-subtitle {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
   
   .hero-cta {

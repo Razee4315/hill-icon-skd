@@ -19,6 +19,7 @@ interface Tour {
     currency: string;
     note: string;
   };
+  gallery?: string[];
 }
 
 const Tours: React.FC = () => {
@@ -149,7 +150,7 @@ const Tours: React.FC = () => {
               </button>
             </div>
 
-            <div className="tour-detail-content">
+              <div className="tour-detail-content">
               <div className="tour-detail-main">
                 {/* Tour Image */}
                 <div className="tour-gallery">
@@ -163,6 +164,20 @@ const Tours: React.FC = () => {
                       <span>{selectedTour.duration}</span>
                     </div>
                   </div>
+                  {selectedTour.gallery && selectedTour.gallery.length > 1 && (
+                    <div className="thumbnail-row">
+                      {selectedTour.gallery.map((thumbUrl, idx) => (
+                        <button
+                          key={idx}
+                          className={`thumbnail ${thumbUrl === selectedTour.image ? 'active' : ''}`}
+                          onClick={() => setSelectedTour({ ...selectedTour, image: thumbUrl })}
+                          aria-label={`Show image ${idx + 1}`}
+                        >
+                          <img src={thumbUrl} alt={`Thumbnail ${idx + 1}`} loading="lazy" decoding="async" />
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {/* Tour Information */}

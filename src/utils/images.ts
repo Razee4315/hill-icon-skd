@@ -38,6 +38,11 @@ import guestPic from '../../images and videos/guest-pic.jpeg';
 import guest from '../../images and videos/guest.jpg';
 import deosai1 from '../../images and videos/Deosai_1.jpg';
 import deosai2 from '../../images and videos/Deosai_2.jpg';
+// Shigar tour images
+import shigarBlindLake from '../../images and videos/shigar_blind_lake.jpg';
+import shigarColdDesert from '../../images and videos/shigar_cold_desert.jpg';
+import shigarFort1 from '../../images and videos/shigar_fort_1.jpg';
+import shigarFort2 from '../../images and videos/shigar_fort_2.jpg';
 
 export const images = {
   // App icons
@@ -79,5 +84,10 @@ export const images = {
   receptionBack,
   // Deosai images
   deosai1,
-  deosai2
+  deosai2,
+  // Shigar images
+  shigarBlindLake,
+  shigarColdDesert,
+  shigarFort1,
+  shigarFort2
 };

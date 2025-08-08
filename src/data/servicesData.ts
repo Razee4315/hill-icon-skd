@@ -44,6 +44,7 @@ interface Tour {
   duration: string;
   image: string;
   highlights: string[];
+  gallery?: string[];
 }
 
 interface ContactInfo {
@@ -211,28 +212,6 @@ export const transportData: Vehicle[] = [
     image: images.pradoTZ,
     airportTransfer: 3000,
     idealFor: "Valley tours, mountain terrain, adventure trips"
-  },
-  {
-    id: 3,
-    name: "Luxury Van",
-    description: "Spacious van for group travel and family trips",
-    detailedDescription: "Our luxury van accommodates larger groups comfortably, making it ideal for family trips, group tours, and corporate travel. Features modern amenities and ample luggage space.",
-    price: {
-      daily: 18000,
-      halfDay: 12000,
-      currency: "Rs",
-      note: "Up to 12 passengers"
-    },
-    features: [
-      "Seats up to 12 passengers",
-      "Air Conditioning",
-      "Professional Driver",
-      "Ample Luggage Space",
-      "Comfortable Seating",
-      "Entertainment System"
-    ],
-    image: images.side,
-    idealFor: "Group travel, family trips, corporate transport"
   }
 ];
 
@@ -290,8 +269,8 @@ export const toursData: Tour[] = [
   {
     id: 3,
     name: "Shigar & Nearby Highlights",
-    description: "Visit Shigar Valley with stops at the Cold Desert and Khaplu Fort",
-    detailedDescription: "Discover Shigar Valley and popular nearby points. This full-day experience typically includes the Shigar Fort area, the mesmerizing Cold Desert (Katpana), scenic valley viewpoints, and a cultural stop at Khaplu Fort. Ideal for travelers who want to see multiple highlights without long drives between each.",
+    description: "Visit Shigar Valley with stops at Blind Lake and the Cold Desert",
+    detailedDescription: "Discover Shigar Valley with highlights including Shigar Fort, Blind Lake, and the mesmerizing Cold Desert (Katpana). Ideal for travelers who want to see the best of Shigar in a relaxed full-day experience.",
     price: {
       currency: "Rs",
       note: "Pricing changes in Skardu. Please contact us for current rates."
@@ -303,13 +282,17 @@ export const toursData: Tour[] = [
       "Entry tickets (where applicable)"
     ],
     duration: "Full Day (6-8 hours)",
-    image: images.roofView1,
+    image: images.shigarBlindLake,
+    gallery: [
+      images.shigarBlindLake,
+      images.shigarColdDesert,
+      images.shigarFort1,
+      images.shigarFort2
+    ],
     highlights: [
       "Shigar Fort",
       "Cold Desert (Katpana)",
-      "Khaplu Fort",
-      "Shigar Valley viewpoints",
-      "Local culture and crafts"
+      "Blind Lake"
     ]
   },
   

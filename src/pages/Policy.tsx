@@ -35,7 +35,6 @@ const Policy: React.FC = () => {
           <h2>3. Smoke‑Free</h2>
           <ul>
             <li>All indoor areas, including rooms and lounges, are smoke‑free.</li>
-            <li>A cleaning fee of Rs 25,000 applies for violations.</li>
           </ul>
         </section>
 

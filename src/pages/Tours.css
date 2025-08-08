@@ -227,6 +227,36 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
+/* Thumbnails */
+.thumbnail-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+
+.thumbnail {
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: var(--border-radius-sm);
+  background: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 72px;
+  object-fit: cover;
+  display: block;
+}
+
+.thumbnail.active,
+.thumbnail:focus {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
 /* Smaller screens: slightly reduce sticky offset */
 @media (max-width: 768px) {
   .tour-gallery {

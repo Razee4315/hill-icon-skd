@@ -7,8 +7,8 @@
       // Single Page Apps for GitHub Pages
       // https://github.com/rafgraph/spa-github-pages
       (function(l) {
-        // Adjust segmentCount for project pages: <user>.github.io/<repo>
-        var segmentCount = 1; // 1 for project pages, 0 for user/org pages
+        // For custom domain or user/org pages, keep 0; for project pages use 1
+        var segmentCount = 0;
         var locationParts = l.pathname.slice(1).split('/');
         var repo = locationParts.slice(0, segmentCount).join('/');
         var target = locationParts.slice(segmentCount).join('/');

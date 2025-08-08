@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Sitemap: https://razee4315.github.io/hill-icon-skd/sitemap.xml
+
+

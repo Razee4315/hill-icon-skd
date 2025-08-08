@@ -61,7 +61,9 @@
           var decoded = l.search.slice(1).split('&').map(function(s){
             return s.replace(/~and~/g, '&');
           }).join('?');
-          var newUrl = '/' + decoded + l.hash;
+          // Ensure exactly one leading slash and no duplicates
+          var normalizedPath = ('/' + decoded).replace(/\/+/, '/');
+          var newUrl = normalizedPath + l.hash;
           window.history.replaceState(null, null, newUrl);
         }
       })(window.location);

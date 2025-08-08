@@ -4,8 +4,8 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
-  // Use base only in production (GitHub Pages). In dev, keep '/'
-  base: mode === 'production' ? '/hill-icon-skd/' : '/',
+  // Serve from domain root when building for production (custom domain)
+  base: mode === 'production' ? '/' : '/',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',

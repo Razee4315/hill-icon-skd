@@ -179,7 +179,7 @@ function AnimatedRoutes() {
 }
 
 function App() {
-  const basename = import.meta.env.MODE === 'production' ? '/hill-icon-skd' : '/';
+  const basename = '/';
   return (
     <Router basename={basename}>
       <div className="app-layout">

@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+# Disallow noisy endpoints that don't exist
+Disallow: /assets/
+
+# Point to the canonical sitemap on the custom domain
+Sitemap: https://hilliconskardu.com/sitemap.xml
+
+

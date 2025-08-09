@@ -29,7 +29,7 @@ const Home: React.FC = () => {
       id: 'transport',
       title: 'Reliable Transport',
       description: 'Professional transport services for all terrains, from airport transfers to valley explorations.',
-      image: images.pradoTZ,
+      image: images.premioCar,
       link: '/transport',
       features: ['Professional Drivers', 'All Terrain Vehicles', 'Safe & Comfortable']
     },

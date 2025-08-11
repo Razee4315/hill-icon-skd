@@ -1,4 +1,4 @@
-// import React from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -180,6 +180,23 @@ function AnimatedRoutes() {
 
 function App() {
   const basename = '/';
+  
+  // Handle redirect from 404.html
+  React.useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectPath = urlParams.get('redirect');
+    
+    if (redirectPath) {
+      // Remove the redirect parameter and navigate to the correct path
+      const newUrl = new URL(window.location);
+      newUrl.searchParams.delete('redirect');
+      window.history.replaceState({}, '', newUrl.toString());
+      
+      // Navigate to the correct path
+      window.location.pathname = redirectPath;
+    }
+  }, []);
+
   return (
     <Router basename={basename}>
       <div className="app-layout">

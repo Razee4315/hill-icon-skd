@@ -301,7 +301,7 @@ export const toursData: Tour[] = [
 export const contactInfo: ContactInfo = {
   whatsapp: "+923487997495",
   phone: "+92 348 7997495",
-  email: "info@hillicon.com",
+  email: "zafarskd.007@gmail.com",
   address: "Olding Nangsoq Skardu, Gilgit-Baltistan, Pakistan",
   socialMedia: {
     facebook: "https://www.facebook.com/hillicon",

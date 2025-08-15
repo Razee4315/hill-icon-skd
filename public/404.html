@@ -2,24 +2,35 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Redirecting...</title>
+    <title>Hill Icon - Premium Services in Skardu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hill Icon - Premium accommodation, transport, and tour services in Skardu. Experience the breathtaking beauty of Northern Pakistan with our luxury services.">
+    <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32" />
     <script type="text/javascript">
-      // Single Page Apps for GitHub Pages
-      // https://github.com/rafgraph/spa-github-pages
+      // Enhanced SPA redirect handler
       (function(l) {
-        // For custom domain or user/org pages, keep 0; for project pages use 1
-        var segmentCount = 0;
-        var locationParts = l.pathname.slice(1).split('/');
-        var repo = locationParts.slice(0, segmentCount).join('/');
-        var target = locationParts.slice(segmentCount).join('/');
-        var search = l.search.slice(1).replace(/&/g, '~and~');
-        var newUrl = l.protocol + '//' + l.host + '/' +
-          (repo ? repo + '/' : '') + '?/' +
-          (target ? target : '') + (search ? (target ? '&' : '') + search : '') +
-          l.hash;
-        l.replace(newUrl);
+        // For custom domain, redirect to index.html with the path
+        var path = l.pathname;
+        var search = l.search;
+        var hash = l.hash;
+        
+        // If we're not already on index.html, redirect
+        if (path !== '/' && !path.includes('index.html')) {
+          var newUrl = l.protocol + '//' + l.host + '/index.html' + 
+                      (path !== '/' ? '?redirect=' + encodeURIComponent(path) : '') +
+                      (search ? '&' + search.slice(1) : '') +
+                      (hash || '');
+          l.replace(newUrl);
+        }
       })(window.location);
     </script>
   </head>
-  <body></body>
+  <body>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: Arial, sans-serif;">
+      <div style="text-align: center;">
+        <h1>Hill Icon Skardu</h1>
+        <p>Loading...</p>
+      </div>
+    </div>
+  </body>
 </html>

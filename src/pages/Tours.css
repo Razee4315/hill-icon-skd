@@ -73,12 +73,28 @@
   padding-top: 1rem;
 }
 
+.inclusions-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.inclusions-preview .flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  align-items: center;
+}
+
 .inclusion-pill {
   font-size: 0.7rem;
   background: rgba(255, 255, 255, 0.05);
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
   color: var(--color-text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* Detail View */

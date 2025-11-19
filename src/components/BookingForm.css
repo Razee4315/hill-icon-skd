@@ -120,6 +120,32 @@
   transition: all var(--transition-fast);
 }
 
+/* Date picker styling - white text and icon */
+.form-input[type="date"] {
+  color: #ffffff;
+}
+
+.form-input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.form-input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+/* Firefox date picker */
+.form-input[type="date"]::-moz-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.form-input[type="date"]::-moz-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
 /* Fix for select dropdown options */
 .form-input select,
 select.form-input {

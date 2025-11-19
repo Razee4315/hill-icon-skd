@@ -9,10 +9,7 @@ const Footer: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleWhatsAppClick = () => {
-    const whatsappUrl = `https://wa.me/${contactInfo.whatsapp.replace(/[^0-9]/g, '')}`;
-    window.open(whatsappUrl, '_blank');
-  };
+  const whatsappLink = `https://wa.me/${contactInfo.whatsapp.replace(/[^0-9]/g, '')}`;
 
   const navigateAndTop = (path: string) => (e: React.MouseEvent) => {
     e.preventDefault();
@@ -85,10 +82,15 @@ const Footer: React.FC = () => {
                 <Email fontSize="small" className="contact-icon" />
                 <span>{contactInfo.email}</span>
               </a>
-              <button onClick={handleWhatsAppClick} className="contact-row whatsapp-btn">
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-row whatsapp-btn"
+              >
                 <WhatsApp fontSize="small" className="contact-icon" />
                 <span>{contactInfo.whatsapp}</span>
-              </button>
+              </a>
               <div className="contact-row">
                 <LocationOn fontSize="small" className="contact-icon" />
                 <span>{contactInfo.address}</span>

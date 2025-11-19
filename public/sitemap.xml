@@ -4,43 +4,35 @@
     <loc>https://hilliconskardu.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <lastmod>2025-08-08</lastmod>
   </url>
   <url>
     <loc>https://hilliconskardu.com/rooms</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <lastmod>2025-08-08</lastmod>
-  </url>
-  <url>
-    <loc>https://hilliconskardu.com/tours</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-    <lastmod>2025-08-08</lastmod>
   </url>
   <url>
     <loc>https://hilliconskardu.com/transport</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-    <lastmod>2025-08-08</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://hilliconskardu.com/tours</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://hilliconskardu.com/gallery</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-    <lastmod>2025-08-08</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://hilliconskardu.com/contact</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-    <lastmod>2025-08-08</lastmod>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://hilliconskardu.com/policy</loc>
     <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-    <lastmod>2025-08-08</lastmod>
+    <priority>0.5</priority>
   </url>
 </urlset>
-

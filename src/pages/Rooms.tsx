@@ -6,6 +6,7 @@ import { roomsData } from '../data/servicesData';
 import BookingForm from '../components/BookingForm';
 import ImageModal from '../components/ImageModal';
 import PlaceholderImage from '../components/PlaceholderImage';
+import SEO from '../components/SEO';
 import './Rooms.css';
 
 interface Room {
@@ -80,8 +81,19 @@ const Rooms: React.FC = () => {
   
   const initialIndex = preview ? roomImages.findIndex(img => img.src === preview.src) : 0;
 
+  const seoTitle = selectedRoom ? `${selectedRoom.name} - Luxury Accommodation` : 'Luxury Rooms & Suites';
+  const seoDesc = selectedRoom 
+    ? `Book your stay at ${selectedRoom.name} in Skardu. ${selectedRoom.description} Amenities include ${selectedRoom.amenities.slice(0, 3).join(', ')}.` 
+    : 'Explore our range of luxury rooms and suites in Skardu, featuring mountain views and modern amenities.';
+
   return (
     <div className="rooms-page section">
+      <SEO 
+        title={seoTitle}
+        description={seoDesc}
+        image={selectedRoom?.image}
+        url={selectedRoom ? `/rooms/${selectedRoom.id}` : '/rooms'}
+      />
       <div className="container">
         <AnimatePresence mode="wait">
           {!selectedRoom ? (

@@ -5,6 +5,7 @@ import { CheckCircle, ArrowBack, DirectionsCar } from '@mui/icons-material';
 import { transportData } from '../data/servicesData';
 import BookingForm from '../components/BookingForm';
 import ImageModal from '../components/ImageModal';
+import SEO from '../components/SEO';
 import './Transport.css';
 
 interface Vehicle {
@@ -66,8 +67,19 @@ const Transport: React.FC = () => {
   // Prepare images for lightbox (usually single image for vehicle)
   const transportImages = selectedVehicle ? [{ src: selectedVehicle.image, alt: selectedVehicle.name }] : [];
 
+  const seoTitle = selectedVehicle ? `${selectedVehicle.name} Rental` : 'Luxury Transport Services';
+  const seoDesc = selectedVehicle
+    ? `Rent a ${selectedVehicle.name} in Skardu. Ideal for ${selectedVehicle.idealFor}. Features: ${selectedVehicle.features.slice(0, 3).join(', ')}.`
+    : 'Reliable transport services in Skardu including 4x4 rentals, airport transfers, and luxury cars for your journey.';
+
   return (
     <div className="transport-page section">
+      <SEO 
+        title={seoTitle}
+        description={seoDesc}
+        image={selectedVehicle?.image}
+        url={selectedVehicle ? `/transport/${selectedVehicle.id}` : '/transport'}
+      />
       <div className="container">
         <AnimatePresence mode="wait">
           {!selectedVehicle ? (

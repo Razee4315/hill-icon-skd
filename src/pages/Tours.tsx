@@ -5,6 +5,7 @@ import { Terrain, CheckCircle, ArrowBack, AccessTime } from '@mui/icons-material
 import { toursData } from '../data/servicesData';
 import BookingForm from '../components/BookingForm';
 import ImageModal from '../components/ImageModal';
+import SEO from '../components/SEO';
 import './Tours.css';
 
 interface Tour {
@@ -81,8 +82,19 @@ const Tours: React.FC = () => {
 
   const initialIndex = preview ? tourImages.findIndex(img => img.src === preview.src) : 0;
 
+  const seoTitle = selectedTour ? `${selectedTour.name} - Guided Tour` : 'Guided Tours & Adventures';
+  const seoDesc = selectedTour
+    ? `Book the ${selectedTour.name} in Skardu. ${selectedTour.duration} tour covering ${selectedTour.highlights.slice(0, 3).join(', ')}.`
+    : 'Explore the best of Skardu with our guided tours. Visit Deosai, Shigar, Shangrila and more with expert local guides.';
+
   return (
     <div className="tours-page section">
+      <SEO 
+        title={seoTitle}
+        description={seoDesc}
+        image={selectedTour?.image}
+        url={selectedTour ? `/tours/${selectedTour.id}` : '/tours'}
+      />
       <div className="container">
         <AnimatePresence mode="wait">
           {!selectedTour ? (

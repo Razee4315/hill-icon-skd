@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
 import Preloader from '../components/Preloader';
 import PlaceholderImage from '../components/PlaceholderImage';
+import SEO from '../components/SEO';
 import { images } from '../utils/images';
 import './Home.css';
 
@@ -66,6 +67,11 @@ const Home: React.FC = () => {
 
   return (
     <div className="home-page">
+      <SEO 
+        title="Home" 
+        description="Welcome to Hill Icon Skardu. Experience luxury accommodation, reliable transport, and guided tours in the heart of Northern Pakistan."
+        keywords="Hill Icon, Skardu hotel, luxury stay Skardu, Skardu transport, tours in Skardu"
+      />
       <Preloader visible={loading} />
       <Hero onVideoReady={() => setLoading(false)} />
 

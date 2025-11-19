@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { images } from '../utils/images';
 import ImageModal from '../components/ImageModal';
+import SEO from '../components/SEO';
 import './Gallery.css';
 
 const galleryImages: { src: string; alt: string; category?: string }[] = [
@@ -39,6 +40,10 @@ const Gallery: React.FC = () => {
 
   return (
     <div className="gallery-page section">
+      <SEO 
+        title="Gallery" 
+        description="View photos of Hill Icon Skardu, our guests, events, and the beautiful scenery of Skardu Valley."
+      />
       <div className="container">
         <motion.div
           className="page-header text-center mb-12"

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Gavel, SmokeFree, Pets, VolumeOff, Security } from '@mui/icons-material';
+import SEO from '../components/SEO';
 import './Policy.css';
 
 const Policy: React.FC = () => {
@@ -49,6 +50,10 @@ const Policy: React.FC = () => {
 
   return (
     <div className="policy-page section">
+      <SEO 
+        title="Guest Policies" 
+        description="Read our hotel policies regarding bookings, check-in/out, guest conduct, and safety at Hill Icon Skardu."
+      />
       <div className="container">
         <motion.div
           className="page-header text-center mb-16"

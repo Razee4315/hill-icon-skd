@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { contactInfo } from '../data/servicesData';
+import SEO from '../components/SEO';
 import './Contact.css';
 
 const Contact: React.FC = () => {
@@ -41,6 +42,10 @@ I'd like to get in touch with you regarding your services.`;
 
   return (
     <div className="contact-page section">
+      <SEO 
+        title="Contact Us" 
+        description="Get in touch with Hill Icon Skardu for bookings and inquiries. Contact us via WhatsApp, phone or email."
+      />
       <div className="container">
         <motion.div
           className="page-header text-center mb-12"

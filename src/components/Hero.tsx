@@ -8,13 +8,13 @@ interface HeroProps {
   title?: string;
   subtitle?: string;
   showCTA?: boolean;
-  onVideoReady?: () => void; // notify when video can play
+  onVideoReady?: () => void;
 }
 
 const Hero: React.FC<HeroProps> = ({
   videoSrc = images.heroVideo,
-  title = "Welcome to Hill Icon Skardu.",
-  subtitle = "Experience Comfort, Feel at Home – Right Here in the Heart of Skardu",
+  title = "Experience the Extraordinary",
+  subtitle = "Luxury accommodation, premium transport, and curated tours in the heart of Skardu.",
   showCTA = true,
   onVideoReady
 }) => {
@@ -27,7 +27,6 @@ const Hero: React.FC<HeroProps> = ({
 
   return (
     <section className="hero">
-      {/* Video Background */}
       <div className="hero-video-container">
         <video
           className="hero-video"
@@ -40,53 +39,81 @@ const Hero: React.FC<HeroProps> = ({
           onCanPlayThrough={() => onVideoReady && onVideoReady()}
         >
           <source src={videoSrc} type="video/mp4" />
-          <track kind="captions" />
-          {/* Fallback for browsers that don't support video */}
-          Your browser does not support the video tag.
         </video>
-
-        {/* Dark Overlay */}
         <div className="hero-overlay"></div>
       </div>
 
-      {/* Hero Content */}
       <div className="hero-content">
         <div className="container">
-          <motion.div 
-            className="hero-text"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-          >
-            <h1 className="hero-title">{title}</h1>
-            {subtitle && (
-              <motion.p 
+          <div className="hero-grid">
+            <motion.div
+              className="hero-text-wrapper"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <motion.span
+                className="hero-label"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+              >
+                Welcome to Hill Icon
+              </motion.span>
+
+              <h1 className="hero-title">
+                {title.split(" ").map((word, i) => (
+                  <span key={i} className="word-wrapper">
+                    <motion.span
+                      initial={{ y: "100%" }}
+                      animate={{ y: 0 }}
+                      transition={{ delay: 0.1 * i, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                      className="word"
+                    >
+                      {word}&nbsp;
+                    </motion.span>
+                  </span>
+                ))}
+              </h1>
+
+              <motion.p
                 className="hero-subtitle"
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1, duration: 0.5, ease: 'easeOut' }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.8, duration: 1 }}
               >
                 {subtitle}
               </motion.p>
-            )}
-            {showCTA && (
-              <motion.div 
-                className="hero-cta"
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.5, ease: 'easeOut' }}
-              >
-                <button 
-                  className="hero-btn primary"
-                  onClick={scrollToServices}
+
+              {showCTA && (
+                <motion.div
+                  className="hero-actions"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1, duration: 0.8 }}
                 >
-                  Explore Our Services
-                </button>
-              </motion.div>
-            )}
-          </motion.div>
+                  <button className="btn primary" onClick={scrollToServices}>
+                    Explore Services
+                  </button>
+                  <button className="btn glass" onClick={() => window.location.href = '/contact'}>
+                    Contact Us
+                  </button>
+                </motion.div>
+              )}
+            </motion.div>
+          </div>
         </div>
       </div>
+
+      <motion.div
+        className="scroll-indicator"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2, duration: 1 }}
+      >
+        <div className="mouse"></div>
+        <span>Scroll to Explore</span>
+      </motion.div>
     </section>
   );
 };

@@ -1,174 +1,68 @@
 .floating-whatsapp {
   position: fixed;
-  bottom: var(--spacing-xl);
-  right: var(--spacing-xl);
+  bottom: 2rem;
+  right: 2rem;
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-  color: white;
-  border: none;
+  background: #25D366;
   border-radius: 50%;
-  cursor: pointer;
-  transform: scale(1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 1000;
-  box-shadow: 
-    0 4px 12px rgba(0, 0, 0, 0.15),
-    0 2px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  animation: bounceIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.floating-whatsapp::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 100%);
-  z-index: -1;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+  cursor: pointer;
+  z-index: 1000;
+  transition: background var(--transition-fast);
 }
 
 .floating-whatsapp:hover {
-  background: linear-gradient(135deg, #128C7E 0%, #075E54 100%);
-  transform: translateY(-3px) scale(1.1);
-  box-shadow: 
-    0 8px 20px rgba(0, 0, 0, 0.2),
-    0 4px 10px rgba(0, 0, 0, 0.15);
+  background: #128C7E;
 }
 
-.floating-whatsapp:active {
-  transform: translateY(-1px) scale(1.05);
-  transition: all 0.1s ease;
+.whatsapp-icon {
+  font-size: 2rem !important;
+  z-index: 2;
 }
 
-.floating-whatsapp .whatsapp-icon {
-  width: 28px;
-  height: 28px;
-  transition: transform 0.2s ease;
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
-  color: #ffffff;
-}
-
-.floating-whatsapp:hover .whatsapp-icon {
-  transform: scale(1.1);
-}
-
-/* Hide floating WhatsApp when explicitly requested via body class */
-body.hide-floating-whatsapp .floating-whatsapp {
-  display: none !important;
-}
-
-/* Also hide automatically when any booking modal is present */
-/* Modern browsers support :has; this provides a foolproof fallback */
-body:has(.booking-form-container) .floating-whatsapp {
-  display: none !important;
-}
-
-/* Floating WhatsApp Button Styles */
-
-/* Pulse animation for attention */
 .whatsapp-pulse {
   position: absolute;
   width: 100%;
   height: 100%;
+  background: inherit;
   border-radius: 50%;
-  background: rgba(37, 211, 102, 0.6);
+  opacity: 0.6;
   animation: pulse 2s infinite;
-  z-index: -1;
+  z-index: 1;
 }
 
 @keyframes pulse {
   0% {
     transform: scale(1);
-    opacity: 1;
+    opacity: 0.6;
   }
-  70% {
-    transform: scale(1.4);
-    opacity: 0;
-  }
+
   100% {
-    transform: scale(1.4);
+    transform: scale(1.6);
     opacity: 0;
   }
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Hide when modal is open */
+body.modal-open .floating-whatsapp {
+  display: none;
+}
+
+@media (max-width: 600px) {
   .floating-whatsapp {
-    bottom: var(--spacing-lg);
-    right: var(--spacing-lg);
-    width: 56px;
-    height: 56px;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 50px;
+    height: 50px;
   }
-  
-  .floating-whatsapp .whatsapp-icon {
-    width: 24px;
-    height: 24px;
-  }
-}
 
-@media (max-width: 480px) {
-  .floating-whatsapp {
-    bottom: var(--spacing-md);
-    right: var(--spacing-md);
-    width: 52px;
-    height: 52px;
-  }
-  
-  .floating-whatsapp .whatsapp-icon {
-    width: 22px;
-    height: 22px;
-  }
-}
-
-/* Animation for better UX */
-@keyframes bounceIn {
-  0% {
-    opacity: 0;
-    transform: translateY(20px) scale(0.3);
-  }
-  50% {
-    transform: translateY(-5px) scale(1.05);
-  }
-  70% {
-    transform: translateY(2px) scale(0.95);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* Shake animation for extra attention (triggered periodically) */
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-2px); }
-  75% { transform: translateX(2px); }
-}
-
-/* Animation will be applied by the original rule */
-
-/* Enhanced focus state for accessibility */
-.floating-whatsapp:focus {
-  outline: 3px solid rgba(37, 211, 102, 0.5);
-  outline-offset: 3px;
-}
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .floating-whatsapp {
-    box-shadow: 
-      0 4px 12px rgba(0, 0, 0, 0.2),
-      0 2px 6px rgba(0, 0, 0, 0.15);
-  }
-  
-  .floating-whatsapp:hover {
-    box-shadow: 
-      0 8px 20px rgba(0, 0, 0, 0.25),
-      0 4px 10px rgba(0, 0, 0, 0.2);
+  .whatsapp-icon {
+    font-size: 1.75rem !important;
   }
 }

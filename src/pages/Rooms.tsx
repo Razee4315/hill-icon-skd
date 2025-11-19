@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle } from '@mui/icons-material';
+import { CheckCircle, ArrowBack, Star } from '@mui/icons-material';
 import { roomsData } from '../data/servicesData';
 import BookingForm from '../components/BookingForm';
 import ImageModal from '../components/ImageModal';
@@ -31,50 +31,25 @@ const Rooms: React.FC = () => {
   const navigate = useNavigate();
   const params = useParams<{ id: string }>();
 
-  // Hide floating WhatsApp button when booking form is open
   useEffect(() => {
     if (showBookingForm) {
-      document.body.classList.add('hide-floating-whatsapp');
       document.body.classList.add('modal-open');
     } else {
-      document.body.classList.remove('hide-floating-whatsapp');
       document.body.classList.remove('modal-open');
     }
-    return () => {
-      document.body.classList.remove('hide-floating-whatsapp');
-      document.body.classList.remove('modal-open');
-    };
+    return () => document.body.classList.remove('modal-open');
   }, [showBookingForm]);
 
   const handleRoomSelect = (room: Room) => {
-    // Route-driven selection to avoid double-render flicker
     navigate(`/rooms/${room.id}`);
-    // Smooth scroll after navigation
     setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }), 0);
-  };
-
-  const handleBookNow = () => {
-    setShowBookingForm(true);
-  };
-
-  const handleCloseBooking = () => {
-    setShowBookingForm(false);
   };
 
   const handleBackToList = () => {
     navigate('/rooms');
-    // Reset scroll to top when returning to list
     setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }), 0);
   };
 
-  // Ensure detail view starts from top when a room is selected
-  useEffect(() => {
-    if (selectedRoom) {
-      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-    }
-  }, [selectedRoom]);
-
-  // Sync URL param to selection (deep-link support)
   useEffect(() => {
     if (!params.id) {
       setSelectedRoom(null);
@@ -90,20 +65,6 @@ const Rooms: React.FC = () => {
     }
   }, [params.id]);
 
-  // Reset view when user clicks the same nav item again
-  useEffect(() => {
-    const handler = (e: Event) => {
-      const custom = e as CustomEvent<{ path: string }>;
-      if (custom.detail?.path === '/rooms') {
-        handleBackToList();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    };
-    window.addEventListener('navigate-same-route', handler as EventListener);
-    return () => window.removeEventListener('navigate-same-route', handler as EventListener);
-  }, []);
-
-  // Detect mobile to adjust modal sizing for full-screen preview
   const [isMobile, setIsMobile] = useState<boolean>(false);
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth <= 768);
@@ -113,198 +74,189 @@ const Rooms: React.FC = () => {
   }, []);
 
   return (
-    <div className="rooms-page">
-      
+    <div className="rooms-page section">
       <div className="container">
-        {/* Page Header */}
-        <div className="page-header">
-          <h1 className="page-title">Our Rooms</h1>
-        </div>
+        <AnimatePresence mode="wait">
+          {!selectedRoom ? (
+            <motion.div
+              key="list"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="page-header text-center mb-12">
+                <span className="text-accent text-uppercase tracking-widest text-sm font-semibold">Accommodations</span>
+                <h1 className="page-title mt-2">Sanctuary of Comfort</h1>
+                <p className="page-subtitle text-muted max-w-2xl mx-auto mt-4">
+                  Experience luxury and comfort in our carefully designed rooms with breathtaking mountain views.
+                </p>
+              </div>
 
-        {!selectedRoom ? (
-          /* Room Listing */
-          <div className="rooms-grid">
-            {[...roomsData]
-              .sort((a, b) => (a.name === 'Suite Room' ? -1 : b.name === 'Suite Room' ? 1 : 0))
-              .map((room, idx) => (
-              <motion.div 
-                key={room.id}
-                className="room-card"
-                onClick={() => handleRoomSelect(room)}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, ease: 'easeOut', delay: Math.min(idx * 0.05, 0.4) }}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <div className="room-image">
-                  {room.image ? (
-                    <img
-                      src={room.image}
-                      alt={room.name}
-                      className="room-card-image"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  ) : (
-                    <PlaceholderImage height={250} text={`${room.name} Image`} />
-                  )}
-                </div>
-                <div className="room-content">
-                  <h3 className="room-name">{room.name}</h3>
-                  <p className="room-description">{room.description}</p>
-                  <div className="room-price">
-                    <span className="price-amount">{room.price.currency} {room.price.perNight?.toLocaleString() || '0'}</span>
-                  </div>
-                  <div className="room-amenities-preview">
-                    {room.amenities.slice(0, 3).map((amenity, index) => (
-                      <span key={index} className="amenity-tag">
-                        {amenity}
-                      </span>
-                    ))}
-                    {room.amenities.length > 3 && (
-                      <span className="amenity-more">
-                        +{room.amenities.length - 3} more
-                      </span>
-                    )}
-                  </div>
-                  <button className="view-details-btn">
-                    View Details →
-                  </button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        ) : (
-          /* Room Detail View */
-          <div className="room-detail">
-            <div className="room-detail-header">
-              <button 
-                className="back-button"
-                onClick={handleBackToList}
-              >
-                ← Back to Rooms
+              <div className="rooms-grid">
+                {[...roomsData]
+                  .sort((a, b) => (a.name === 'Suite Room' ? -1 : b.name === 'Suite Room' ? 1 : 0))
+                  .map((room, idx) => (
+                    <motion.div
+                      key={room.id}
+                      className="room-card glass-panel"
+                      onClick={() => handleRoomSelect(room)}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: idx * 0.1, duration: 0.5 }}
+                      whileHover={{ y: -10 }}
+                    >
+                      <div className="room-image-wrapper">
+                        {room.image ? (
+                          <img
+                            src={room.image}
+                            alt={room.name}
+                            className="room-card-image"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <PlaceholderImage height={300} text={room.name} />
+                        )}
+                        <div className="room-overlay">
+                          <span className="view-btn">View Details</span>
+                        </div>
+                      </div>
+                      <div className="room-content">
+                        <div className="flex justify-between items-start mb-2">
+                          <h3 className="room-name">{room.name}</h3>
+                          <div className="flex items-center text-accent">
+                            <Star fontSize="small" />
+                            <Star fontSize="small" />
+                            <Star fontSize="small" />
+                            <Star fontSize="small" />
+                            <Star fontSize="small" />
+                          </div>
+                        </div>
+                        <p className="room-description text-muted">{room.description}</p>
+                        <div className="room-footer mt-4">
+                          <div className="room-price">
+                            <span className="currency">{room.price.currency}</span>
+                            <span className="amount">{room.price.perNight?.toLocaleString()}</span>
+                            <span className="period">/night</span>
+                          </div>
+                          <div className="amenities-preview">
+                            {room.amenities.slice(0, 3).map((amenity, i) => (
+                              <span key={i} className="amenity-pill">{amenity}</span>
+                            ))}
+                            {room.amenities.length > 3 && (
+                              <span className="amenity-pill">+{room.amenities.length - 3}</span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="detail"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.5 }}
+              className="room-detail"
+            >
+              <button className="back-btn mb-8" onClick={handleBackToList}>
+                <ArrowBack fontSize="small" /> Back to Rooms
               </button>
-            </div>
 
-            <div className="room-detail-content">
-              <div className="room-detail-main">
-                {/* Room Gallery */}
-                <div className="room-gallery">
-                  <div className="main-image">
-                     {activeImage ? (
+              <div className="room-detail-grid">
+                <div className="room-gallery-section">
+                  <div className="main-image-wrapper glass-panel">
+                    {activeImage ? (
                       <img
                         src={activeImage}
                         alt={selectedRoom.name}
-                        className="room-main-image"
-                         loading="eager"
-                         decoding="async"
-                        onClick={() => {
-                          if (!isMobile) setPreview({ src: activeImage, alt: selectedRoom.name });
-                        }}
+                        className="main-image"
+                        onClick={() => !isMobile && setPreview({ src: activeImage, alt: selectedRoom.name })}
                       />
                     ) : (
-                      <PlaceholderImage height={400} text={`${selectedRoom.name} Main Image`} />
+                      <PlaceholderImage height={500} text={selectedRoom.name} />
                     )}
                   </div>
                   {selectedRoom.gallery && selectedRoom.gallery.length > 0 && (
-                    <div className="gallery-thumbnails">
-                      {[selectedRoom.image, ...selectedRoom.gallery].filter(Boolean).map((src, index) => (
-                        <div key={index} className="thumbnail">
-                          {src ? (
-                            <img
-                              src={src}
-                              alt={`${selectedRoom.name} ${index + 1}`}
-                              style={{ width: '100%', height: 80, objectFit: 'cover', borderRadius: 8, cursor: 'pointer', outline: src === activeImage ? '2px solid #2e7d32' : 'none' }}
-                              loading="lazy"
-                              decoding="async"
-                              onClick={() => setActiveImage(src)}
-                            />
-                          ) : (
-                            <PlaceholderImage height={80} text={`Image ${index + 1}`} />
-                          )}
+                    <div className="gallery-thumbs mt-4">
+                      {[selectedRoom.image, ...selectedRoom.gallery].filter(Boolean).map((src, idx) => (
+                        <div
+                          key={idx}
+                          className={`thumb-item ${src === activeImage ? 'active' : ''}`}
+                          onClick={() => setActiveImage(src)}
+                        >
+                          <img src={src} alt={`View ${idx + 1}`} />
                         </div>
                       ))}
                     </div>
                   )}
                 </div>
 
-                {/* Image Preview Modal */}
-                <ImageModal
-                  open={!!preview}
-                  src={preview?.src || ''}
-                  alt={preview?.alt}
-                  onClose={() => setPreview(null)}
-                  maxWidth={isMobile ? '100vw' : '80vw'}
-                  maxHeight={isMobile ? '100vh' : '80vh'}
-                />
-
-                {/* Room Information */}
-                <div className="room-info">
-                  <h2 className="room-detail-name">{selectedRoom.name}</h2>
-                  <div className="room-detail-price">
-                    <span className="price-amount">{selectedRoom.price.currency} {selectedRoom.price.perNight?.toLocaleString() || '0'}</span>
-                    <span className="price-note">{selectedRoom.price.note}</span>
+                <div className="room-info-section glass-panel p-8">
+                  <h2 className="text-3xl font-serif mb-2">{selectedRoom.name}</h2>
+                  <div className="price-tag mb-6">
+                    <span className="text-2xl font-bold text-accent">
+                      {selectedRoom.price.currency} {selectedRoom.price.perNight?.toLocaleString()}
+                    </span>
+                    <span className="text-muted ml-2">/ night</span>
                   </div>
-                  <p className="room-detail-description">
+
+                  <p className="text-muted mb-8 leading-relaxed">
                     {selectedRoom.detailedDescription}
                   </p>
 
-                  {/* Amenities */}
-                  <div className="amenities-section">
-                    <h3 className="amenities-title">Amenities</h3>
-                    <div className="amenities-grid">
-                      {selectedRoom.amenities.map((amenity, index) => (
-                        <div key={index} className="amenity-item">
-                          <CheckCircle fontSize="small" className="amenity-icon" />
-                          <span className="amenity-name">{amenity}</span>
-                        </div>
-                      ))}
-                    </div>
+                  <h3 className="text-lg font-medium mb-4">Amenities</h3>
+                  <div className="amenities-grid mb-8">
+                    {selectedRoom.amenities.map((amenity, idx) => (
+                      <div key={idx} className="amenity-item">
+                        <CheckCircle className="text-accent" fontSize="small" />
+                        <span>{amenity}</span>
+                      </div>
+                    ))}
                   </div>
 
-                  {/* Book Now Button */}
-                  <div className="room-actions">
-                    <button 
-                      className="book-now-btn"
-                      onClick={handleBookNow}
-                    >
-                      Book This Room
-                    </button>
-                  </div>
+                  <button
+                    className="btn primary w-full"
+                    onClick={() => setShowBookingForm(true)}
+                  >
+                    Book This Room
+                  </button>
                 </div>
               </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-              {/* Booking Form */}
-              <AnimatePresence>
-                {showBookingForm && (
-                  <motion.div className="booking-form-container">
-                    <motion.div 
-                      className="booking-form-overlay" 
-                      onClick={handleCloseBooking}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                    />
-                    <motion.div 
-                      className="booking-form-wrapper"
-                      initial={{ opacity: 0, y: 16 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 16 }}
-                      transition={{ duration: 0.25, ease: 'easeOut' }}
-                    >
-                      <BookingForm
-                        serviceType="room"
-                        serviceName={selectedRoom.name}
-                        onClose={handleCloseBooking}
-                      />
-                    </motion.div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+        <AnimatePresence>
+          {showBookingForm && selectedRoom && (
+            <div className="modal-overlay">
+              <motion.div
+                className="modal-content"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+              >
+                <BookingForm
+                  serviceType="room"
+                  serviceName={selectedRoom.name}
+                  onClose={() => setShowBookingForm(false)}
+                />
+              </motion.div>
             </div>
-          </div>
-        )}
+          )}
+        </AnimatePresence>
+
+        <ImageModal
+          open={!!preview}
+          src={preview?.src || ''}
+          alt={preview?.alt}
+          onClose={() => setPreview(null)}
+          maxWidth={isMobile ? '100vw' : '80vw'}
+          maxHeight={isMobile ? '100vh' : '80vh'}
+        />
       </div>
     </div>
   );

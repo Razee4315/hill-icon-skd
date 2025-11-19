@@ -1,163 +1,200 @@
 import React, { useEffect, useState } from 'react';
-import { CheckCircle } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
 import Preloader from '../components/Preloader';
 import PlaceholderImage from '../components/PlaceholderImage';
 import { images } from '../utils/images';
 import './Home.css';
 
+// Icons (using Material UI for now, but could switch to Feather or Heroicons for a cleaner look)
+import { CheckCircle, ArrowForward } from '@mui/icons-material';
+
 const Home: React.FC = () => {
-  // Preloader state: visible until hero video can play or a timeout occurs
   const [loading, setLoading] = useState(true);
 
-  // Safety timeout in case canplaythrough never fires (network conditions)
   useEffect(() => {
-    const t = setTimeout(() => setLoading(false), 6000);
+    const t = setTimeout(() => setLoading(false), 4000); // Slightly shorter timeout
     return () => clearTimeout(t);
   }, []);
+
   const services = [
     {
       id: 'rooms',
       title: 'Premium Accommodation',
-      description: 'Experience luxury and comfort in our carefully designed rooms with breathtaking mountain views.',
+      description: 'Sanctuary of comfort with panoramic mountain views.',
       image: images.deluxeRoom1,
       link: '/rooms',
-      features: ['Mountain Views', 'Modern Amenities', 'Room Service']
+      features: ['Mountain Views', 'Modern Amenities', '24/7 Room Service']
     },
     {
       id: 'transport',
-      title: 'Reliable Transport',
-      description: 'Professional transport services for all terrains, from airport transfers to valley explorations.',
+      title: 'Luxury Transport',
+      description: 'Navigate the rugged terrain in absolute comfort and safety.',
       image: images.premioCar,
       link: '/transport',
-      features: ['Professional Drivers', 'All Terrain Vehicles', 'Safe & Comfortable']
+      features: ['Professional Chauffeurs', '4x4 Fleet', 'Airport Transfers']
     },
     {
       id: 'tours',
-      title: 'Guided Tours',
-      description: 'Discover the natural beauty and cultural heritage of Skardu with our expertly guided tours.',
+      title: 'Curated Tours',
+      description: 'Immersive journeys into the heart of the Karakoram.',
       image: images.viewFromRoungChumik,
       link: '/tours',
-      features: ['Expert Guides', 'Cultural Experiences', 'Natural Wonders']
+      features: ['Expert Local Guides', 'Custom Itineraries', 'Cultural Immersion']
     }
   ];
 
-  return (
-    <div className="home">
-      
-      {/* Global Preloader Overlay */}
-      <Preloader visible={loading} />
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
 
-      {/* Hero Section */}
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  };
+
+  return (
+    <div className="home-page">
+      <Preloader visible={loading} />
       <Hero onVideoReady={() => setLoading(false)} />
 
-      {/* Services Overview Section */}
-      <section id="services-overview" className="services-overview section">
+      {/* Services Section */}
+      <section id="services-overview" className="section services-section">
         <div className="container">
-          <div className="section-header">
-            <h2 className="section-title">Our Services</h2>
-            <p className="section-subtitle">
-              Discover the perfect blend of luxury, adventure, and authentic experiences 
+          <motion.div
+            className="section-header text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="text-accent text-uppercase tracking-widest text-sm font-semibold">What We Offer</span>
+            <h2 className="section-title mt-4 mb-6">Elevate Your Experience</h2>
+            <p className="section-subtitle max-w-2xl mx-auto text-muted">
+              Discover the perfect blend of luxury, adventure, and authentic experiences
               in the heart of Skardu's magnificent landscape.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="services-grid">
+          <motion.div
+            className="services-grid mt-12"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+          >
             {services.map((service) => (
-              <div key={service.id} className="service-card">
-                <div className="service-image">
+              <motion.div key={service.id} className="service-card glass-panel" variants={itemVariants}>
+                <div className="service-image-wrapper">
                   <img
                     src={service.image}
                     alt={service.title}
+                    className="service-image"
                     onError={(e) => {
-                      // Fallback to placeholder if image fails to load
                       e.currentTarget.style.display = 'none';
-                      e.currentTarget.nextElementSibling?.classList.add('show-placeholder');
+                      e.currentTarget.nextElementSibling?.classList.remove('hidden');
                     }}
                   />
-                  <PlaceholderImage
-                    height={250}
-                    text={`${service.title} Image`}
-                    className="fallback-placeholder"
-                  />
+                  <div className="hidden w-full h-full bg-gray-800 flex items-center justify-center">
+                    <PlaceholderImage height={300} text={service.title} />
+                  </div>
+                  <div className="service-overlay"></div>
                 </div>
-                
+
                 <div className="service-content">
                   <h3 className="service-title">{service.title}</h3>
                   <p className="service-description">{service.description}</p>
-                  
+
                   <ul className="service-features">
                     {service.features.map((feature, index) => (
                       <li key={index} className="service-feature">
-                        <CheckCircle fontSize="small" className="feature-icon" />
+                        <CheckCircle sx={{ fontSize: 16, color: 'var(--color-accent)' }} />
                         <span>{feature}</span>
                       </li>
                     ))}
                   </ul>
-                  
-                  <Link
-                    to={service.link}
-                    className="service-cta"
-                    onClick={() => setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }), 0)}
-                  >
-                    Learn More →
+
+                  <Link to={service.link} className="service-link">
+                    <span>Learn More</span>
+                    <ArrowForward sx={{ fontSize: 18 }} />
                   </Link>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* About Section */}
-      <section className="about-section section">
+      <section className="section about-section bg-secondary">
         <div className="container">
-          <div className="about-content">
-            <div className="about-text">
-              <h2 className="about-title">Why Choose Hill Icon?</h2>
-              <p className="about-description">
-                Located in the heart of Skardu, Hill Icon offers unparalleled access to the region's 
-                most spectacular destinations. Our commitment to excellence ensures that every aspect 
+          <div className="about-grid">
+            <motion.div
+              className="about-content"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <span className="text-accent text-uppercase tracking-widest text-sm font-semibold">About Us</span>
+              <h2 className="about-title mt-4 mb-6">Why Choose Hill Icon?</h2>
+              <p className="about-description text-lg mb-8">
+                Located in the heart of Skardu, Hill Icon offers unparalleled access to the region's
+                most spectacular destinations. Our commitment to excellence ensures that every aspect
                 of your journey is carefully crafted to create unforgettable memories.
               </p>
-              
+
               <div className="about-highlights">
-                <div className="highlight-item">
-                  <h4>Premium Quality</h4>
-                  <p>Carefully selected accommodations and services that meet the highest standards.</p>
-                </div>
-                <div className="highlight-item">
-                  <h4>Local Expertise</h4>
-                  <p>Deep knowledge of the region's hidden gems and cultural treasures.</p>
-                </div>
-                <div className="highlight-item">
-                  <h4>Personalized Service</h4>
-                  <p>Tailored experiences that cater to your unique preferences and needs.</p>
-                </div>
+                {[
+                  { title: 'Premium Quality', desc: 'Accommodations that meet the highest global standards.' },
+                  { title: 'Local Expertise', desc: 'Deep knowledge of hidden gems and cultural treasures.' },
+                  { title: 'Personalized Service', desc: 'Tailored experiences for your unique preferences.' }
+                ].map((item, idx) => (
+                  <div key={idx} className="highlight-item">
+                    <div className="highlight-dot"></div>
+                    <div>
+                      <h4 className="text-white text-lg font-medium mb-1">{item.title}</h4>
+                      <p className="text-sm text-muted">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-              
-              <Link to="/contact" className="about-cta">
+
+              <Link to="/contact" className="btn primary mt-8">
                 Get in Touch
               </Link>
-            </div>
-            
-            <div className="about-image">
-              <img
-                src={images.front}
-                alt="Hill Icon Experience"
-                onError={(e) => {
-                  // Fallback to placeholder if image fails to load
-                  e.currentTarget.style.display = 'none';
-                  e.currentTarget.nextElementSibling?.classList.add('show-placeholder');
-                }}
-              />
-              <PlaceholderImage
-                height={400}
-                text="Hill Icon Experience"
-                className="fallback-placeholder"
-              />
-            </div>
+            </motion.div>
+
+            <motion.div
+              className="about-image-wrapper"
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="image-frame">
+                <img
+                  src={images.front}
+                  alt="Hill Icon Experience"
+                  className="about-image"
+                />
+              </div>
+              <div className="experience-badge glass-panel">
+                <span className="years">4+</span>
+                <span className="label">Years of<br />Excellence</span>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>

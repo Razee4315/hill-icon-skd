@@ -1,15 +1,25 @@
 import React, { useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Close } from '@mui/icons-material';
+import './ImageModal.css';
 
 interface ImageModalProps {
   src: string;
   alt?: string;
   open: boolean;
   onClose: () => void;
-  maxWidth?: number | string; // e.g., '90vw' or 900
-  maxHeight?: number | string; // e.g., '90vh' or 700
+  maxWidth?: number | string;
+  maxHeight?: number | string;
 }
 
-const ImageModal: React.FC<ImageModalProps> = ({ src, alt, open, onClose, maxWidth = '90vw', maxHeight = '90vh' }) => {
+const ImageModal: React.FC<ImageModalProps> = ({
+  src,
+  alt,
+  open,
+  onClose,
+  maxWidth = '90vw',
+  maxHeight = '90vh'
+}) => {
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -23,56 +33,33 @@ const ImageModal: React.FC<ImageModalProps> = ({ src, alt, open, onClose, maxWid
     };
   }, [open, onClose]);
 
-  if (!open) return null;
-
-  const isFullscreen = (maxWidth === '100vw' || maxHeight === '100vh');
-
   return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      onClick={onClose}
-      style={{
-        position: 'fixed',
-        inset: 0,
-        background: 'rgba(0,0,0,0.6)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 1000,
-        padding: isFullscreen ? 0 : 16,
-        cursor: 'zoom-out'
-      }}
-    >
-      <div
-        onClick={(e) => e.stopPropagation()}
-        style={{
-          background: 'transparent',
-          maxWidth,
-          maxHeight,
-          width: 'auto',
-          height: 'auto',
-          boxShadow: '0 10px 30px rgba(0,0,0,0.4)',
-          borderRadius: isFullscreen ? 0 : 12,
-          overflow: 'hidden',
-          cursor: 'default'
-        }}
-      >
-        <img
-          src={src}
-          alt={alt || 'Preview'}
-          style={{
-            display: 'block',
-            maxWidth: typeof maxWidth === 'number' ? `${maxWidth}px` : maxWidth,
-            maxHeight: typeof maxHeight === 'number' ? `${maxHeight}px` : maxHeight,
-            width: isFullscreen ? '100vw' : '100%',
-            height: isFullscreen ? '100vh' : '100%',
-            objectFit: 'contain',
-            background: '#000'
-          }}
-        />
-      </div>
-    </div>
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          className="image-modal-overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+        >
+          <motion.div
+            className="image-modal-content"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            transition={{ type: "spring", duration: 0.5 }}
+            onClick={(e) => e.stopPropagation()}
+            style={{ maxWidth, maxHeight }}
+          >
+            <button className="modal-close-btn" onClick={onClose}>
+              <Close />
+            </button>
+            <img src={src} alt={alt || 'Preview'} className="modal-image" />
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 

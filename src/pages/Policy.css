@@ -1,51 +1,78 @@
-.policy-page {
-  padding: var(--spacing-xxl) 0;
+.policy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
 }
 
-.policy-header {
-  margin-bottom: var(--spacing-xl);
+.policy-card {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: transform var(--transition-normal);
 }
 
-.policy-title {
-  font-size: 2.25rem;
+.policy-card:hover {
+  transform: translateY(-5px);
 }
 
-.policy-intro {
-  color: var(--color-gray-medium);
+.policy-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  background: rgba(212, 175, 55, 0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
 }
 
-.policy-section {
-  background: var(--color-secondary);
-  border: 1px solid #e9ecef;
-  border-radius: var(--border-radius-md);
-  padding: var(--spacing-lg);
-  margin-bottom: var(--spacing-md);
+.policy-icon {
+  color: var(--color-accent);
+  font-size: 1.5rem;
 }
 
-.policy-section h2 {
+.policy-card-title {
+  font-family: var(--font-serif);
   font-size: 1.25rem;
-  margin-bottom: var(--spacing-sm);
+  color: var(--color-text-primary);
+  margin-bottom: 1rem;
 }
 
-.policy-section ul {
-  padding-left: var(--spacing-lg);
+.policy-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
 }
 
-.policy-section li {
-  margin-bottom: 0.5rem;
-  color: var(--color-gray-dark);
+.policy-list li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
-.policy-note {
-  margin-top: var(--spacing-lg);
-  color: var(--color-gray-medium);
-  font-style: italic;
+.policy-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
 }
 
-@media (max-width: 768px) {
-  .policy-title {
-    font-size: 1.75rem;
+.policy-footer {
+  font-size: 0.9rem;
+  border-top: 1px solid var(--color-border);
+  padding-top: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 600px) {
+  .policy-grid {
+    grid-template-columns: 1fr;
   }
 }
-
-

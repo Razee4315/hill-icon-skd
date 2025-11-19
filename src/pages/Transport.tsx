@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { CheckCircle } from '@mui/icons-material';
+import { motion, AnimatePresence } from 'framer-motion';
+import { CheckCircle, ArrowBack, DirectionsCar } from '@mui/icons-material';
 import { transportData } from '../data/servicesData';
 import BookingForm from '../components/BookingForm';
 import ImageModal from '../components/ImageModal';
-// Removed PlaceholderImage in favor of real images provided in data
 import './Transport.css';
 
 interface Vehicle {
@@ -31,49 +31,25 @@ const Transport: React.FC = () => {
   const navigate = useNavigate();
   const params = useParams<{ id: string }>();
 
-  // Hide floating WhatsApp button when booking form is open
   useEffect(() => {
     if (showBookingForm) {
-      document.body.classList.add('hide-floating-whatsapp');
       document.body.classList.add('modal-open');
     } else {
-      document.body.classList.remove('hide-floating-whatsapp');
       document.body.classList.remove('modal-open');
     }
-    return () => {
-      document.body.classList.remove('hide-floating-whatsapp');
-      document.body.classList.remove('modal-open');
-    };
+    return () => document.body.classList.remove('modal-open');
   }, [showBookingForm]);
 
   const handleVehicleSelect = (vehicle: Vehicle) => {
     navigate(`/transport/${vehicle.id}`);
-    // Ensure we jump to top when entering detail view
     setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }), 0);
-  };
-
-  const handleInquireNow = () => {
-    setShowBookingForm(true);
-  };
-
-  const handleCloseBooking = () => {
-    setShowBookingForm(false);
   };
 
   const handleBackToList = () => {
     navigate('/transport');
-    // Reset scroll to top when returning to list
     setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }), 0);
   };
 
-  // Ensure detail view starts from top when a vehicle is selected
-  useEffect(() => {
-    if (selectedVehicle) {
-      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-    }
-  }, [selectedVehicle]);
-
-  // Sync URL param to selection (deep-link support)
   useEffect(() => {
     if (!params.id) {
       setSelectedVehicle(null);
@@ -88,155 +64,156 @@ const Transport: React.FC = () => {
   }, [params.id]);
 
   return (
-    <div className="transport-page">
-      
+    <div className="transport-page section">
       <div className="container">
-        {/* Page Header */}
-        <div className="page-header">
-          <h1 className="page-title">Transport Services</h1>
-          <p className="page-subtitle">
-            Reliable transport in Skardu — airport transfers and full‑day rentals.
-          </p>
-        </div>
+        <AnimatePresence mode="wait">
+          {!selectedVehicle ? (
+            <motion.div
+              key="list"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="page-header text-center mb-12">
+                <span className="text-accent text-uppercase tracking-widest text-sm font-semibold">Transport Services</span>
+                <h1 className="page-title mt-2">Journey in Comfort</h1>
+                <p className="page-subtitle text-muted max-w-2xl mx-auto mt-4">
+                  Reliable transport in Skardu — from airport transfers to full‑day rentals for your adventures.
+                </p>
+              </div>
 
-        {!selectedVehicle ? (
-          /* Vehicle Listing */
-          <>
-            <div className="vehicles-grid">
-            {vehicles.map((vehicle) => (
-              <div 
-                key={vehicle.id} 
-                className="vehicle-card"
-                onClick={() => handleVehicleSelect(vehicle)}
-              >
-                <div className="vehicle-image">
-                  <img src={vehicle.image} alt={`${vehicle.name}`} style={{ width: '100%', height: 250, objectFit: 'contain', borderRadius: 12, backgroundColor: '#f5f5f5' }} loading="lazy" decoding="async" />
+              <div className="vehicles-grid">
+                {vehicles.map((vehicle, idx) => (
+                  <motion.div
+                    key={vehicle.id}
+                    className="vehicle-card glass-panel"
+                    onClick={() => handleVehicleSelect(vehicle)}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: idx * 0.1, duration: 0.5 }}
+                    whileHover={{ y: -10 }}
+                  >
+                    <div className="vehicle-image-wrapper">
+                      <img src={vehicle.image} alt={vehicle.name} className="vehicle-image" loading="lazy" />
+                      <div className="vehicle-overlay">
+                        <span className="view-btn">View Details</span>
+                      </div>
+                    </div>
+                    <div className="vehicle-content">
+                      <h3 className="vehicle-name">{vehicle.name}</h3>
+                      <p className="vehicle-desc text-muted">{vehicle.description}</p>
+
+                      <div className="vehicle-footer mt-4">
+                        <div className="price-info">
+                          <span className="currency">{vehicle.price.currency}</span>
+                          <span className="amount">{vehicle.price.daily?.toLocaleString()}</span>
+                          <span className="period">/day</span>
+                        </div>
+                        <div className="features-preview">
+                          {vehicle.features.slice(0, 2).map((feature, i) => (
+                            <span key={i} className="feature-pill">{feature}</span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="detail"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.5 }}
+              className="vehicle-detail"
+            >
+              <button className="back-btn mb-8" onClick={handleBackToList}>
+                <ArrowBack fontSize="small" /> Back to Transport
+              </button>
+
+              <div className="vehicle-detail-grid">
+                <div className="vehicle-image-section glass-panel p-4">
+                  <img
+                    src={selectedVehicle.image}
+                    alt={selectedVehicle.name}
+                    className="detail-main-image"
+                    onClick={() => setPreview({ src: selectedVehicle.image, alt: selectedVehicle.name })}
+                  />
                 </div>
-                <div className="vehicle-content">
-                  <h3 className="vehicle-name">{vehicle.name}</h3>
-                  <p className="vehicle-description">{vehicle.description}</p>
-                  <div className="room-price">
-                    <span className="price-amount">{vehicle.price.currency} {vehicle.price.daily?.toLocaleString() || '0'}</span>
+
+                <div className="vehicle-info-section glass-panel p-8">
+                  <h2 className="text-3xl font-serif mb-2">{selectedVehicle.name}</h2>
+                  <div className="price-tag mb-6">
+                    <span className="text-2xl font-bold text-accent">
+                      {selectedVehicle.price.currency} {selectedVehicle.price.daily?.toLocaleString()}
+                    </span>
+                    <span className="text-muted ml-2">/ day</span>
                   </div>
-                  {vehicle.airportTransfer && (
-                    <div className="price-note" aria-label="airport-transfer-rate">
-                      Airport transfer: {vehicle.price.currency} {vehicle.airportTransfer.toLocaleString()}
+
+                  {selectedVehicle.airportTransfer && (
+                    <div className="airport-transfer-badge mb-6">
+                      <DirectionsCar fontSize="small" />
+                      <span>Airport Transfer: {selectedVehicle.price.currency} {selectedVehicle.airportTransfer.toLocaleString()}</span>
                     </div>
                   )}
-                  <div className="vehicle-features-preview">
-                    {vehicle.features.slice(0, 3).map((feature, index) => (
-                      <span key={index} className="feature-tag">
-                        {feature}
-                      </span>
-                    ))}
-                    {vehicle.features.length > 3 && (
-                      <span className="feature-more">
-                        +{vehicle.features.length - 3} more
-                      </span>
-                    )}
-                  </div>
-                  <button className="view-details-btn">
-                    View Details →
-                  </button>
-                </div>
-              </div>
-            ))}
-            </div>
-          </>
-        ) : (
-          /* Vehicle Detail View */
-          <div className="vehicle-detail">
-            <div className="vehicle-detail-header">
-              <button 
-                className="back-button"
-                onClick={handleBackToList}
-              >
-                ← Back to Transport
-              </button>
-            </div>
 
-            <div className="vehicle-detail-content">
-              <div className="vehicle-detail-main">
-                {/* Vehicle Image */}
-                <div className="vehicle-gallery">
-                  <div className="main-image">
-                    <img
-                      src={selectedVehicle.image}
-                      alt={selectedVehicle.name}
-                      style={{ width: '100%', height: 400, objectFit: 'contain', objectPosition: 'center', borderRadius: 12, cursor: 'zoom-in', backgroundColor: '#f5f5f5' }}
-                      onClick={() => setPreview({ src: selectedVehicle.image, alt: selectedVehicle.name })}
-                    />
-                  </div>
-                </div>
-
-                {/* Vehicle Information */}
-                <div className="vehicle-info">
-                  <h2 className="vehicle-detail-name">{selectedVehicle.name}</h2>
-                  <div className="room-detail-price">
-                    <span className="price-amount">{selectedVehicle.price.currency} {selectedVehicle.price.daily?.toLocaleString() || '0'}</span>
-                    <span className="price-note">{selectedVehicle.price.note}</span>
-                    {selectedVehicle.airportTransfer && (
-                      <span className="price-note">Airport transfer: {selectedVehicle.price.currency} {selectedVehicle.airportTransfer.toLocaleString()}</span>
-                    )}
-                  </div>
-                  <p className="vehicle-detail-description">
+                  <p className="text-muted mb-8 leading-relaxed">
                     {selectedVehicle.detailedDescription}
                   </p>
 
-                  {/* Removed Ideal For section as requested */}
-
-                  {/* Features */}
-                  <div className="features-section">
-                    <h3 className="section-title">Features</h3>
-                    <div className="features-grid">
-                      {selectedVehicle.features.map((feature, index) => (
-                        <div key={index} className="feature-item">
-                          <CheckCircle fontSize="small" className="feature-icon" />
-                          <span className="feature-name">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
+                  <h3 className="text-lg font-medium mb-4">Vehicle Features</h3>
+                  <div className="features-grid mb-8">
+                    {selectedVehicle.features.map((feature, idx) => (
+                      <div key={idx} className="feature-item">
+                        <CheckCircle className="text-accent" fontSize="small" />
+                        <span>{feature}</span>
+                      </div>
+                    ))}
                   </div>
 
-                  {/* Inquire Now Button */}
-                  <div className="vehicle-actions">
-                    <button 
-                      className="inquire-now-btn"
-                      onClick={handleInquireNow}
-                    >
-                      Inquire About This Vehicle
-                    </button>
-                  </div>
+                  <button
+                    className="btn primary w-full"
+                    onClick={() => setShowBookingForm(true)}
+                  >
+                    Inquire Now
+                  </button>
                 </div>
               </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-              {/* Booking Form */}
-              {showBookingForm && (
-                <div className="booking-form-container">
-                  <div className="booking-form-overlay" onClick={handleCloseBooking}></div>
-                  <div className="booking-form-wrapper">
-                    <BookingForm
-                      serviceType="transport"
-                      serviceName={selectedVehicle.name}
-                      onClose={handleCloseBooking}
-                    />
-                  </div>
-                </div>
-              )}
+        <AnimatePresence>
+          {showBookingForm && selectedVehicle && (
+            <div className="modal-overlay">
+              <motion.div
+                className="modal-content"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+              >
+                <BookingForm
+                  serviceType="transport"
+                  serviceName={selectedVehicle.name}
+                  onClose={() => setShowBookingForm(false)}
+                />
+              </motion.div>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </AnimatePresence>
 
-      {/* Image Preview Modal */}
-      <ImageModal
-        open={!!preview}
-        src={preview?.src || ''}
-        alt={preview?.alt}
-        onClose={() => setPreview(null)}
-        maxWidth="80vw"
-        maxHeight="80vh"
-      />
+        <ImageModal
+          open={!!preview}
+          src={preview?.src || ''}
+          alt={preview?.alt}
+          onClose={() => setPreview(null)}
+          maxWidth="80vw"
+          maxHeight="80vh"
+        />
+      </div>
     </div>
   );
 };

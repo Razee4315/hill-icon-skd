@@ -1,72 +1,99 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { images } from '../utils/images';
 import ImageModal from '../components/ImageModal';
+import './Gallery.css';
 
-const galleryImages: { src: string; alt: string }[] = [
-  { src: images.groupPic, alt: 'Guests group photo' },
-  { src: images.tripGroup, alt: 'Trip group at Hill Icon' },
-  { src: images.guest, alt: 'Happy guest' },
-  { src: images.guestPic, alt: 'Guest with computer' },
-  { src: images.boneFire, alt: 'Bonfire night' },
-  { src: images.front, alt: 'Hotel front view' },
-  { src: images.roofView1, alt: 'Roof view 1' },
-  { src: images.roofView2, alt: 'Roof view 2' },
-  { src: images.viewFromRoungChumik, alt: 'View from Roung Chumik' },
-  { src: images.receptionFront, alt: 'Reception front' },
-  { src: images.receptionBack, alt: 'Reception back' },
-  { src: images.garden1, alt: 'Garden' },
-  { src: images.twinRoom1, alt: 'Twin Room' },
-  { src: images.deluxeRoom1, alt: 'Deluxe Room' },
-  { src: images.familyRoom1, alt: 'Family Room' },
-  { src: images.suiteRoom1, alt: 'Suite Room' },
+const galleryImages: { src: string; alt: string; category?: string }[] = [
+  { src: images.groupPic, alt: 'Guests group photo', category: 'Guests' },
+  { src: images.tripGroup, alt: 'Trip group at Hill Icon', category: 'Guests' },
+  { src: images.guest, alt: 'Happy guest', category: 'Guests' },
+  { src: images.guestPic, alt: 'Guest with computer', category: 'Guests' },
+  { src: images.boneFire, alt: 'Bonfire night', category: 'Events' },
+  { src: images.front, alt: 'Hotel front view', category: 'Property' },
+  { src: images.roofView1, alt: 'Roof view 1', category: 'Views' },
+  { src: images.roofView2, alt: 'Roof view 2', category: 'Views' },
+  { src: images.viewFromRoungChumik, alt: 'View from Roung Chumik', category: 'Views' },
+  { src: images.receptionFront, alt: 'Reception front', category: 'Property' },
+  { src: images.receptionBack, alt: 'Reception back', category: 'Property' },
+  { src: images.garden1, alt: 'Garden', category: 'Property' },
+  { src: images.twinRoom1, alt: 'Twin Room', category: 'Rooms' },
+  { src: images.deluxeRoom1, alt: 'Deluxe Room', category: 'Rooms' },
+  { src: images.familyRoom1, alt: 'Family Room', category: 'Rooms' },
+  { src: images.suiteRoom1, alt: 'Suite Room', category: 'Rooms' },
 ];
 
 const Gallery: React.FC = () => {
   const [preview, setPreview] = useState<{ src: string; alt: string } | null>(null);
-  return (
-    <section className="section">
-      <div className="container">
-        <header style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>Guest Gallery</h1>
-          <p style={{ color: '#666' }}>A glimpse of our guests and moments at Hill Icon.</p>
-        </header>
+  const [filter, setFilter] = useState<string>('All');
 
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-            gap: '12px',
-          }}
+  const categories = ['All', ...Array.from(new Set(galleryImages.map(img => img.category || 'Others')))];
+
+  const filteredImages = filter === 'All'
+    ? galleryImages
+    : galleryImages.filter(img => (img.category || 'Others') === filter);
+
+  return (
+    <div className="gallery-page section">
+      <div className="container">
+        <motion.div
+          className="page-header text-center mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
         >
-          {galleryImages.map((img, idx) => (
-            <div
-              key={idx}
-              style={{
-                margin: 0,
-                overflow: 'hidden',
-                borderRadius: 0,
-              }}
+          <span className="text-accent text-uppercase tracking-widest text-sm font-semibold">Our Moments</span>
+          <h1 className="page-title mt-2">Gallery</h1>
+          <p className="page-subtitle text-muted max-w-2xl mx-auto mt-4">
+            A glimpse of our guests, property, and the breathtaking moments at Hill Icon.
+          </p>
+        </motion.div>
+
+        {/* Filter Tabs */}
+        <motion.div
+          className="gallery-filters mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+        >
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              className={`filter-btn ${filter === cat ? 'active' : ''}`}
+              onClick={() => setFilter(cat)}
+            >
+              {cat}
+            </button>
+          ))}
+        </motion.div>
+
+        <motion.div
+          className="gallery-grid"
+          layout
+        >
+          {filteredImages.map((img, idx) => (
+            <motion.div
+              key={img.src}
+              layout
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.4 }}
+              className="gallery-item"
+              onClick={() => setPreview(img)}
             >
               <img
                 src={img.src}
                 alt={img.alt}
                 loading="lazy"
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  height: 'clamp(200px, 30vw, 360px)',
-                  objectFit: 'cover',
-                  cursor: 'zoom-in'
-                }}
-                onClick={() => {
-                  setPreview(img);
-                  // Make sure the modal opening doesn't interfere with scroll position globally
-                  setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' }), 0);
-                }}
+                className="gallery-image"
               />
-            </div>
+              <div className="gallery-overlay">
+                <span className="view-text">View</span>
+              </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         <ImageModal
           open={!!preview}
@@ -77,7 +104,7 @@ const Gallery: React.FC = () => {
           maxHeight="90vh"
         />
       </div>
-    </section>
+    </div>
   );
 };
 

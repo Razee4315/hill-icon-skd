@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Person, Phone, CalendarToday, Group, Close, Notes } from '@mui/icons-material';
+import { Person, Phone, CalendarToday, Group, Close, Notes, WhatsApp } from '@mui/icons-material';
 import { contactInfo } from '../data/servicesData';
-import { images } from '../utils/images';
+import { motion } from 'framer-motion';
 import './BookingForm.css';
 
 interface BookingFormProps {
@@ -49,42 +49,39 @@ const BookingForm: React.FC<BookingFormProps> = ({
       return;
     }
 
-    let messageText = `Hello Hill Icon!\n\nI'd like to inquire about a ${serviceType} booking:\n\n`;
-    
+    let messageText = `*New Booking Inquiry*\n\n`;
+    messageText += `*Service:* ${serviceType.charAt(0).toUpperCase() + serviceType.slice(1)} - ${serviceName}\n`;
+    messageText += `*Name:* ${formData.fullName}\n`;
+    messageText += `*Phone:* ${formData.phone}\n`;
+
     if (serviceType === 'room') {
-      messageText += `Room Type: ${serviceName}\n`;
-      messageText += `Name: ${formData.fullName}\n`;
-      messageText += `Phone: ${formData.phone}\n`;
-      if (formData.checkIn) messageText += `Check-in: ${formData.checkIn}\n`;
-      if (formData.checkOut) messageText += `Check-out: ${formData.checkOut}\n`;
-      messageText += `Guests: ${formData.guests}\n`;
+      if (formData.checkIn) messageText += `*Check-in:* ${formData.checkIn}\n`;
+      if (formData.checkOut) messageText += `*Check-out:* ${formData.checkOut}\n`;
+      messageText += `*Guests:* ${formData.guests}\n`;
     } else if (serviceType === 'transport') {
-      messageText += `Vehicle Type: ${serviceName}\n`;
-      messageText += `Name: ${formData.fullName}\n`;
-      messageText += `Phone: ${formData.phone}\n`;
-      if (formData.requirements) messageText += `Requirements: ${formData.requirements}\n`;
+      messageText += `*Guests:* ${formData.guests}\n`;
+      if (formData.requirements) messageText += `*Requirements:* ${formData.requirements}\n`;
     } else if (serviceType === 'tour') {
-      messageText += `Tour Package: ${serviceName}\n`;
-      messageText += `Name: ${formData.fullName}\n`;
-      messageText += `Phone: ${formData.phone}\n`;
-      messageText += `Guests: ${formData.guests}\n`;
-      if (formData.requirements) messageText += `Special Requirements: ${formData.requirements}\n`;
+      messageText += `*Guests:* ${formData.guests}\n`;
+      if (formData.requirements) messageText += `*Special Req:* ${formData.requirements}\n`;
     }
 
-    messageText += '\nPlease confirm availability and pricing. Thank you!';
-    
-    // Direct WhatsApp integration
+    messageText += '\nPlease confirm availability and rates.';
+
     const cleanPhoneNumber = contactInfo.whatsapp.replace(/[^0-9]/g, '');
     const encodedMessage = encodeURIComponent(messageText);
     const whatsappUrl = `https://wa.me/${cleanPhoneNumber}?text=${encodedMessage}`;
-    
+
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   };
 
   return (
-    <div className="booking-form">
+    <div className="booking-form glass-panel">
       <div className="booking-form-header">
-        <h3>Book {serviceName}</h3>
+        <div>
+          <span className="form-subtitle">Booking Inquiry</span>
+          <h3 className="form-title">{serviceName}</h3>
+        </div>
         {onClose && (
           <button className="close-button" onClick={onClose} aria-label="Close">
             <Close fontSize="small" />
@@ -93,50 +90,52 @@ const BookingForm: React.FC<BookingFormProps> = ({
       </div>
 
       <form className="booking-form-content" onSubmit={handleSubmit}>
-        {/* Name Field */}
-        <div className="form-group">
-          <label htmlFor="fullName" className="form-label">
-            <Person fontSize="small" className="label-icon" />
-            Full Name *
-          </label>
-          <input
-            type="text"
-            id="fullName"
-            name="fullName"
-            value={formData.fullName}
-            onChange={handleInputChange}
-            className="form-input"
-            required
-            placeholder="Enter your full name"
-          />
-        </div>
+        <div className="form-grid">
+          {/* Name Field */}
+          <div className="form-group">
+            <label htmlFor="fullName" className="form-label">
+              <Person fontSize="small" className="label-icon" />
+              Full Name
+            </label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              value={formData.fullName}
+              onChange={handleInputChange}
+              className="form-input"
+              required
+              placeholder="Your Name"
+            />
+          </div>
 
-        {/* Phone Field */}
-        <div className="form-group">
-          <label htmlFor="phone" className="form-label">
-            <Phone fontSize="small" className="label-icon" />
-            Phone Number *
-          </label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleInputChange}
-            className="form-input"
-            required
-            placeholder="e.g., 03001234567"
-          />
+          {/* Phone Field */}
+          <div className="form-group">
+            <label htmlFor="phone" className="form-label">
+              <Phone fontSize="small" className="label-icon" />
+              Phone Number
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleInputChange}
+              className="form-input"
+              required
+              placeholder="0300 1234567"
+            />
+          </div>
         </div>
 
         {/* Room-specific fields */}
         {serviceType === 'room' && (
           <>
-            <div className="form-row">
+            <div className="form-grid">
               <div className="form-group">
                 <label htmlFor="checkIn" className="form-label">
                   <CalendarToday fontSize="small" className="label-icon" />
-                  Check-in Date
+                  Check-in
                 </label>
                 <input
                   type="date"
@@ -150,7 +149,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
               <div className="form-group">
                 <label htmlFor="checkOut" className="form-label">
                   <CalendarToday fontSize="small" className="label-icon" />
-                  Check-out Date
+                  Check-out
                 </label>
                 <input
                   type="date"
@@ -166,7 +165,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
             <div className="form-group">
               <label htmlFor="guests" className="form-label">
                 <Group fontSize="small" className="label-icon" />
-                Number of Guests
+                Guests
               </label>
               <select
                 id="guests"
@@ -204,12 +203,12 @@ const BookingForm: React.FC<BookingFormProps> = ({
           </div>
         )}
 
-        {/* Requirements field for transport and tours */}
+        {/* Requirements field */}
         {(serviceType === 'transport' || serviceType === 'tour') && (
           <div className="form-group">
             <label htmlFor="requirements" className="form-label">
               <Notes fontSize="small" className="label-icon" />
-              {serviceType === 'transport' ? 'Service Requirements' : 'Special Requirements'}
+              {serviceType === 'transport' ? 'Details' : 'Special Requests'}
             </label>
             <textarea
               id="requirements"
@@ -218,24 +217,25 @@ const BookingForm: React.FC<BookingFormProps> = ({
               onChange={handleInputChange}
               className="form-input form-textarea"
               placeholder={
-                serviceType === 'transport' 
-                  ? 'e.g., Airport pickup on [Date], Valley tour requirements...'
-                  : 'Any special requirements or preferences...'
+                serviceType === 'transport'
+                  ? 'Pickup location, time, destination...'
+                  : 'Dietary restrictions, preferences...'
               }
               rows={3}
             />
           </div>
         )}
 
-        {/* Action Button */}
         <div className="form-actions">
-          <button
+          <motion.button
             type="submit"
             className="submit-whatsapp-btn"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
-            <img src={images.whatsapp} alt="WhatsApp" className="btn-icon" />
-            Book via WhatsApp
-          </button>
+            <WhatsApp className="btn-icon" />
+            <span>Inquire via WhatsApp</span>
+          </motion.button>
         </div>
       </form>
     </div>

@@ -103,10 +103,28 @@
 }
 
 /* Detail View */
+.room-detail {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 .room-detail-grid {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
   gap: 3rem;
+  width: 100%;
+}
+
+.room-gallery-section {
+  min-width: 0; /* Prevents flex/grid items from overflowing */
+}
+
+.room-info-section {
+  padding: 2.5rem;
+  min-width: 0; /* Prevents grid blowout */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .main-image-wrapper {
@@ -127,6 +145,8 @@
   gap: 1rem;
   overflow-x: auto;
   padding-bottom: 0.5rem;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
 }
 
 .thumb-item {
@@ -215,5 +235,18 @@
 
   .amenities-grid {
     grid-template-columns: 1fr;
+  }
+
+  .room-info-section {
+    padding: 1.5rem;
+  }
+  
+  /* Fix for mobile overflow */
+  .room-detail {
+    overflow-x: hidden;
+  }
+  
+  .rooms-page {
+    overflow-x: hidden;
   }
 }

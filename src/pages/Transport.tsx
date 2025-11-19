@@ -63,6 +63,9 @@ const Transport: React.FC = () => {
     }
   }, [params.id]);
 
+  // Prepare images for lightbox (usually single image for vehicle)
+  const transportImages = selectedVehicle ? [{ src: selectedVehicle.image, alt: selectedVehicle.name }] : [];
+
   return (
     <div className="transport-page section">
       <div className="container">
@@ -209,9 +212,9 @@ const Transport: React.FC = () => {
           open={!!preview}
           src={preview?.src || ''}
           alt={preview?.alt}
+          images={transportImages}
+          initialIndex={0}
           onClose={() => setPreview(null)}
-          maxWidth="80vw"
-          maxHeight="80vh"
         />
       </div>
     </div>

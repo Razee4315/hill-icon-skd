@@ -1,13 +1,16 @@
-import React, { useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Close } from '@mui/icons-material';
-import './ImageModal.css';
+import React from 'react';
+import { PhotoSlider } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 
 interface ImageModalProps {
   src: string;
   alt?: string;
+  // Optional: Support for multiple images if we want to pass a gallery later
+  images?: { src: string; alt?: string }[];
+  initialIndex?: number;
   open: boolean;
   onClose: () => void;
+  // Deprecated props kept for compatibility
   maxWidth?: number | string;
   maxHeight?: number | string;
 }
@@ -15,51 +18,36 @@ interface ImageModalProps {
 const ImageModal: React.FC<ImageModalProps> = ({
   src,
   alt,
+  images,
+  initialIndex = 0,
   open,
-  onClose,
-  maxWidth = '90vw',
-  maxHeight = '90vh'
+  onClose
 }) => {
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    document.addEventListener('keydown', onKey);
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.removeEventListener('keydown', onKey);
-      document.body.style.overflow = '';
-    };
-  }, [open, onClose]);
+  // Prepare images for PhotoSlider
+  const sliderImages = images 
+    ? images.map(img => ({ src: img.src, key: img.src, intro: img.alt }))
+    : [{ src, key: src, intro: alt }];
 
   return (
-    <AnimatePresence>
-      {open && (
-        <motion.div
-          className="image-modal-overlay"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={onClose}
-        >
-          <motion.div
-            className="image-modal-content"
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
-            transition={{ type: "spring", duration: 0.5 }}
-            onClick={(e) => e.stopPropagation()}
-            style={{ maxWidth, maxHeight }}
-          >
-            <button className="modal-close-btn" onClick={onClose}>
-              <Close />
-            </button>
-            <img src={src} alt={alt || 'Preview'} className="modal-image" />
-          </motion.div>
-        </motion.div>
+    <PhotoSlider
+      images={sliderImages}
+      visible={open}
+      onClose={onClose}
+      index={initialIndex}
+      onIndexChange={() => {}}
+      // Ensure z-index is higher than Navbar (1000)
+      overlayRender={(props) => (
+        <div 
+          style={{ 
+            position: 'absolute', 
+            zIndex: 2000, 
+            width: '100%', 
+            height: '100%', 
+            pointerEvents: 'none' 
+          }} 
+        />
       )}
-    </AnimatePresence>
+    />
   );
 };
 

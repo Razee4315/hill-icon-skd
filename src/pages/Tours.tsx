@@ -74,6 +74,13 @@ const Tours: React.FC = () => {
     return () => window.removeEventListener('resize', check);
   }, []);
 
+  // Prepare images for the lightbox
+  const tourImages = selectedTour
+    ? [selectedTour.image, ...(selectedTour.gallery || [])].filter(Boolean).map(src => ({ src, alt: selectedTour.name }))
+    : [];
+
+  const initialIndex = preview ? tourImages.findIndex(img => img.src === preview.src) : 0;
+
   return (
     <div className="tours-page section">
       <div className="container">
@@ -155,7 +162,7 @@ const Tours: React.FC = () => {
                         src={activeImage}
                         alt={selectedTour.name}
                         className="main-image"
-                        onClick={() => !isMobile && setPreview({ src: activeImage, alt: selectedTour.name })}
+                        onClick={() => setPreview({ src: activeImage, alt: selectedTour.name })}
                       />
                     ) : null}
                   </div>
@@ -251,9 +258,9 @@ const Tours: React.FC = () => {
           open={!!preview}
           src={preview?.src || ''}
           alt={preview?.alt}
+          images={tourImages}
+          initialIndex={Math.max(0, initialIndex)}
           onClose={() => setPreview(null)}
-          maxWidth={isMobile ? '100vw' : '80vw'}
-          maxHeight={isMobile ? '100vh' : '80vh'}
         />
       </div>
     </div>

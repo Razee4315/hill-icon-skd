@@ -33,6 +33,10 @@ const Gallery: React.FC = () => {
     ? galleryImages
     : galleryImages.filter(img => (img.category || 'Others') === filter);
 
+  // Prepare images for lightbox
+  const lightboxImages = filteredImages.map(img => ({ src: img.src, alt: img.alt }));
+  const initialIndex = preview ? lightboxImages.findIndex(img => img.src === preview.src) : 0;
+
   return (
     <div className="gallery-page section">
       <div className="container">
@@ -99,9 +103,9 @@ const Gallery: React.FC = () => {
           open={!!preview}
           src={preview?.src || ''}
           alt={preview?.alt}
+          images={lightboxImages}
+          initialIndex={Math.max(0, initialIndex)}
           onClose={() => setPreview(null)}
-          maxWidth="90vw"
-          maxHeight="90vh"
         />
       </div>
     </div>

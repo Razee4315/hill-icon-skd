@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle, ArrowBack, Star } from '@mui/icons-material';
+import { CheckCircle, ArrowBack } from '@mui/icons-material';
 import { roomsData } from '../data/servicesData';
 import BookingForm from '../components/BookingForm';
 import ImageModal from '../components/ImageModal';
@@ -73,6 +73,13 @@ const Rooms: React.FC = () => {
     return () => window.removeEventListener('resize', check);
   }, []);
 
+  // Prepare images for the lightbox
+  const roomImages = selectedRoom 
+    ? [selectedRoom.image, ...(selectedRoom.gallery || [])].filter(Boolean).map(src => ({ src, alt: selectedRoom.name }))
+    : [];
+  
+  const initialIndex = preview ? roomImages.findIndex(img => img.src === preview.src) : 0;
+
   return (
     <div className="rooms-page section">
       <div className="container">
@@ -124,13 +131,6 @@ const Rooms: React.FC = () => {
                       <div className="room-content">
                         <div className="flex justify-between items-start mb-2">
                           <h3 className="room-name">{room.name}</h3>
-                          <div className="flex items-center text-accent">
-                            <Star fontSize="small" />
-                            <Star fontSize="small" />
-                            <Star fontSize="small" />
-                            <Star fontSize="small" />
-                            <Star fontSize="small" />
-                          </div>
                         </div>
                         <p className="room-description text-muted">{room.description}</p>
                         <div className="room-footer mt-4">
@@ -174,7 +174,7 @@ const Rooms: React.FC = () => {
                         src={activeImage}
                         alt={selectedRoom.name}
                         className="main-image"
-                        onClick={() => !isMobile && setPreview({ src: activeImage, alt: selectedRoom.name })}
+                        onClick={() => setPreview({ src: activeImage, alt: selectedRoom.name })}
                       />
                     ) : (
                       <PlaceholderImage height={500} text={selectedRoom.name} />
@@ -195,7 +195,7 @@ const Rooms: React.FC = () => {
                   )}
                 </div>
 
-                <div className="room-info-section glass-panel p-8">
+                <div className="room-info-section glass-panel">
                   <h2 className="text-3xl font-serif mb-2">{selectedRoom.name}</h2>
                   <div className="price-tag mb-6">
                     <span className="text-2xl font-bold text-accent">
@@ -253,9 +253,9 @@ const Rooms: React.FC = () => {
           open={!!preview}
           src={preview?.src || ''}
           alt={preview?.alt}
+          images={roomImages}
+          initialIndex={Math.max(0, initialIndex)}
           onClose={() => setPreview(null)}
-          maxWidth={isMobile ? '100vw' : '80vw'}
-          maxHeight={isMobile ? '100vh' : '80vh'}
         />
       </div>
     </div>

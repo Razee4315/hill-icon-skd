@@ -77,35 +77,62 @@
 .form-label {
   display: flex;
   align-items: center;
-  /* Vertically centers icon and text */
   gap: 0.6rem;
-  /* Slightly increased gap for cleaner look */
   font-size: 0.85rem;
   color: var(--color-text-secondary);
   margin-bottom: 0.5rem;
-  line-height: 1.4;
-  /* Standard line height helps text sit in middle */
+  line-height: 1.5;
+  /* Ensure consistent height */
+  height: 1.5em;
 }
 
 .label-icon {
-  /* Fixed container size ensures consistency */
   display: flex;
   align-items: center;
   justify-content: center;
   width: 1.25rem;
-  /* Approx 20px */
   height: 1.25rem;
-  /* Approx 20px */
+  min-width: 1.25rem;
+  min-height: 1.25rem;
   color: var(--color-accent);
   flex-shrink: 0;
-  /* Prevents squishing */
+  margin: 0;
+  padding: 0;
+  /* Perfect center alignment */
+  align-self: center;
+}
+
+/* Material-UI icon specific fixes - override all defaults */
+.label-icon.MuiSvgIcon-root {
+  font-size: 14px !important;
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px !important;
+  min-height: 14px !important;
+  max-width: 14px !important;
+  max-height: 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  /* Remove any transforms or positioning */
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  vertical-align: middle !important;
 }
 
 .label-icon svg {
-  /* Icon size slightly smaller than container for perfect visual centering */
   display: block;
-  width: 14px;
-  height: 14px;
+  width: 14px !important;
+  height: 14px !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .form-input {

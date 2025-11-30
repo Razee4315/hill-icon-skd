@@ -1,14 +1,14 @@
 # Hill Icon Skardu
 A modern, responsive website for Hill Icon - a premium accommodation, transport, and tour service provider in Skardu, Pakistan.
 
-## 🏔️ About Hill Icon
+## About Hill Icon
 
 Hill Icon provides exceptional services in the breathtaking Skardu region, offering:
 - **Premium Accommodation**: Luxury rooms with mountain views
 - **Reliable Transport**: Professional drivers and vehicles for all terrains
 - **Guided Tours**: Expert-led tours to natural wonders and cultural sites
 
-## 🚀 Features
+## Features
 
 - **Modern Design**: Clean, minimalistic black and white aesthetic
 - **Responsive Layout**: Optimized for desktop, tablet, and mobile devices
@@ -17,7 +17,7 @@ Hill Icon provides exceptional services in the breathtaking Skardu region, offer
 - **Contact Integration**: Multiple ways to get in touch
 - **Smooth Navigation**: Intuitive user experience with scroll effects
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 - **React 19** with TypeScript
 - **Vite** for fast development and building

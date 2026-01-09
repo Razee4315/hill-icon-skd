@@ -1,10 +1,13 @@
-import { createRoot } from 'react-dom/client'
-import { HelmetProvider } from 'react-helmet-async'
-import './index.css'
-import App from './App.tsx'
+import { ViteReactSSG } from 'vite-react-ssg';
+import routes from './routes';
+import './index.css';
 
-createRoot(document.getElementById('root')!).render(
-  <HelmetProvider>
-    <App />
-  </HelmetProvider>,
-)
+export const createRoot = ViteReactSSG(
+  { routes },
+  ({ isClient }) => {
+    // Client-side only initialization
+    if (isClient) {
+      // Any client-side setup can go here
+    }
+  }
+);

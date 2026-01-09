@@ -10,16 +10,14 @@ export default defineConfig(({ mode }) => ({
     outDir: 'dist',
     assetsDir: 'assets',
     sourcemap: false,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          router: ['react-router-dom']
-        }
-      }
-    }
   },
   server: {
     historyApiFallback: true
+  },
+  ssgOptions: {
+    script: 'async',
+    formatting: 'none',
+    dirStyle: 'nested',
+    mock: true,
   }
 }))

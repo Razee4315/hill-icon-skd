@@ -1,5 +1,4 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import { Head } from 'vite-react-ssg';
 
 interface SEOProps {
   title?: string;
@@ -20,7 +19,7 @@ const SEO: React.FC<SEOProps> = ({
 }) => {
   const siteTitle = 'Hill Icon Skardu';
   const defaultDescription = 'Hill Icon - Premium accommodation, transport, and tour services in Skardu. Experience the breathtaking beauty of Northern Pakistan with our luxury services.';
-  const defaultKeywords = 'Skardu, accommodation, hotel, guest house, transport, tours, Pakistan, Northern Areas, Karakoram, luxury travel, Hill Icon';
+  const defaultKeywords = 'Skardu, accommodation, hotel, guest house, transport, tours, Pakistan, Northern Areas, Karakoram, luxury travel, Hill Icon, Gilgit-Baltistan, K2 base camp, Shangrila, Deosai';
   const siteUrl = 'https://hilliconskardu.com';
   const defaultImage = 'https://raw.githubusercontent.com/saqlainkhan011/hill-icon-skd/main/src/assets/front.jpg';
 
@@ -53,15 +52,7 @@ const SEO: React.FC<SEOProps> = ({
     },
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday"
-      ],
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
       "opens": "00:00",
       "closes": "23:59"
     },
@@ -77,11 +68,11 @@ const SEO: React.FC<SEOProps> = ({
       "bestRating": "5"
     },
     "amenityFeature": [
-      {"@type": "LocationFeatureSpecification", "name": "Mountain View"},
-      {"@type": "LocationFeatureSpecification", "name": "Free WiFi"},
-      {"@type": "LocationFeatureSpecification", "name": "24/7 Room Service"},
-      {"@type": "LocationFeatureSpecification", "name": "Restaurant"},
-      {"@type": "LocationFeatureSpecification", "name": "Free Parking"}
+      { "@type": "LocationFeatureSpecification", "name": "Mountain View" },
+      { "@type": "LocationFeatureSpecification", "name": "Free WiFi" },
+      { "@type": "LocationFeatureSpecification", "name": "24/7 Room Service" },
+      { "@type": "LocationFeatureSpecification", "name": "Restaurant" },
+      { "@type": "LocationFeatureSpecification", "name": "Free Parking" }
     ],
     "sameAs": [
       "https://www.facebook.com/hillicon",
@@ -90,7 +81,7 @@ const SEO: React.FC<SEOProps> = ({
   };
 
   return (
-    <Helmet>
+    <Head>
       {/* Standard Metadata */}
       <title>{finalTitle}</title>
       <meta name="description" content={finalDescription} />
@@ -104,18 +95,19 @@ const SEO: React.FC<SEOProps> = ({
       <meta property="og:url" content={finalUrl} />
       <meta property="og:image" content={finalImage} />
       <meta property="og:site_name" content={siteTitle} />
+      <meta property="og:locale" content="en_US" />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={finalTitle} />
       <meta name="twitter:description" content={finalDescription} />
       <meta name="twitter:image" content={finalImage} />
-      
+
       {/* Structured Data */}
       <script type="application/ld+json">
         {JSON.stringify(schemaData)}
       </script>
-    </Helmet>
+    </Head>
   );
 };
 

@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
 import Preloader from '../components/Preloader';
 import PlaceholderImage from '../components/PlaceholderImage';
 import SEO from '../components/SEO';
+import FAQ from '../components/FAQ';
 import { images } from '../utils/images';
 import './Home.css';
 
@@ -15,7 +17,7 @@ const Home: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const t = setTimeout(() => setLoading(false), 4000); // Slightly shorter timeout
+    const t = setTimeout(() => setLoading(false), 1500); // Reduced from 4s to 1.5s for faster UX
     return () => clearTimeout(t);
   }, []);
 
@@ -67,8 +69,8 @@ const Home: React.FC = () => {
 
   return (
     <div className="home-page">
-      <SEO 
-        title="Home" 
+      <SEO
+        title="Home"
         description="Welcome to Hill Icon Skardu. Experience luxury accommodation, reliable transport, and guided tours in the heart of Northern Pakistan."
         keywords="Hill Icon, Skardu hotel, luxury stay Skardu, Skardu transport, tours in Skardu"
       />
@@ -202,6 +204,13 @@ const Home: React.FC = () => {
               </div>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="section faq-wrapper">
+        <div className="container">
+          <FAQ />
         </div>
       </section>
     </div>

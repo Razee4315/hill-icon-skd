@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Head } from 'vite-react-ssg';
 import { CheckCircle, ArrowBack } from '@mui/icons-material';
 import { roomsData } from '../data/servicesData';
 import BookingForm from '../components/BookingForm';
@@ -75,25 +77,66 @@ const Rooms: React.FC = () => {
   }, []);
 
   // Prepare images for the lightbox
-  const roomImages = selectedRoom 
+  const roomImages = selectedRoom
     ? [selectedRoom.image, ...(selectedRoom.gallery || [])].filter(Boolean).map(src => ({ src, alt: selectedRoom.name }))
     : [];
-  
+
   const initialIndex = preview ? roomImages.findIndex(img => img.src === preview.src) : 0;
 
   const seoTitle = selectedRoom ? `${selectedRoom.name} - Luxury Accommodation` : 'Luxury Rooms & Suites';
-  const seoDesc = selectedRoom 
-    ? `Book your stay at ${selectedRoom.name} in Skardu. ${selectedRoom.description} Amenities include ${selectedRoom.amenities.slice(0, 3).join(', ')}.` 
+  const seoDesc = selectedRoom
+    ? `Book your stay at ${selectedRoom.name} in Skardu. ${selectedRoom.description} Amenities include ${selectedRoom.amenities.slice(0, 3).join(', ')}.`
     : 'Explore our range of luxury rooms and suites in Skardu, featuring mountain views and modern amenities.';
+
+  // HotelRoom schema for room detail pages
+  const roomSchema = selectedRoom ? {
+    "@context": "https://schema.org",
+    "@type": "HotelRoom",
+    "name": selectedRoom.name,
+    "description": selectedRoom.detailedDescription,
+    "image": selectedRoom.image,
+    "bed": {
+      "@type": "BedDetails",
+      "numberOfBeds": selectedRoom.name.includes("Family") ? 3 : selectedRoom.name.includes("Twin") ? 2 : 1,
+      "typeOfBed": selectedRoom.name.includes("Twin") ? "Twin" : "King"
+    },
+    "occupancy": {
+      "@type": "QuantitativeValue",
+      "value": selectedRoom.name.includes("Family") ? 6 : 2
+    },
+    "amenityFeature": selectedRoom.amenities.map(amenity => ({
+      "@type": "LocationFeatureSpecification",
+      "name": amenity,
+      "value": true
+    })),
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "PKR",
+      "price": selectedRoom.price.perNight || 5000,
+      "availability": "https://schema.org/InStock"
+    },
+    "containedInPlace": {
+      "@type": "Hotel",
+      "name": "Hill Icon Skardu",
+      "url": "https://hilliconskardu.com"
+    }
+  } : null;
 
   return (
     <div className="rooms-page section">
-      <SEO 
+      <SEO
         title={seoTitle}
         description={seoDesc}
         image={selectedRoom?.image}
         url={selectedRoom ? `/rooms/${selectedRoom.id}` : '/rooms'}
       />
+      {roomSchema && (
+        <Head>
+          <script type="application/ld+json">
+            {JSON.stringify(roomSchema)}
+          </script>
+        </Head>
+      )}
       <div className="container">
         <AnimatePresence mode="wait">
           {!selectedRoom ? (

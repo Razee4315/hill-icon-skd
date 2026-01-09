@@ -1,4 +1,5 @@
-import React from 'react';
+import * as React from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { images } from '../utils/images';
 import './Hero.css';
@@ -18,6 +19,33 @@ const Hero: React.FC<HeroProps> = ({
   showCTA = true,
   onVideoReady
 }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+
+  // Lazy load video using IntersectionObserver
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !isVideoLoaded) {
+            video.src = videoSrc;
+            video.load();
+            setIsVideoLoaded(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(video);
+
+    return () => observer.disconnect();
+  }, [videoSrc, isVideoLoaded]);
+
   const scrollToServices = () => {
     const servicesSection = document.getElementById('services-overview');
     if (servicesSection) {
@@ -29,16 +57,17 @@ const Hero: React.FC<HeroProps> = ({
     <section className="hero">
       <div className="hero-video-container">
         <video
+          ref={videoRef}
           className="hero-video"
           autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="none"
           poster={images.front}
           onCanPlayThrough={() => onVideoReady && onVideoReady()}
         >
-          <source src={videoSrc} type="video/mp4" />
+          {/* Source added dynamically via IntersectionObserver */}
         </video>
         <div className="hero-overlay"></div>
       </div>

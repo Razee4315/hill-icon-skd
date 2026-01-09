@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Head } from 'vite-react-ssg';
 import { Terrain, CheckCircle, ArrowBack, AccessTime } from '@mui/icons-material';
 import { toursData } from '../data/servicesData';
 import BookingForm from '../components/BookingForm';
@@ -87,14 +89,55 @@ const Tours: React.FC = () => {
     ? `Book the ${selectedTour.name} in Skardu. ${selectedTour.duration} tour covering ${selectedTour.highlights.slice(0, 3).join(', ')}.`
     : 'Explore the best of Skardu with our guided tours. Visit Deosai, Shigar, Shangrila and more with expert local guides.';
 
+  // TouristTrip schema for tour detail pages
+  const tourSchema = selectedTour ? {
+    "@context": "https://schema.org",
+    "@type": "TouristTrip",
+    "name": selectedTour.name,
+    "description": selectedTour.detailedDescription,
+    "image": selectedTour.image,
+    "touristType": "Adventure Tourism",
+    "itinerary": {
+      "@type": "ItemList",
+      "itemListElement": selectedTour.highlights.map((highlight, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "name": highlight
+      }))
+    },
+    "provider": {
+      "@type": "TouristInformationCenter",
+      "name": "Hill Icon Skardu",
+      "telephone": "+923487997495",
+      "url": "https://hilliconskardu.com"
+    },
+    "contentLocation": {
+      "@type": "Place",
+      "name": "Skardu, Gilgit-Baltistan",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Skardu",
+        "addressRegion": "Gilgit-Baltistan",
+        "addressCountry": "Pakistan"
+      }
+    }
+  } : null;
+
   return (
     <div className="tours-page section">
-      <SEO 
+      <SEO
         title={seoTitle}
         description={seoDesc}
         image={selectedTour?.image}
         url={selectedTour ? `/tours/${selectedTour.id}` : '/tours'}
       />
+      {tourSchema && (
+        <Head>
+          <script type="application/ld+json">
+            {JSON.stringify(tourSchema)}
+          </script>
+        </Head>
+      )}
       <div className="container">
         <AnimatePresence mode="wait">
           {!selectedTour ? (

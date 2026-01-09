@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import FloatingWhatsApp from './components/ScrollToTop';
+import Breadcrumbs from './components/Breadcrumbs';
 import Loading from './components/Loading';
 import './App.css';
 
@@ -27,6 +28,9 @@ const AppLayout: React.FC = () => {
     return (
         <div className="app-layout">
             <Navbar />
+            <div className="container">
+                <Breadcrumbs />
+            </div>
             <Suspense fallback={<Loading />}>
                 <AnimatePresence mode="wait">
                     <motion.main

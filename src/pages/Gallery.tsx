@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import * as React from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { images } from '../utils/images';
 import ImageModal from '../components/ImageModal';
@@ -40,8 +41,8 @@ const Gallery: React.FC = () => {
 
   return (
     <div className="gallery-page section">
-      <SEO 
-        title="Gallery" 
+      <SEO
+        title="Gallery"
         description="View photos of Hill Icon Skardu, our guests, events, and the beautiful scenery of Skardu Valley."
       />
       <div className="container">

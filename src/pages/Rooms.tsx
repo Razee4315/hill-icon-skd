@@ -76,9 +76,13 @@ const Rooms: React.FC = () => {
     return () => window.removeEventListener('resize', check);
   }, []);
 
-  // Prepare images for the lightbox
+  // Prepare images for the lightbox - use gallery if available, otherwise just the main image
+  // Don't prepend main image as it's already included in the gallery array
   const roomImages = selectedRoom
-    ? [selectedRoom.image, ...(selectedRoom.gallery || [])].filter(Boolean).map(src => ({ src, alt: selectedRoom.name }))
+    ? (selectedRoom.gallery && selectedRoom.gallery.length > 0
+      ? selectedRoom.gallery
+      : [selectedRoom.image]
+    ).filter(Boolean).map(src => ({ src, alt: selectedRoom.name }))
     : [];
 
   const initialIndex = preview ? roomImages.findIndex(img => img.src === preview.src) : 0;

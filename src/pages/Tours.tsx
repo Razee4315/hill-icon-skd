@@ -77,9 +77,13 @@ const Tours: React.FC = () => {
     return () => window.removeEventListener('resize', check);
   }, []);
 
-  // Prepare images for the lightbox
+  // Prepare images for the lightbox - use gallery if available, otherwise just the main image
+  // Don't prepend main image as it's already included in the gallery array
   const tourImages = selectedTour
-    ? [selectedTour.image, ...(selectedTour.gallery || [])].filter(Boolean).map(src => ({ src, alt: selectedTour.name }))
+    ? (selectedTour.gallery && selectedTour.gallery.length > 0
+      ? selectedTour.gallery
+      : [selectedTour.image]
+    ).filter(Boolean).map(src => ({ src, alt: selectedTour.name }))
     : [];
 
   const initialIndex = preview ? tourImages.findIndex(img => img.src === preview.src) : 0;

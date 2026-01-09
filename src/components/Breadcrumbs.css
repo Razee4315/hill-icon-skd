@@ -1,6 +1,10 @@
 .breadcrumbs {
-  padding: 1rem 0;
-  margin-bottom: 1rem;
+  padding: 0.75rem 0;
+  margin-top: 80px;
+  /* Account for fixed navbar height */
+  margin-bottom: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .breadcrumb-list {

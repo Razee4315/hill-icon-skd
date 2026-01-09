@@ -1,4 +1,5 @@
-import React from 'react';
+import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { PhotoSlider } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 
@@ -23,8 +24,17 @@ const ImageModal: React.FC<ImageModalProps> = ({
   open,
   onClose
 }) => {
+  const [currentIndex, setCurrentIndex] = useState(initialIndex);
+
+  // Reset index when modal opens with new initialIndex
+  useEffect(() => {
+    if (open) {
+      setCurrentIndex(initialIndex);
+    }
+  }, [open, initialIndex]);
+
   // Prepare images for PhotoSlider
-  const sliderImages = images 
+  const sliderImages = images
     ? images.map(img => ({ src: img.src, key: img.src, intro: img.alt }))
     : [{ src, key: src, intro: alt }];
 
@@ -33,18 +43,18 @@ const ImageModal: React.FC<ImageModalProps> = ({
       images={sliderImages}
       visible={open}
       onClose={onClose}
-      index={initialIndex}
-      onIndexChange={() => {}}
+      index={currentIndex}
+      onIndexChange={setCurrentIndex}
       // Ensure z-index is higher than Navbar (1000)
-      overlayRender={(props) => (
-        <div 
-          style={{ 
-            position: 'absolute', 
-            zIndex: 2000, 
-            width: '100%', 
-            height: '100%', 
-            pointerEvents: 'none' 
-          }} 
+      overlayRender={() => (
+        <div
+          style={{
+            position: 'absolute',
+            zIndex: 2000,
+            width: '100%',
+            height: '100%',
+            pointerEvents: 'none'
+          }}
         />
       )}
     />
@@ -52,3 +62,4 @@ const ImageModal: React.FC<ImageModalProps> = ({
 };
 
 export default ImageModal;
+

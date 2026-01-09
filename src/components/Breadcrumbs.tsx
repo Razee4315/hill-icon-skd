@@ -1,3 +1,5 @@
+import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Head } from 'vite-react-ssg';
 import './Breadcrumbs.css';
@@ -19,10 +21,17 @@ const routeLabels: Record<string, string> = {
 
 const Breadcrumbs: React.FC = () => {
     const location = useLocation();
+    const [isMounted, setIsMounted] = useState(false);
+
+    // Only render on client to prevent hydration mismatch
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
     const pathSegments = location.pathname.split('/').filter(Boolean);
 
-    // Don't show on home page
-    if (pathSegments.length === 0) return null;
+    // Don't show on home page or during SSR
+    if (pathSegments.length === 0 || !isMounted) return null;
 
     const breadcrumbs: BreadcrumbItem[] = [
         { label: 'Home', path: '/' },

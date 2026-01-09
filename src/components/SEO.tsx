@@ -34,6 +34,7 @@ const SEO: React.FC<SEOProps> = ({
     "@context": "https://schema.org",
     "@type": "Hotel",
     "name": "Hill Icon Skardu",
+    "description": finalDescription,
     "image": defaultImage,
     "url": siteUrl,
     "telephone": "+923487997495",
@@ -64,7 +65,28 @@ const SEO: React.FC<SEOProps> = ({
       "opens": "00:00",
       "closes": "23:59"
     },
-    "priceRange": "$$$"
+    "priceRange": "PKR 8,000 - PKR 15,000",
+    "starRating": {
+      "@type": "Rating",
+      "ratingValue": "4"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "47",
+      "bestRating": "5"
+    },
+    "amenityFeature": [
+      {"@type": "LocationFeatureSpecification", "name": "Mountain View"},
+      {"@type": "LocationFeatureSpecification", "name": "Free WiFi"},
+      {"@type": "LocationFeatureSpecification", "name": "24/7 Room Service"},
+      {"@type": "LocationFeatureSpecification", "name": "Restaurant"},
+      {"@type": "LocationFeatureSpecification", "name": "Free Parking"}
+    ],
+    "sameAs": [
+      "https://www.facebook.com/hillicon",
+      "https://www.instagram.com/hill_icon_resort/"
+    ]
   };
 
   return (

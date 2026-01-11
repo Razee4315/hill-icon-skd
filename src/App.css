@@ -15,7 +15,7 @@
 
 .main-content {
   flex: 1;
-  padding-top: 90px;
+  padding-top: 80px;
   /* Account for fixed navbar height */
 }
 

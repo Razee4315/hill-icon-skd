@@ -27,11 +27,11 @@ const AppLayout: React.FC = () => {
     return (
         <div className="app-layout">
             <Navbar />
-            <div className="container">
-                <Breadcrumbs />
-            </div>
             <Suspense fallback={<Loading />}>
                 <main key={location.pathname} className="main-content">
+                    <div className="container">
+                        <Breadcrumbs />
+                    </div>
                     <Outlet />
                 </main>
             </Suspense>

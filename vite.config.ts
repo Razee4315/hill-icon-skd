@@ -11,9 +11,6 @@ export default defineConfig(({ mode }) => ({
     assetsDir: 'assets',
     sourcemap: false,
   },
-  server: {
-    historyApiFallback: true
-  },
   ssgOptions: {
     script: 'async',
     formatting: 'none',

@@ -15,6 +15,5 @@ export default defineConfig(({ mode }) => ({
     script: 'async',
     formatting: 'none',
     dirStyle: 'nested',
-    mock: true,
   }
 }))

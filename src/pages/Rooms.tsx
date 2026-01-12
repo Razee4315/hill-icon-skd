@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Head } from 'vite-react-ssg';
+import { Helmet } from 'react-helmet-async';
 import { CheckCircle, ArrowBack } from '@mui/icons-material';
 import { roomsData } from '../data/servicesData';
 import BookingForm from '../components/BookingForm';
@@ -135,11 +135,11 @@ const Rooms: React.FC = () => {
         url={selectedRoom ? `/rooms/${selectedRoom.id}` : '/rooms'}
       />
       {roomSchema && (
-        <Head>
+        <Helmet>
           <script type="application/ld+json">
             {JSON.stringify(roomSchema)}
           </script>
-        </Head>
+        </Helmet>
       )}
       <div className="container">
         <AnimatePresence mode="wait">

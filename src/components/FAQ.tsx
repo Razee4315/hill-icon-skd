@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Head } from 'vite-react-ssg';
+import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExpandMore } from '@mui/icons-material';
 import './FAQ.css';
@@ -59,11 +59,11 @@ const FAQ: React.FC = () => {
 
     return (
         <>
-            <Head>
+            <Helmet>
                 <script type="application/ld+json">
                     {JSON.stringify(faqSchema)}
                 </script>
-            </Head>
+            </Helmet>
             <section className="faq-section">
                 <div className="faq-header">
                     <span className="text-accent text-uppercase tracking-widest text-sm font-semibold">

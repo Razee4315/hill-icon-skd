@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Head } from 'vite-react-ssg';
+import { Helmet } from 'react-helmet-async';
 import './Breadcrumbs.css';
 
 interface BreadcrumbItem {
@@ -73,11 +73,11 @@ const Breadcrumbs: React.FC = () => {
 
     return (
         <>
-            <Head>
+            <Helmet>
                 <script type="application/ld+json">
                     {JSON.stringify(breadcrumbSchema)}
                 </script>
-            </Head>
+            </Helmet>
             <nav className="breadcrumbs" aria-label="Breadcrumb">
                 <ol className="breadcrumb-list">
                     {breadcrumbs.map((crumb, index) => (

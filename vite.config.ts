@@ -10,10 +10,5 @@ export default defineConfig(({ mode }) => ({
     outDir: 'dist',
     assetsDir: 'assets',
     sourcemap: false,
-  },
-  ssgOptions: {
-    script: 'async',
-    formatting: 'none',
-    dirStyle: 'nested',
   }
 }))

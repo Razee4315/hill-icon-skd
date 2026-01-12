@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Head } from 'vite-react-ssg';
+import { Helmet } from 'react-helmet-async';
 import { Terrain, CheckCircle, ArrowBack, AccessTime } from '@mui/icons-material';
 import { toursData } from '../data/servicesData';
 import BookingForm from '../components/BookingForm';
@@ -136,11 +136,11 @@ const Tours: React.FC = () => {
         url={selectedTour ? `/tours/${selectedTour.id}` : '/tours'}
       />
       {tourSchema && (
-        <Head>
+        <Helmet>
           <script type="application/ld+json">
             {JSON.stringify(tourSchema)}
           </script>
-        </Head>
+        </Helmet>
       )}
       <div className="container">
         <AnimatePresence mode="wait">

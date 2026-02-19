@@ -3,49 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photo Gallery - Hill Icon Skardu | Beautiful Images of Northern Pakistan</title>
-    <meta name="description" content="Explore our photo gallery showcasing the stunning beauty of Skardu and Northern Pakistan. View images of our luxury accommodation, breathtaking landscapes, and memorable experiences." />
-    <meta name="keywords" content="Skardu gallery, Northern Pakistan photos, Hill Icon gallery, Skardu images, mountain photos, accommodation photos" />
-    <meta name="author" content="Hill Icon" />
+    <title>Photo Gallery | Hill Icon Skardu - Views, Rooms & Experiences</title>
+    <meta name="description" content="Browse photos of Hill Icon Skardu - luxury rooms, mountain views, guest experiences, and the stunning landscapes of Gilgit-Baltistan and Northern Pakistan." />
+    <meta name="keywords" content="Hill Icon photos, Skardu hotel gallery, Skardu mountain views, Northern Pakistan photos, Gilgit-Baltistan images" />
+    <meta name="author" content="Hill Icon Skardu" />
     <meta name="robots" content="index, follow" />
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Photo Gallery - Hill Icon Skardu" />
-    <meta property="og:description" content="Explore our photo gallery showcasing the stunning beauty of Skardu and Northern Pakistan. View images of our luxury accommodation, breathtaking landscapes, and memorable experiences." />
+
+    <meta property="og:title" content="Photo Gallery | Hill Icon Skardu" />
+    <meta property="og:description" content="Browse beautiful photos of Hill Icon Skardu - luxury rooms, mountain views, and guest experiences." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://hilliconskardu.com/gallery" />
-    <meta property="og:image" content="https://raw.githubusercontent.com/saqlainkhan011/hill-icon-skd/main/src/assets/front.jpg" />
-    
-    <!-- Twitter Card Meta Tags -->
+    <meta property="og:image" content="https://hilliconskardu.com/og-image.jpg" />
+    <meta property="og:site_name" content="Hill Icon Skardu" />
+
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Photo Gallery - Hill Icon Skardu" />
-    <meta name="twitter:description" content="Explore our photo gallery showcasing the stunning beauty of Skardu and Northern Pakistan." />
-    <meta name="twitter:image" content="https://raw.githubusercontent.com/saqlainkhan011/hill-icon-skd/main/src/assets/front.jpg" />
-    
-    <!-- Canonical URL -->
+    <meta name="twitter:title" content="Photo Gallery | Hill Icon Skardu" />
+    <meta name="twitter:description" content="Browse beautiful photos of Hill Icon Skardu." />
+    <meta name="twitter:image" content="https://hilliconskardu.com/og-image.jpg" />
+
     <link rel="canonical" href="https://hilliconskardu.com/gallery" />
-    
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="/favicon.png" sizes="16x16" />
-    <link rel="shortcut icon" href="/favicon.png" />
-    
-    <!-- JSON-LD: Image Gallery -->
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "ImageGallery",
       "name": "Hill Icon Skardu Photo Gallery",
       "url": "https://hilliconskardu.com/gallery",
-      "description": "Photo gallery showcasing the beauty of Skardu and Northern Pakistan",
-      "image": "https://raw.githubusercontent.com/saqlainkhan011/hill-icon-skd/main/src/assets/front.jpg",
+      "description": "Photo gallery showcasing Hill Icon Skardu rooms, mountain views, and guest experiences in Gilgit-Baltistan",
       "author": {
         "@type": "Organization",
         "name": "Hill Icon Skardu"
       },
       "contentLocation": {
         "@type": "Place",
-        "name": "Skardu",
+        "name": "Skardu, Gilgit-Baltistan",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Skardu",
@@ -55,19 +47,36 @@
       }
     }
     </script>
+
+    <style>
+      body { font-family: 'Segoe UI', sans-serif; background: #0a0a0a; color: #f0f0f0; margin: 0; padding: 2rem; }
+      .container { max-width: 800px; margin: 0 auto; text-align: center; padding-top: 4rem; }
+      h1 { font-size: 2rem; margin-bottom: 1rem; }
+      p { color: #a0a0a0; line-height: 1.6; }
+      .categories { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+      .category { padding: 0.75rem 1.5rem; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #d4af37; }
+      a { color: #d4af37; }
+    </style>
 </head>
 <body>
     <div id="root">
-        <div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: Arial, sans-serif;">
-            <div style="text-align: center;">
-                <h1>Loading Gallery...</h1>
-                <p>Please wait while we load our beautiful photo gallery.</p>
+        <div class="container">
+            <h1>Hill Icon Skardu Photo Gallery</h1>
+            <p>Explore our collection of photos showcasing the beauty of Hill Icon and the stunning landscapes of Skardu, Gilgit-Baltistan. From our luxury rooms to breathtaking mountain views and memorable guest experiences.</p>
+
+            <div class="categories">
+                <div class="category">Rooms</div>
+                <div class="category">Views</div>
+                <div class="category">Guests</div>
+                <div class="category">Events</div>
+                <div class="category">Property</div>
             </div>
+
+            <p style="margin-top: 2rem;">Visit us: <a href="https://hilliconskardu.com">hilliconskardu.com</a> | <a href="https://www.instagram.com/hill_icon_resort/">Follow on Instagram</a></p>
         </div>
     </div>
 
     <script>
-        // Redirect to the React app with the gallery route
         window.location.href = '/?redirect=/gallery';
     </script>
 </body>

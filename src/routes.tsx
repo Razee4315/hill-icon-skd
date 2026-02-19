@@ -1,6 +1,14 @@
 import * as React from 'react';
-import type { RouteRecord } from 'vite-react-ssg';
 import { roomsData, transportData, toursData } from './data/servicesData';
+
+interface RouteRecord {
+  path?: string;
+  index?: boolean;
+  element?: React.ReactNode;
+  entry?: string;
+  children?: RouteRecord[];
+  getStaticPaths?: () => string[];
+}
 
 // Layout wrapper for all pages
 const AppLayout = React.lazy(() => import('./AppLayout'));

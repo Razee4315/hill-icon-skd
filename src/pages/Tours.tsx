@@ -233,7 +233,7 @@ const Tours: React.FC = () => {
                           className={`thumb-item ${src === activeImage ? 'active' : ''}`}
                           onClick={() => setActiveImage(src)}
                         >
-                          <img src={src} alt={`View ${idx + 1}`} />
+                          <img src={src} alt={`${selectedTour.name} - Photo ${idx + 1}`} />
                         </div>
                       ))}
                     </div>

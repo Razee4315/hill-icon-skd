@@ -9,15 +9,10 @@ Allow: /gallery
 Allow: /contact
 Allow: /policy
 
-# Disallow noisy endpoints that don't exist
-Disallow: /assets/
+# Disallow non-content paths
 Disallow: /src/
 Disallow: /node_modules/
-Disallow: /dist/
 Disallow: /.git/
 
-# Point to the canonical sitemap on the custom domain
+# Point to the canonical sitemap
 Sitemap: https://hilliconskardu.com/sitemap.xml
-
-# Crawl delay (optional, helps with server load)
-Crawl-delay: 1

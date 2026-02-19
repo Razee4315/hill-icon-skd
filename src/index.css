@@ -488,6 +488,23 @@ button.glass,
   color: var(--color-bg-primary);
 }
 
+/* Improved Focus States */
+*:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Smooth Image Loading */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+img[loading="lazy"] {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   html {

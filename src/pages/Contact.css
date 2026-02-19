@@ -1,3 +1,53 @@
+/* Contact Info Cards */
+.contact-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.contact-info-card {
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.contact-info-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+.contact-info-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+}
+
+.contact-info-title {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.contact-info-value {
+  font-size: 0.9rem;
+  color: var(--color-text-primary);
+  word-break: break-word;
+}
+
+a.contact-info-value:hover {
+  color: var(--color-accent);
+}
+
+/* Form & Map Grid */
 .contact-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -54,10 +104,25 @@
   color: var(--color-text-muted);
 }
 
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
 .map-wrapper {
   border-radius: var(--border-radius-md);
   height: 100%;
   min-height: 500px;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .contact-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 900px) {
@@ -71,6 +136,10 @@
 }
 
 @media (max-width: 600px) {
+  .contact-cards {
+    grid-template-columns: 1fr;
+  }
+
   .form-grid {
     grid-template-columns: 1fr;
   }

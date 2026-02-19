@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Phone, Email, WhatsApp, LocationOn } from '@mui/icons-material';
 import { contactInfo } from '../data/servicesData';
 import SEO from '../components/SEO';
 import './Contact.css';
@@ -40,11 +41,41 @@ I'd like to get in touch with you regarding your services.`;
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   };
 
+  const whatsappLink = `https://wa.me/${contactInfo.whatsapp.replace(/[^0-9]/g, '')}`;
+
+  const contactCards = [
+    {
+      icon: <Phone fontSize="small" />,
+      title: 'Phone',
+      value: contactInfo.phone,
+      href: `tel:${contactInfo.phone}`,
+    },
+    {
+      icon: <Email fontSize="small" />,
+      title: 'Email',
+      value: contactInfo.email,
+      href: `mailto:${contactInfo.email}`,
+    },
+    {
+      icon: <WhatsApp fontSize="small" />,
+      title: 'WhatsApp',
+      value: contactInfo.whatsapp,
+      href: whatsappLink,
+      external: true,
+    },
+    {
+      icon: <LocationOn fontSize="small" />,
+      title: 'Address',
+      value: contactInfo.address,
+    },
+  ];
+
   return (
     <div className="contact-page section">
-      <SEO 
-        title="Contact Us" 
-        description="Get in touch with Hill Icon Skardu for bookings and inquiries. Contact us via WhatsApp, phone or email."
+      <SEO
+        title="Contact Us"
+        description="Contact Hill Icon Skardu for bookings and inquiries. Call +92 348 7997495, email zafarskd.007@gmail.com, or reach us on WhatsApp."
+        url="/contact"
       />
       <div className="container">
         <motion.div
@@ -57,6 +88,33 @@ I'd like to get in touch with you regarding your services.`;
           <p className="page-subtitle text-muted max-w-2xl mx-auto">
             We're here to help you plan your perfect stay in Skardu. Reach out to us for bookings, inquiries, or just to say hello.
           </p>
+        </motion.div>
+
+        {/* Contact Info Cards */}
+        <motion.div
+          className="contact-cards mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+        >
+          {contactCards.map((card, idx) => (
+            <div key={idx} className="contact-info-card glass-panel">
+              <div className="contact-info-icon">{card.icon}</div>
+              <h4 className="contact-info-title">{card.title}</h4>
+              {card.href ? (
+                <a
+                  href={card.href}
+                  className="contact-info-value"
+                  target={card.external ? '_blank' : undefined}
+                  rel={card.external ? 'noopener noreferrer' : undefined}
+                >
+                  {card.value}
+                </a>
+              ) : (
+                <span className="contact-info-value">{card.value}</span>
+              )}
+            </div>
+          ))}
         </motion.div>
 
         <div className="contact-content">
@@ -144,7 +202,7 @@ I'd like to get in touch with you regarding your services.`;
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Hill Icon Resort and Restaurant Location"
+              title="Hill Icon Skardu location on Google Maps"
             />
           </motion.div>
         </div>

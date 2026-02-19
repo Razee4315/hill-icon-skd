@@ -1,18 +1,24 @@
 .tours-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 2rem;
 }
 
 .tour-card {
   overflow: hidden;
   cursor: pointer;
-  transition: transform var(--transition-normal);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+}
+
+.tour-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), var(--shadow-glow);
+  border-color: rgba(212, 175, 55, 0.2);
 }
 
 .tour-image-wrapper {
   position: relative;
-  height: 240px;
+  height: 260px;
   overflow: hidden;
 }
 
@@ -24,13 +30,13 @@
 }
 
 .tour-card:hover .tour-image {
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
 .tour-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 50%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,14 +53,15 @@
   bottom: 1rem;
   right: 1rem;
   background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(8px);
   color: #fff;
-  padding: 0.25rem 0.75rem;
+  padding: 0.35rem 0.9rem;
   border-radius: 50px;
   font-size: 0.75rem;
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .tour-content {
@@ -63,9 +70,13 @@
 
 .tour-name {
   font-family: var(--font-serif);
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   color: var(--color-text-primary);
   margin-bottom: 0.5rem;
+}
+
+.tour-desc {
+  font-size: 0.9rem;
 }
 
 .tour-footer {
@@ -83,18 +94,19 @@
 .inclusions-preview .flex {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.25rem;
+  gap: 0.3rem;
   align-items: center;
 }
 
 .inclusion-pill {
   font-size: 0.7rem;
   background: rgba(255, 255, 255, 0.05);
-  padding: 0.2rem 0.5rem;
+  padding: 0.25rem 0.6rem;
   border-radius: 4px;
   color: var(--color-text-muted);
   white-space: nowrap;
   flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* Detail View */
@@ -104,13 +116,21 @@
   gap: 3rem;
 }
 
+.tour-gallery-section {
+  min-width: 0;
+}
+
 .duration-tag {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   color: var(--color-accent);
   font-weight: 500;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  background: var(--color-accent-light);
+  padding: 0.35rem 0.9rem;
+  border-radius: var(--border-radius-full);
+  border: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 .info-grid {
@@ -132,7 +152,17 @@
   align-items: flex-start;
   gap: 0.75rem;
   color: var(--color-text-secondary);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  padding: 0.4rem 0;
+}
+
+.pricing-note {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
 }
 
 @media (max-width: 900px) {

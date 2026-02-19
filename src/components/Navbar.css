@@ -63,6 +63,27 @@
   border-radius: 50%;
 }
 
+.navbar-cta {
+  background-color: var(--color-accent);
+  color: var(--color-bg-primary) !important;
+  padding: 0.6rem 1.5rem;
+  border-radius: var(--border-radius-full);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: all var(--transition-fast);
+  margin-left: 0.5rem;
+}
+
+.navbar-cta:hover {
+  background-color: var(--color-accent-hover);
+  color: var(--color-bg-primary) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
 /* Mobile Toggle */
 .navbar-toggle {
   display: none;

@@ -7,22 +7,22 @@ import SEO from '../components/SEO';
 import './Gallery.css';
 
 const galleryImages: { src: string; alt: string; category?: string }[] = [
-  { src: images.groupPic, alt: 'Guests group photo', category: 'Guests' },
-  { src: images.tripGroup, alt: 'Trip group at Hill Icon', category: 'Guests' },
-  { src: images.guest, alt: 'Happy guest', category: 'Guests' },
-  { src: images.guestPic, alt: 'Guest with computer', category: 'Guests' },
-  { src: images.boneFire, alt: 'Bonfire night', category: 'Events' },
-  { src: images.front, alt: 'Hotel front view', category: 'Property' },
-  { src: images.roofView1, alt: 'Roof view 1', category: 'Views' },
-  { src: images.roofView2, alt: 'Roof view 2', category: 'Views' },
-  { src: images.viewFromRoungChumik, alt: 'View from Roung Chumik', category: 'Views' },
-  { src: images.receptionFront, alt: 'Reception front', category: 'Property' },
-  { src: images.receptionBack, alt: 'Reception back', category: 'Property' },
-  { src: images.garden1, alt: 'Garden', category: 'Property' },
-  { src: images.twinRoom1, alt: 'Twin Room', category: 'Rooms' },
-  { src: images.deluxeRoom1, alt: 'Deluxe Room', category: 'Rooms' },
-  { src: images.familyRoom1, alt: 'Family Room', category: 'Rooms' },
-  { src: images.suiteRoom1, alt: 'Suite Room', category: 'Rooms' },
+  { src: images.groupPic, alt: 'Guest group photo at Hill Icon Skardu', category: 'Guests' },
+  { src: images.tripGroup, alt: 'Tour group enjoying trip from Hill Icon Skardu', category: 'Guests' },
+  { src: images.guest, alt: 'Happy guest at Hill Icon Skardu', category: 'Guests' },
+  { src: images.guestPic, alt: 'Guest relaxing at Hill Icon Skardu', category: 'Guests' },
+  { src: images.boneFire, alt: 'Bonfire evening at Hill Icon Skardu', category: 'Events' },
+  { src: images.front, alt: 'Hill Icon Skardu hotel front view', category: 'Property' },
+  { src: images.roofView1, alt: 'Mountain panorama from Hill Icon rooftop', category: 'Views' },
+  { src: images.roofView2, alt: 'Sunset view from Hill Icon Skardu rooftop', category: 'Views' },
+  { src: images.viewFromRoungChumik, alt: 'Scenic view from Roung Chumik near Hill Icon', category: 'Views' },
+  { src: images.receptionFront, alt: 'Hill Icon Skardu reception entrance', category: 'Property' },
+  { src: images.receptionBack, alt: 'Hill Icon Skardu reception interior', category: 'Property' },
+  { src: images.garden1, alt: 'Hill Icon Skardu garden and outdoor seating', category: 'Property' },
+  { src: images.twinRoom1, alt: 'Twin Bed Room at Hill Icon Skardu', category: 'Rooms' },
+  { src: images.deluxeRoom1, alt: 'Deluxe Room with mountain view at Hill Icon Skardu', category: 'Rooms' },
+  { src: images.familyRoom1, alt: 'Family Room at Hill Icon Skardu', category: 'Rooms' },
+  { src: images.suiteRoom1, alt: 'Suite Room with panoramic view at Hill Icon Skardu', category: 'Rooms' },
 ];
 
 const Gallery: React.FC = () => {

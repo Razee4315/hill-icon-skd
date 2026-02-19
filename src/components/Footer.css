@@ -3,6 +3,18 @@
   border-top: 1px solid var(--color-border);
   padding: 4rem 0 2rem;
   margin-top: auto;
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+  opacity: 0.4;
 }
 
 .footer-grid {
@@ -29,34 +41,49 @@
 
 .social-links {
   display: flex;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .social-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-border);
   color: var(--color-text-primary);
   transition: all var(--transition-fast);
 }
 
 .social-icon:hover {
   background: var(--color-accent);
+  border-color: var(--color-accent);
   color: var(--color-bg-primary);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.25);
 }
 
 .footer-heading {
   font-family: var(--font-sans);
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: #fff;
   margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+.footer-heading::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 2rem;
+  height: 2px;
+  background: var(--color-accent);
 }
 
 .footer-nav {
@@ -68,12 +95,13 @@
 .footer-link {
   color: var(--color-text-secondary);
   font-size: 0.95rem;
-  transition: color var(--transition-fast);
+  transition: all var(--transition-fast);
+  position: relative;
 }
 
 .footer-link:hover {
   color: var(--color-accent);
-  padding-left: 4px;
+  padding-left: 8px;
 }
 
 .contact-list {
@@ -88,7 +116,7 @@
   gap: 0.75rem;
   color: var(--color-text-secondary);
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   transition: color var(--transition-fast);
   background: none;
   border: none;
@@ -104,6 +132,7 @@
 .contact-icon {
   color: var(--color-accent);
   margin-top: 2px;
+  flex-shrink: 0;
 }
 
 .whatsapp-btn {
@@ -119,7 +148,11 @@
   padding-top: 2rem;
   text-align: center;
   color: var(--color-text-muted);
-  font-size: 0.875rem;
+  font-size: 0.85rem;
+}
+
+.footer-bottom p {
+  margin: 0;
 }
 
 @media (max-width: 1024px) {

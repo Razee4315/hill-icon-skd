@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
@@ -10,8 +10,40 @@ import FAQ from '../components/FAQ';
 import { images } from '../utils/images';
 import './Home.css';
 
-// Icons (using Material UI for now, but could switch to Feather or Heroicons for a cleaner look)
 import { CheckCircle, ArrowForward } from '@mui/icons-material';
+
+const useCountUp = (end: number, duration: number = 2000) => {
+  const [count, setCount] = useState(0);
+  const [hasStarted, setHasStarted] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasStarted) {
+          setHasStarted(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [hasStarted]);
+
+  useEffect(() => {
+    if (!hasStarted) return;
+    let startTime: number;
+    const step = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      setCount(Math.floor(progress * end));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [hasStarted, end, duration]);
+
+  return { count, ref };
+};
 
 const Home: React.FC = () => {
   const [loading, setLoading] = useState(true);
@@ -28,7 +60,8 @@ const Home: React.FC = () => {
       description: 'Sanctuary of comfort with panoramic mountain views.',
       image: images.deluxeRoom1,
       link: '/rooms',
-      features: ['Mountain Views', 'Modern Amenities', '24/7 Room Service']
+      features: ['Mountain Views', 'Modern Amenities', '24/7 Room Service'],
+      price: 'From Rs 5,000'
     },
     {
       id: 'transport',
@@ -36,7 +69,8 @@ const Home: React.FC = () => {
       description: 'Navigate the rugged terrain in absolute comfort and safety.',
       image: images.premioCar,
       link: '/transport',
-      features: ['Professional Chauffeurs', '4x4 Fleet', 'Airport Transfers']
+      features: ['Professional Chauffeurs', '4x4 Fleet', 'Airport Transfers'],
+      price: 'From Rs 6,000'
     },
     {
       id: 'tours',
@@ -44,8 +78,16 @@ const Home: React.FC = () => {
       description: 'Immersive journeys into the heart of the Karakoram.',
       image: images.viewFromRoungChumik,
       link: '/tours',
-      features: ['Expert Local Guides', 'Custom Itineraries', 'Cultural Immersion']
+      features: ['Expert Local Guides', 'Custom Itineraries', 'Cultural Immersion'],
+      price: 'From Rs 25,000'
     }
+  ];
+
+  const stats = [
+    { value: 4, suffix: '+', label: 'Years of Excellence' },
+    { value: 47, suffix: '+', label: 'Happy Guests' },
+    { value: 4, suffix: '', label: 'Room Types' },
+    { value: 3, suffix: '+', label: 'Tour Packages' }
   ];
 
   const containerVariants = {
@@ -71,11 +113,28 @@ const Home: React.FC = () => {
     <div className="home-page">
       <SEO
         title="Home"
-        description="Welcome to Hill Icon Skardu. Experience luxury accommodation, reliable transport, and guided tours in the heart of Northern Pakistan."
-        keywords="Hill Icon, Skardu hotel, luxury stay Skardu, Skardu transport, tours in Skardu"
+        description="Hill Icon Skardu - Premium hotel accommodation, reliable transport, and guided tours in Skardu, Gilgit-Baltistan. Mountain views, free WiFi, 24/7 service."
+        keywords="Hill Icon, Skardu hotel, luxury stay Skardu, Skardu transport, tours in Skardu, Gilgit-Baltistan hotel"
       />
       <Preloader visible={loading} />
       <Hero onVideoReady={() => setLoading(false)} />
+
+      {/* Stats Section */}
+      <section className="stats-section">
+        <div className="container">
+          <div className="stats-grid">
+            {stats.map((stat, idx) => {
+              const { count, ref } = useCountUp(stat.value);
+              return (
+                <div key={idx} className="stat-item" ref={ref}>
+                  <span className="stat-value">{count}{stat.suffix}</span>
+                  <span className="stat-label">{stat.label}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
       {/* Services Section */}
       <section id="services-overview" className="section services-section">
@@ -87,7 +146,7 @@ const Home: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-accent text-uppercase tracking-widest text-sm font-semibold">What We Offer</span>
+            <span className="section-label">What We Offer</span>
             <h2 className="section-title mt-4 mb-6">Elevate Your Experience</h2>
             <p className="section-subtitle max-w-2xl mx-auto text-muted">
               Discover the perfect blend of luxury, adventure, and authentic experiences
@@ -103,7 +162,7 @@ const Home: React.FC = () => {
             viewport={{ once: true, margin: "-100px" }}
           >
             {services.map((service) => (
-              <motion.div key={service.id} className="service-card glass-panel" variants={itemVariants}>
+              <motion.div key={service.id} className="service-card" variants={itemVariants}>
                 <div className="service-image-wrapper">
                   <img
                     src={service.image}
@@ -118,6 +177,7 @@ const Home: React.FC = () => {
                     <PlaceholderImage height={300} text={service.title} />
                   </div>
                   <div className="service-overlay"></div>
+                  <span className="service-price-badge">{service.price}</span>
                 </div>
 
                 <div className="service-content">
@@ -134,7 +194,7 @@ const Home: React.FC = () => {
                   </ul>
 
                   <Link to={service.link} className="service-link">
-                    <span>Learn More</span>
+                    <span>Explore</span>
                     <ArrowForward sx={{ fontSize: 18 }} />
                   </Link>
                 </div>
@@ -145,7 +205,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* About Section */}
-      <section className="section about-section bg-secondary">
+      <section className="section about-section">
         <div className="container">
           <div className="about-grid">
             <motion.div
@@ -155,7 +215,7 @@ const Home: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <span className="text-accent text-uppercase tracking-widest text-sm font-semibold">About Us</span>
+              <span className="section-label">About Us</span>
               <h2 className="about-title mt-4 mb-6">Why Choose Hill Icon?</h2>
               <p className="about-description text-lg mb-8">
                 Located in the heart of Skardu, Hill Icon offers unparalleled access to the region's
@@ -194,7 +254,7 @@ const Home: React.FC = () => {
               <div className="image-frame">
                 <img
                   src={images.front}
-                  alt="Hill Icon Experience"
+                  alt="Hill Icon Skardu - Hotel front view"
                   className="about-image"
                 />
               </div>
@@ -204,6 +264,28 @@ const Home: React.FC = () => {
               </div>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="cta-section">
+        <div className="container">
+          <motion.div
+            className="cta-content"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="cta-title">Ready to Experience Skardu?</h2>
+            <p className="cta-subtitle">Book your stay at Hill Icon and discover the breathtaking beauty of Northern Pakistan.</p>
+            <div className="cta-actions">
+              <Link to="/rooms" className="btn primary">View Rooms</Link>
+              <a href="https://wa.me/923487997495" target="_blank" rel="noopener noreferrer" className="btn glass">
+                Chat on WhatsApp
+              </a>
+            </div>
+          </motion.div>
         </div>
       </section>
 

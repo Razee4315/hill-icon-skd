@@ -63,6 +63,7 @@ const Navbar: React.FC = () => {
                 )}
               </Link>
             ))}
+            <Link to="/rooms" className="navbar-cta">Book Now</Link>
           </div>
 
           {/* Mobile Menu Button */}

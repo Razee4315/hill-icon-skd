@@ -175,6 +175,24 @@
   border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
+/* Booking Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 600px;
+}
+
 @media (max-width: 900px) {
   .vehicle-detail-grid {
     grid-template-columns: 1fr;

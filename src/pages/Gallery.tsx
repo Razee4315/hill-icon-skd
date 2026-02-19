@@ -42,8 +42,9 @@ const Gallery: React.FC = () => {
   return (
     <div className="gallery-page section">
       <SEO
-        title="Gallery"
-        description="View photos of Hill Icon Skardu, our guests, events, and the beautiful scenery of Skardu Valley."
+        title="Photo Gallery"
+        description="Browse photos of Hill Icon Skardu - luxury rooms, mountain views, guest experiences, bonfire evenings, and the stunning landscapes of Gilgit-Baltistan."
+        url="/gallery"
       />
       <div className="container">
         <motion.div

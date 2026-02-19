@@ -50,9 +50,10 @@ const Policy: React.FC = () => {
 
   return (
     <div className="policy-page section">
-      <SEO 
-        title="Guest Policies" 
-        description="Read our hotel policies regarding bookings, check-in/out, guest conduct, and safety at Hill Icon Skardu."
+      <SEO
+        title="Guest Policies"
+        description="Read Hill Icon Skardu hotel policies - check-in at 2 PM, check-out at 12 PM, quiet hours 10 PM - 7 AM, smoke-free premises, and more."
+        url="/policy"
       />
       <div className="container">
         <motion.div

@@ -8,8 +8,10 @@ import Breadcrumbs from './components/Breadcrumbs';
 import Loading from './components/Loading';
 import './App.css';
 
-// Lazy load pages for code splitting
-const Home = React.lazy(() => import('./pages/Home'));
+// Eagerly import Home since it's the landing page (prevents footer flash)
+import Home from './pages/Home';
+
+// Lazy load other pages for code splitting
 const Rooms = React.lazy(() => import('./pages/Rooms'));
 const Transport = React.lazy(() => import('./pages/Transport'));
 const Tours = React.lazy(() => import('./pages/Tours'));
@@ -37,7 +39,7 @@ const AppLayout: React.FC = () => {
     return (
         <div className="app-layout">
             <Navbar />
-            <Suspense fallback={<Loading />}>
+            <Suspense fallback={<Loading size="large" fullScreen />}>
                 <main key={location.pathname} className="main-content">
                     <div className="container">
                         <Breadcrumbs />

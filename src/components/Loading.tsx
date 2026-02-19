@@ -4,14 +4,16 @@ import './Loading.css';
 interface LoadingProps {
   message?: string;
   size?: 'small' | 'medium' | 'large';
+  fullScreen?: boolean;
 }
 
-const Loading: React.FC<LoadingProps> = ({ 
-  message = 'Loading...', 
-  size = 'medium' 
+const Loading: React.FC<LoadingProps> = ({
+  message,
+  size = 'medium',
+  fullScreen = false
 }) => {
   return (
-    <div className={`loading-container ${size}`}>
+    <div className={`loading-container ${size} ${fullScreen ? 'fullscreen' : ''}`}>
       <div className="loading-spinner">
         <div className="spinner-ring"></div>
         <div className="spinner-ring"></div>
